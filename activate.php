@@ -94,15 +94,15 @@ curl_close($curl);
 								<h3>ORDER #<?php print $OrderID;?></h3>
 								<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
 								<p>Then open a terminal window and run the following script:</p>
-								<pre><code>bash <( curl http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
+								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
 								<p>Here is your hot wallet address when prompted: <pre><code><?php print $address; ?></code></pre></p>
 								<br/>
 								<p>Run this script at any time to see your cold staking balance:</p>
-								<pre><code>bash <( curl http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.sh )</code></pre>
+								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.sh )</code></pre>
 								<p>If you need to add funds at a later date use this command:</p>
-								<pre><code>bash <( curl http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.sh )</code></pre>
+								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.sh )</code></pre>
 								<p>And finally, when you want to withdraw your funds use this command:</p>
-								<pre><code>bash <( curl http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.sh )</code></pre>
+								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.sh )</code></pre>
 								</div>
 							</section>
 					</article>
