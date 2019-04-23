@@ -10,10 +10,9 @@ BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
 ##### Define Variables ######
-
+source <(curl -s http://redstone.trustaking.com/include/config.sh)
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_${date_stamp}.log"
-apiport="38222"; # "37222" <Main
 ColdWalletName="cold-wallet"
 ColdWalletSecretWords=""
 ColdWalletPassword=""

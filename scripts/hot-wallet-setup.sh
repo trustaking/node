@@ -11,7 +11,6 @@ UNDERLINE='\033[4m'
 
 ##### Define Variables ######
 source <(curl -s http://redstone.trustaking.com/include/config.sh)
-#apiport="38222"; # "37222" <Main
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
 HotWalletName="hot-wallet"
