@@ -1,43 +1,42 @@
 <?php 
+require_once ('include/config.php');
+require ('include/functions.php');
 
-$OrderID=$_GET['OrderID'];
 // Grab the next unused address 
-// Set variables
-$ticker      = 'redstone'; // Name of coin
-$server_ip 	 = 'localhost'; // '0.0.0.0' target server ip. [ex.] 10.0.0.15
-$api_port    = '38222'; // '37222'; << Mainnet 
-$WalletName  = 'hot-wallet' ; // Hot wallet name
-$AccountName = 'coldStakingHotAddresses' ; // special account for cold staking addresses
-$scheme		 = 'http' ;// tcp protocol to access json on coin. [default]
-
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
-//  Initiate curl
-$ch = curl_init() ;
-// Will return the response, if false it print the response
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-curl_setopt($ch, CURLOPT_URL,$url);
-// Execute
-$address = curl_exec($ch);
-// Closing
-curl_close($ch);
-// grab contents
-$address = file_get_contents($url);
+$address= CallAPI ($url);
 
+//  Initiate curl
+//$ch = curl_init() ;
+// Will return the response, if false it print the response
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// Set the url
+//curl_setopt($ch, CURLOPT_URL,$url);
+// Execute
+//$address = curl_exec($ch);
+// Closing
+//curl_close($ch);
+// grab contents
+//$address = file_get_contents($url);
+
+
+// Grab Staking info
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-//  Initiate curl
-$ch = curl_init() ;
-// Will return the response, if false it print the response
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-curl_setopt($ch, CURLOPT_URL,$url);
-// Execute
-$result = curl_exec($ch);
-// Closing
-curl_close($ch);
-// grab contents
-$result = file_get_contents($url);
 
+//  Initiate curl
+//$ch = curl_init() ;
+// Will return the response, if false it print the response
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// Set the url
+//curl_setopt($ch, CURLOPT_URL,$url);
+// Execute
+//$result = curl_exec($ch);
+// Closing
+//curl_close($ch);
+// grab contents
+//$result = file_get_contents($url);
+
+$stakinginfo = CallAPI ($url);
 $stakinginfo = json_decode($result);
 
 if ($stakinginfo->staking =1) {
@@ -55,9 +54,9 @@ EOD;
 $invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
 $apiKey      = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
 $url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
+$OrderID     =  $_GET['OrderID'];
 
 $curl = curl_init();
-
 curl_setopt_array($curl, array(
   CURLOPT_PORT => "443",
   CURLOPT_URL => $url,
