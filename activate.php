@@ -6,38 +6,9 @@ require ('include/functions.php');
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
 $address= CallAPI ($url);
 
-//  Initiate curl
-//$ch = curl_init() ;
-// Will return the response, if false it print the response
-//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-//curl_setopt($ch, CURLOPT_URL,$url);
-// Execute
-//$address = curl_exec($ch);
-// Closing
-//curl_close($ch);
-// grab contents
-//$address = file_get_contents($url);
-
-
 // Grab Staking info
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-
-//  Initiate curl
-//$ch = curl_init() ;
-// Will return the response, if false it print the response
-//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-//curl_setopt($ch, CURLOPT_URL,$url);
-// Execute
-//$result = curl_exec($ch);
-// Closing
-//curl_close($ch);
-// grab contents
-//$result = file_get_contents($url);
-
-$stakinginfo = CallAPI ($url);
-$stakinginfo = json_decode($result);
+$stakinginfo = json_decode(CallAPI ($url));
 
 if ($stakinginfo->staking =1) {
 $message = <<<EOD
