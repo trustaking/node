@@ -13,7 +13,7 @@ UNDERLINE='\033[4m'
 
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_${date_stamp}.log"
-apiport="38444" #"38222"; # "37222" <Main
+apiport="38222"; # "37222" <Main
 ColdWalletName="cold-wallet"
 ColdWalletSecretWords=""
 ColdWalletPassword=""
