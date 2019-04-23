@@ -20,8 +20,7 @@ function crypto_rand($min,$max,$pedantic=True) {
     return $num + $min;
 }
 
-
-funtion CallAPI ($url) {
+function CallAPI($url) {
 
 //  Initiate curl
 $ch = curl_init() ;
