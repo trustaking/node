@@ -60,7 +60,7 @@ $OrderID = $ticker . '-' . crypto_rand(100000000000,999999999999);
 							<a href="#main" class="more scrolly"><b>PAYMENT</b></a>
 					</section>
 
-				<!-- Main -->
+				<!-- Main 
 					<article id="main">
 							<section class="wrapper style5">
 								<div class="inner">
@@ -76,6 +76,23 @@ $OrderID = $ticker . '-' . crypto_rand(100000000000,999999999999);
 								</form>
 							</div>
 							</section>
+					</article>
+				-->
+				<!-- Main -->
+				<article id="main">
+						<section class="wrapper style5">
+							<div class="inner">
+							<form method="POST" action="https://testnet.demo.btcpayserver.org/api/v1/invoices">
+								<input type="hidden" name="storeId" value="7thhDWTqzvaKjMU5KHxUY1AbzkrQ6UaTsfD4E8Ux6k2k" />
+								<input type="hidden" name="orderId" value="<?php print $OrderID;?>" />
+								<input type="hidden" name="price" value="2" />
+								<input type="hidden" name="currency" value="USD" />
+								<input type="hidden" name="notifyEmail" value="admin@trustaking.com" />
+								<input type="hidden" name="browserRedirect" value="http://<?php print $ticker; ?>.trustaking.com/activate.php?OrderID=<?php print $OrderID; ?>" />
+    							<input type="image" src="https://testnet.demo.btcpayserver.org/img/paybutton/pay.png" name="submit" style="width:209px" alt="Pay with BtcPay, Self-Hosted Bitcoin Payment Processor">
+							</form>
+							</div>
+						</section>
 					</article>
 
 				<!-- Footer -->
