@@ -26,9 +26,9 @@ $ch = curl_init() ; //  Initiate curl
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
 curl_setopt($ch, CURLOPT_URL,$url); // Set the url
 curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
-$result = curl_exec($ch); // Execute
+curl_exec($ch); // Execute
 if (curl_error($ch)) {
-    $error_msg = curl_error($ch);
+    $result= curl_error($ch);
 } else {
 $result = file_get_contents($url); // grab contents
 }
