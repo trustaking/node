@@ -5,7 +5,6 @@ require ('include/functions.php');
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $stakinginfo = json_decode(CallAPI ($url));
-echo $stakinginfo;
 
 if ($stakinginfo->staking =1) {
 $message = <<<EOD

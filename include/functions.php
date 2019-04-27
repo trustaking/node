@@ -28,9 +28,9 @@ curl_setopt($ch, CURLOPT_URL,$url); // Set the url
 curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
 curl_exec($ch); // Execute
 if (curl_error($ch)) {
-    $result= curl_error($ch);
+    $result = curl_error($ch);
 } else {
-$result = file_get_contents($url); // grab contents
+    $result = file_get_contents($url); // grab contents
 }
 curl_close($ch); // Closing
 return $result;
