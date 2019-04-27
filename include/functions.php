@@ -33,7 +33,6 @@ if (curl_errno($ch)) {
     echo 'Request Error:' . curl_error($ch);
 } else {
     $result = file_get_contents($url); // grab contents
-    echo 'success: ' . $result;
 }
 curl_close($ch); // Closing
 return $result;

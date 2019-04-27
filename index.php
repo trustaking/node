@@ -4,6 +4,7 @@ require ('include/functions.php');
 
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
+//TODO: Check for error before responding
 $stakinginfo = json_decode(CallAPI ($url));
 
 if ($stakinginfo->staking =1) {
