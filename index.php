@@ -12,7 +12,7 @@ $message = <<<EOD
 EOD;
 } else {
 
- Get Node Staking Details
+// Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $stakinginfo = CallAPI ($url); //json_decode(
 if ($stakinginfo->staking =1) {
