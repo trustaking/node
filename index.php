@@ -13,16 +13,13 @@ EOD;
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $stakinginfo = CallAPI ($url); 
-//if ($stakinginfo->staking =1) {
 
-if ( !is_array($stakinginfo) ) {
-	echo 'staking=' . stakinginfo['staking'];	
-	die (' There was an error with your parameters.');
+//if ( !is_array($stakinginfo) ) {
+//	die (' There was an error with your parameters.');
+//}
 
-}
-
-
-if ($stakinginfo['staking']=1) {
+//if ($stakinginfo['staking']=1) {
+if ($stakinginfo->staking =1) {
 $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
 EOD;

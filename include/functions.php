@@ -41,16 +41,10 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if 
 curl_setopt($ch, CURLOPT_URL,$url); // Set the url
 curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
 $response = curl_exec($ch); // Execute
-//$response=json_decode($response);
-$response = json_decode($response,true);
-
-//if (curl_error($ch)) {
-    $error = curl_errno($ch);
-//    echo 'Request Error:' . curl_error($ch);
-//} else {
-    $result = $response;
-//}
-
+$response=json_decode($response);
+//$response = json_decode($response,true);
+$error = curl_errno($ch);
+$result = $response;
 curl_close($ch); // Closing
 
 if (!is_null($error) ) {
