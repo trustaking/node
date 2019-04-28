@@ -20,8 +20,7 @@ function crypto_rand($min,$max,$pedantic=True) {
     return $num + $min;
 }
 
-
-public function ping($scheme,$ip,$port){
+function ping($scheme,$ip,$port){
 
     $url = $scheme.'://'.$ip;
     $ch = curl_init();
@@ -34,7 +33,6 @@ public function ping($scheme,$ip,$port){
     curl_close($ch);
     return $result;
 }
-
 
 function CallAPI($url) {
 
