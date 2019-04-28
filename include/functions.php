@@ -45,19 +45,16 @@ $response = curl_exec($ch); // Execute
 $response = json_decode($response,true);
 
 if (curl_error($ch)) {
-    $result = curl_errno($ch);
+    $error = curl_errno($ch);
     echo 'Request Error:' . curl_error($ch);
 } else {
-//    $result = $response; //file_get_contents($url); // grab contents
-    $result = $response['result'];
-    $error  = $response['error'];
+    $result = $response;
 }
 
 curl_close($ch); // Closing
-//return $result;
 
 if (!is_null($error) ) {
-    return $response['error']['message'];
+    return $error;
 } else {
     return $result;
 }
