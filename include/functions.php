@@ -44,12 +44,12 @@ $response = curl_exec($ch); // Execute
 //$response=json_decode($response);
 $response = json_decode($response,true);
 
-if (curl_error($ch)) {
+//if (curl_error($ch)) {
     $error = curl_errno($ch);
-    echo 'Request Error:' . curl_error($ch);
-} else {
+//    echo 'Request Error:' . curl_error($ch);
+//} else {
     $result = $response;
-}
+//}
 
 curl_close($ch); // Closing
 
