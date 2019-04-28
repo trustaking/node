@@ -2,6 +2,15 @@
 require_once ('include/config.php');
 require ('include/functions.php');
 
+//Check if node is online before further checks
+$check_server = ping($scheme, $server_ip, $api_port);
+
+if ( $check_server == '' || empty($check_server) ) {
+$message = <<<EOD
+<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
+EOD;
+} else {
+
 // Grab the next unused address 
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
 $address= CallAPI ($url);
@@ -19,7 +28,7 @@ $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
 EOD;
 }
-
+}
 //Check invoice paid
 // Set variables
 $invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only

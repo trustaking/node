@@ -2,7 +2,7 @@
 require_once ('include/config.php');
 require ('include/functions.php');
 
-//TODO: Check for error before responding
+//Check if node is online before further checks
 $check_server = ping($scheme, $server_ip, $api_port);
 
 if ( $check_server == '' || empty($check_server) ) {
