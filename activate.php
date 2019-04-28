@@ -8,7 +8,7 @@ $address= CallAPI ($url);
 
 // Grab Staking info
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$stakinginfo = json_decode(CallAPI ($url));
+$stakinginfo = CallAPI ($url);
 
 if ($stakinginfo->staking =1) {
 $message = <<<EOD

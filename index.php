@@ -3,15 +3,21 @@ require_once ('include/config.php');
 require ('include/functions.php');
 
 // Get Node Staking Details
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-//TODO: Check for error before responding
-$stakinginfo = json_decode(CallAPI ($url));
+//$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
+//$stakinginfo = CallAPI ($url); //json_decode(
+//if ($stakinginfo->staking =1) {
+//$message = <<<EOD
+//<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
+//EOD;
+//} else {
+//$message = <<<EOD
+//<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
+//EOD;
+//}
 
-if ($stakinginfo->staking =1) {
-$message = <<<EOD
-<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
-EOD;
-} else {
+//TODO: Check for error before responding
+$check_server = ping($scheme, $server_ip, $api_port);
+if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
 EOD;

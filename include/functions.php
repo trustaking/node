@@ -20,16 +20,33 @@ function crypto_rand($min,$max,$pedantic=True) {
     return $num + $min;
 }
 
+
+public function ping($scheme,$ip,$port){
+
+    $url = $scheme.'://'.$ip;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$url);
+    curl_setopt ($ch, CURLOPT_PORT , $port);
+    curl_setopt ($ch, CURLOPT_TIMEOUT , 1);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
+
 function CallAPI($url) {
 
 $ch = curl_init() ; //  Initiate curl
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
 curl_setopt($ch, CURLOPT_URL,$url); // Set the url
 curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
-curl_exec($ch); // Execute
+$response = curl_exec($ch); // Execute
+$result=json_decode($response);
 
-if (curl_errno($ch)) {
-    $result = curl_error($ch);
+if (curl_error($ch)) {
+    $result = curl_errno($ch);
     echo 'Request Error:' . curl_error($ch);
 } else {
     $result = file_get_contents($url); // grab contents
