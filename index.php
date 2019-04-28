@@ -16,9 +16,11 @@ $stakinginfo = CallAPI ($url);
 //if ($stakinginfo->staking =1) {
 
 if ( !is_array($stakinginfo) ) {
-		die (' There was an error with your parameters.');
+	echo 'staking=' . stakinginfo['staking'];	
+	die (' There was an error with your parameters.');
+
 }
-echo 'staking=' . stakinginfo['staking'];
+
 
 if ($stakinginfo['staking']=1) {
 $message = <<<EOD
