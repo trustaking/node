@@ -2,26 +2,30 @@
 require_once ('include/config.php');
 require ('include/functions.php');
 
-// Get Node Staking Details
-//$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-//$stakinginfo = CallAPI ($url); //json_decode(
-//if ($stakinginfo->staking =1) {
-//$message = <<<EOD
-//<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
-//EOD;
-//} else {
-//$message = <<<EOD
-//<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
-//EOD;
-//}
-
 //TODO: Check for error before responding
 $check_server = ping($scheme, $server_ip, $api_port);
+echo 'ping=' . $check_server;
+
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
 EOD;
+} else {
+
+ Get Node Staking Details
+$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
+$stakinginfo = CallAPI ($url); //json_decode(
+if ($stakinginfo->staking =1) {
+$message = <<<EOD
+<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
+EOD;
+} else {
+$message = <<<EOD
+<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
+EOD;
 }
+}
+
 
 $OrderID = $ticker . '-' . crypto_rand(100000000000,999999999999);
 ?>

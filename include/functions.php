@@ -47,7 +47,7 @@ if (curl_error($ch)) {
     $result = curl_errno($ch);
     echo 'Request Error:' . curl_error($ch);
 } else {
-    $result = file_get_contents($url); // grab contents
+    $result = $result; //file_get_contents($url); // grab contents
 }
 curl_close($ch); // Closing
 return $result;
