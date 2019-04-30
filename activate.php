@@ -99,7 +99,7 @@ curl_close($curl);
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<img src="images/coin_logo.png" alt="" width="200"/>
+							<img src="images/coin_logo-<?php print $ticker; ?>.png" alt="" width="200"/>
 						</header>
 							<section class="wrapper style5">
 								<div class="inner">
