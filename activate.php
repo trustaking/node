@@ -3,7 +3,8 @@ require_once ('include/config.php');
 require ('include/functions.php');
 
 //Check if node is online before further checks
-$check_server = ping($scheme, $server_ip, $api_port);
+$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
+$check_server =checkSite ($url);
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
@@ -14,6 +15,7 @@ EOD;
 // Grab the next unused address 
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
 $address= CallAPI ($url);
+//TODO: error trap the address
 
 // Grab Staking info
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
@@ -35,6 +37,7 @@ $invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
 $apiKey      = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
 $url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
 $OrderID     =  $_GET['OrderID'];
+//TODO: error trap the OrderID
 
 $curl = curl_init();
 curl_setopt_array($curl, array(

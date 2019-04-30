@@ -3,7 +3,8 @@ require_once ('include/config.php');
 require ('include/functions.php');
 
 //Check if node is online before further checks
-$check_server = ping($scheme, $server_ip, $api_port);
+$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
+$check_server =checkSite ($url);
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD

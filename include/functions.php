@@ -20,18 +20,28 @@ function crypto_rand($min,$max,$pedantic=True) {
     return $num + $min;
 }
 
-function ping($scheme,$ip,$port){
+function checkSite( $url ) {
+    $useragent = $_SERVER['HTTP_USER_AGENT'];
 
-    $url = $scheme.'://'.$ip;
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,$url);
-    curl_setopt ($ch, CURLOPT_PORT , $port);
-    curl_setopt ($ch, CURLOPT_TIMEOUT , 1);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($ch);
+    $options = array(
+            CURLOPT_RETURNTRANSFER => true,      // return web page
+            CURLOPT_HEADER         => false,     // do not return headers
+            CURLOPT_FOLLOWLOCATION => true,      // follow redirects
+            CURLOPT_USERAGENT      => $useragent, // who am i
+            CURLOPT_AUTOREFERER    => true,       // set referer on redirect
+            CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
+            CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
+            CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
+            CURLOPT_SSL_VERIFYPEER => false,     // SSL verification not required
+            CURLOPT_SSL_VERIFYHOST => false,     // SSL verification not required
+    );
+    $ch = curl_init( $url );
+    curl_setopt_array( $ch, $options );
+    curl_exec( $ch );
+
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    return $result;
+    return ($httpcode == 200);
 }
 
 function CallAPI($url) {
@@ -44,15 +54,8 @@ $response = curl_exec($ch); // Execute
 $response = json_decode($response);
 $error = curl_errno($ch);
 $result = $response;
-curl_close($ch); // Closing
-
-//if (!is_null($error) ) {
-//    return $error;
-//} else {
-    return $result;
-//}
-
-
+curl_close($ch);
+return $result;
 }
 
 ?>
