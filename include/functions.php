@@ -61,7 +61,7 @@ return $result;
 }
 
 public function getInvoiceStatus($invoiceId) {
-
+require ('/var/secure/keys.php');
 $ch = curl_init();
 curl_setopt_array($ch, array(
   CURLOPT_PORT => "443",
