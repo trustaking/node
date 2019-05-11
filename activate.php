@@ -46,6 +46,8 @@ foreach ($OrderDetails as $key => $value) {
 	$OrderIDCheck = $value["orderId"];
 	}
 
+echo $OrderStatus .' '. $OrderIDCheck . '=' .$_GET['OrderID'];
+
 if ($OrderStatus='complete' && $OrderIDCheck=$_GET['OrderID']) {
 echo 'Good to go:)';
 } else {
