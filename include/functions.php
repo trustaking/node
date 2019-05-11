@@ -61,10 +61,7 @@ return $result;
 }
 
 public function getInvoiceStatus($invoiceId) {
-$apiKey    = 'dkw3YklXeVFMUWRXZFdva2J5aVc3bkxXaVFQbDdHMHZNaUVHRVdZSGlsTA==' ;
-$url 	  	 = 'https://testnet.demo.btcpayserver.org/invoices/'.$invoiceId ;
-//$url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
-//$apiKey  = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
+require '/var/secure/keys.php';
 
 $ch = curl_init();
 curl_setopt_array($ch, array(
