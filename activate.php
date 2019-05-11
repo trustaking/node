@@ -35,15 +35,18 @@ EOD;
 }
 //Check invoice paid
 // Set variables
-$invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
-$url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
+#$invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
+#$url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
+$invoiceId   = 'Q7rqzgQ5Le81jsh5mxNbkQ' ;
+$url 		 = 'https://testnet.demo.btcpayserver.org/invoices/'.$invoiceId ;
+
 $OrderID     =  $_GET['OrderID'];
 $OrderStatus = '' ;
 $OrderDetails = '';
 //TODO: error trap the OrderID
 
 $OrderDetails = $wallet->getInvoiceStatus ($url);
-$OrderStatus = $OrderDetails['status'];
+$OrderStatus = $OrderDetails['state'];
 echo $OrderStatus;
 ?>
 <!DOCTYPE HTML>
