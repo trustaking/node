@@ -1,10 +1,15 @@
 <?php 
 require_once ('include/config.php');
 require ('include/functions.php');
+$wallet = new phpFunctions_Wallet();
 
 //Check if node is online before further checks
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
-$check_server =checkSite ($url);
+$check_server = $wallet->checkSite ($url);
+
+//if ( $check_server == '' || empty($check_server) ) {
+//	die (' The coind server located at '. $scheme.'://'.$server_port.' on Port:['.$server_port.'] appears to be unresponsive.');
+//}
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
@@ -13,14 +18,14 @@ EOD;
 } else {
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$stakinginfo = CallAPI ($url); 
+$stakinginfo = $wallet->CallAPI ($url); 
 
 //if ( !is_array($stakinginfo) ) {
-//	die (' There was an error with your parameters.');
+//	die (' There was an error with your login parameters.');
 //}
 
-//if ($stakinginfo['staking']=1) {
-if ($stakinginfo->staking =1) {
+if ($stakinginfo['staking']=1) {
+//if ($stakinginfo->staking =1) {
 $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
 EOD;
@@ -30,7 +35,6 @@ $message = <<<EOD
 EOD;
 }
 }
-
 
 $OrderID = $ticker . '-' . crypto_rand(100000000000,999999999999);
 ?>

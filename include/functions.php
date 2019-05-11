@@ -1,6 +1,8 @@
 <?php 
 
-function crypto_rand($min,$max,$pedantic=True) {
+class phpFunctions_Wallet {
+
+public function crypto_rand($min,$max,$pedantic=True) {
     $diff = $max - $min;
     if ($diff <= 0) return $min; // not so random...
     $range = $diff + 1; // because $max is inclusive
@@ -20,7 +22,7 @@ function crypto_rand($min,$max,$pedantic=True) {
     return $num + $min;
 }
 
-function checkSite( $url ) {
+public function checkSite( $url ) {
     $useragent = $_SERVER['HTTP_USER_AGENT'];
 
     $options = array(
@@ -44,18 +46,43 @@ function checkSite( $url ) {
     return ($httpcode == 200);
 }
 
-function CallAPI($url) {
+public function CallAPI($url) {
 
 $ch = curl_init() ; //  Initiate curl
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
 curl_setopt($ch, CURLOPT_URL,$url); // Set the url
 curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
 $response = curl_exec($ch); // Execute
-$response = json_decode($response);
+$response = json_decode($response,true);
 $error = curl_errno($ch);
 $result = $response;
 curl_close($ch);
 return $result;
 }
 
-?>
+public function getInvoiceStatus{$url} {
+
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_PORT => "443",
+  CURLOPT_URL => $url,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_POSTFIELDS => "{\"method\":\"getblock\", \"params\": [6931c538229099305baadd8ee17d9d3bad960c8f83e2468b428da887785297d4\",1]}",
+  CURLOPT_HTTPHEADER => array(
+    "Authorization: Basic ".$apiKey."",
+    "Content-Type: application/json",
+    "cache-control: no-cache"
+  ),
+));
+$response = curl_exec($ch); // Execute
+$response = json_decode($response,true);
+$error = curl_error($curl);
+$result = $response;
+curl_close($curl);
+return $result;
+}

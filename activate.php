@@ -1,10 +1,11 @@
 <?php 
 require_once ('include/config.php');
 require ('include/functions.php');
+$wallet = new phpFunctions_Wallet();
 
 //Check if node is online before further checks
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
-$check_server =checkSite ($url);
+$check_server = $wallet->checkSite ($url);
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
@@ -14,14 +15,15 @@ EOD;
 
 // Grab the next unused address 
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
-$address= CallAPI ($url);
+$address = $wallet->CallAPI ($url);
 //TODO: error trap the address
 
 // Grab Staking info
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$stakinginfo = CallAPI ($url);
+$stakinginfo = $wallet->CallAPI ($url);
 
-if ($stakinginfo->staking =1) {
+if ($stakinginfo['staking']=1) {
+//if ($stakinginfo->staking =1) {
 $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
 EOD;
@@ -37,30 +39,13 @@ $invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
 $apiKey      = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
 $url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
 $OrderID     =  $_GET['OrderID'];
+$OrderStatus = '' ;
+$OrderDetails = '';
 //TODO: error trap the OrderID
 
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_PORT => "443",
-  CURLOPT_URL => $url,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_POSTFIELDS => "{\"method\":\"getblock\", \"params\": [6931c538229099305baadd8ee17d9d3bad960c8f83e2468b428da887785297d4\",1]}",
-  CURLOPT_HTTPHEADER => array(
-    "Authorization: Basic ".$apiKey."",
-    "Content-Type: application/json",
-    "cache-control: no-cache"
-  ),
-));
-
-$result = curl_exec($curl);
-$err = curl_error($curl);
-curl_close($curl);
-
+$OrderDetails = $wallet->getInvoiceStatus ($url);
+$OrderStatus = $OrderDetails['status'];
+echo $OrderStatus;
 ?>
 <!DOCTYPE HTML>
 <html>
