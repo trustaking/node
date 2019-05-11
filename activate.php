@@ -51,9 +51,6 @@ foreach($OrderDetails as $data) {
     echo $data;
 }
 
-print_r $OrderDetails;
-
-
 var_dump($OrderDetails);
 
 ?>
