@@ -1,6 +1,7 @@
 <?php 
 
 class phpFunctions_Wallet {
+require '/var/secure/keys.php';
 
 public function crypto_rand($min,$max,$pedantic=True) {
     $diff = $max - $min;
@@ -61,7 +62,6 @@ return $result;
 }
 
 public function getInvoiceStatus($invoiceId) {
-require '/var/secure/keys.php';
 
 $ch = curl_init();
 curl_setopt_array($ch, array(
