@@ -47,9 +47,9 @@ foreach ($OrderDetails as $key => $value) {
 	}
 
 if ($OrderStatus='complete' && $OrderIDCheck=$_GET['OrderID']) {
-echo 'Good to go:)' 
+echo 'Good to go:)';
 } else {
-	echo 'Not so good:('
+	echo 'Not so good:(';
 }
 
 ?>
