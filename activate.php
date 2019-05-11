@@ -32,27 +32,11 @@ $message = <<<EOD
 EOD;
 }
 }
-//Check invoice paid
-// Set variables
+//Check if invoice paid
 #$invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
-#$url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
 $invoiceId   = 'Q7rqzgQ5Le81jsh5mxNbkQ' ;
-$url 		 = 'https://testnet.demo.btcpayserver.org/invoices/'.$invoiceId ;
-
-$OrderDetails = $wallet->getInvoiceStatus ($url);
-
-foreach ($OrderDetails as $key => $value) {
-    $OrderStatus = $value["status"];
-	$OrderIDCheck = $value["orderId"];
-	}
-
-echo $OrderStatus .' '. $OrderIDCheck . '=' .$_GET['OrderID'];
-
-if ($OrderStatus == 'complete' && $OrderIDCheck == $_GET['OrderID']) {
-echo 'Good to go:)';
-} else {
-	echo 'Not so good:(';
-}
+$OrderPaid = $wallet->getInvoiceStatus ($invoiceId);
+echo $OrderPaid;
 
 ?>
 <!DOCTYPE HTML>

@@ -60,10 +60,11 @@ curl_close($ch);
 return $result;
 }
 
-public function getInvoiceStatus($url) {
-
-#$apiKey      = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
-$apiKey      = 'dkw3YklXeVFMUWRXZFdva2J5aVc3bkxXaVFQbDdHMHZNaUVHRVdZSGlsTA==' ;
+public function getInvoiceStatus($invoiceId) {
+$apiKey    = 'dkw3YklXeVFMUWRXZFdva2J5aVc3bkxXaVFQbDdHMHZNaUVHRVdZSGlsTA==' ;
+$url 	  	 = 'https://testnet.demo.btcpayserver.org/invoices/'.$invoiceId ;
+//$url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
+//$apiKey  = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
 
 $ch = curl_init();
 curl_setopt_array($ch, array(
@@ -85,8 +86,19 @@ curl_setopt_array($ch, array(
 $response = curl_exec($ch); // Execute
 $response = json_decode($response,true);
 $error = curl_error($ch);
-$result = $response;
 curl_close($ch);
+
+foreach ($response as $key => $value) {
+  $OrderStatus = $value["status"];
+  $OrderIDCheck = $value["orderId"];
+}
+
+if ($OrderStatus == 'complete' && $OrderIDCheck == $_GET['OrderID']) {
+  $result = "PASS";
+} else {
+  $result = "FAIL";
+}
+
 return $result;
 }
 }
