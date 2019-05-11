@@ -23,7 +23,6 @@ $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $stakinginfo = $wallet->CallAPI ($url);
 
 if ($stakinginfo['staking']=1) {
-//if ($stakinginfo->staking =1) {
 $message = <<<EOD
 <ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
 EOD;
@@ -47,11 +46,11 @@ foreach ($OrderDetails as $key => $value) {
 	$OrderIDCheck = $value["orderId"];
 	}
 
-if ( $OrderStatus='complete' && $OrderIDCheck=$_GET['OrderID'] ) {
-echo 'Good to go:)'
- else {
+if ($OrderStatus='complete' && $OrderIDCheck=$_GET['OrderID']) {
+echo 'Good to go:)' 
+} else {
 	echo 'Not so good:('
-}}
+}
 
 ?>
 <!DOCTYPE HTML>
