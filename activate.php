@@ -47,7 +47,7 @@ $OrderDetails = '';
 
 $OrderDetails = $wallet->getInvoiceStatus ($url);
 //$OrderStatus = $OrderDetails[1]['status'];
-foreach($OrderDetails $data) {
+foreach($OrderDetails as $data) {
     echo $data;
 }
 
