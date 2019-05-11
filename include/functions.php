@@ -1,8 +1,6 @@
 <?php 
-require '/var/secure/keys.php';
 
 class phpFunctions_Wallet {
-
 
 public function crypto_rand($min,$max,$pedantic=True) {
     $diff = $max - $min;

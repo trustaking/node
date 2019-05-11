@@ -1,6 +1,7 @@
 <?php 
 require_once ('include/config.php');
 require ('include/functions.php');
+require ('/var/secure/keys.php');
 $wallet = new phpFunctions_Wallet();
 
 //Check if node is online before further checks
