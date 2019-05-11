@@ -46,7 +46,7 @@ $OrderDetails = '';
 //TODO: error trap the OrderID
 
 $OrderDetails = $wallet->getInvoiceStatus ($url);
-$OrderStatus = $OrderDetails['state'];
+$OrderStatus = $OrderDetails['State'];
 echo $OrderStatus;
 ?>
 <!DOCTYPE HTML>
