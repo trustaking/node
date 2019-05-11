@@ -40,19 +40,18 @@ EOD;
 $invoiceId   = 'Q7rqzgQ5Le81jsh5mxNbkQ' ;
 $url 		 = 'https://testnet.demo.btcpayserver.org/invoices/'.$invoiceId ;
 
-$OrderID     =  $_GET['OrderID'];
-$OrderStatus = '' ;
-$OrderDetails = '';
-//TODO: error trap the OrderID
-
 $OrderDetails = $wallet->getInvoiceStatus ($url);
-//$OrderStatus = $OrderDetails[1]['status'];
 
 foreach ($OrderDetails as $key => $value) {
-    echo $value["status"] . ", " . $value["orderId"] . "<br>";
-  }
+    $OrderStatus = $value["status"];
+	$OrderIDCheck = $value["orderId"];
+	}
 
-var_dump($OrderDetails);
+if ( $OrderStatus='complete' && $OrderIDCheck=$_GET['OrderID']) {
+echo 'Good to go:)'
+} else {
+	echo 'Not so good:('
+}
 
 ?>
 <!DOCTYPE HTML>
