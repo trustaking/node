@@ -60,7 +60,7 @@ curl_close($ch);
 return $result;
 }
 
-public function getInvoiceStatus{$url} {
+public function getInvoiceStatus($url) {
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
