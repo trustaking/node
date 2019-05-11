@@ -62,8 +62,10 @@ return $result;
 
 public function getInvoiceStatus($url) {
 
-$curl = curl_init();
-curl_setopt_array($curl, array(
+$apiKey      = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
   CURLOPT_PORT => "443",
   CURLOPT_URL => $url,
   CURLOPT_RETURNTRANSFER => true,
@@ -81,9 +83,9 @@ curl_setopt_array($curl, array(
 ));
 $response = curl_exec($ch); // Execute
 $response = json_decode($response,true);
-$error = curl_error($curl);
+$error = curl_error($ch);
 $result = $response;
-curl_close($curl);
+curl_close($ch);
 return $result;
 }
 }

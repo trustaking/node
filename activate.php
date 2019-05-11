@@ -36,7 +36,6 @@ EOD;
 //Check invoice paid
 // Set variables
 $invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
-$apiKey      = 'aWxaMWJZVkdZaHBvVmtkTHlvN3lvZGRrN0wwMEhVb0lrUmlFN0hiaVd2aQ==' ;
 $url 		 = 'https://btcpay.trustaking.com/invoices/'.$invoiceId ;
 $OrderID     =  $_GET['OrderID'];
 $OrderStatus = '' ;
