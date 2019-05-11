@@ -47,7 +47,8 @@ $OrderDetails = '';
 
 $OrderDetails = $wallet->getInvoiceStatus ($url);
 //var_dump($OrderDetails);
-$OrderStatus = $OrderDetails['data'];
+$OrderStatus1 = json_decode($OrderDetails['data'],true);
+$OrderStatus = $OrderStatus1['status'];
 echo $OrderStatus;
 ?>
 <!DOCTYPE HTML>
