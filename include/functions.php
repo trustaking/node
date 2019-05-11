@@ -83,7 +83,7 @@ curl_setopt_array($ch, array(
   ),
 ));
 $response = curl_exec($ch); // Execute
-$response = json_decode($response,true);
+$response = json_decode($response,JSON_PRETTY_PRINT);
 $error = curl_error($ch);
 $result = $response;
 curl_close($ch);
