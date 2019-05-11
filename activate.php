@@ -36,7 +36,9 @@ EOD;
 #$invoiceId   = 'CtT6BnSTimsH1kQaXZjkUC' ; //Testing only
 $invoiceId   = 'Q7rqzgQ5Le81jsh5mxNbkQ' ;
 $OrderPaid = $wallet->getInvoiceStatus ($invoiceId);
-echo $OrderPaid;
+if ( $OrderPaid == 'FAIL' ) {
+	die ('Payment not successful - please try again');
+}
 
 ?>
 <!DOCTYPE HTML>
