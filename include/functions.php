@@ -90,8 +90,7 @@ foreach ($response as $key => $value) {
   $OrderIDCheck = $value["orderId"];
 }
 
-//if ($OrderStatus == 'complete' && $OrderIDCheck == $_GET['OrderID']) {
-if ($OrderStatus == 'expired' && $OrderIDCheck == $_GET['OrderID']) {
+if ($OrderStatus == 'complete' && $OrderIDCheck == $_GET['OrderID']) {
   $result = "PASS";
 } else {
   $result = "FAIL";
