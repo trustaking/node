@@ -1,6 +1,9 @@
 <?php 
 require_once ('include/config.php');
 require ('include/functions.php');
+require '/home/hunter/projects/trustaking/keys.php';
+require '/home/hunter/web/vendor/autoload.php';
+
 $wallet = new phpFunctions_Wallet();
 
 //Check if node is online before further checks
