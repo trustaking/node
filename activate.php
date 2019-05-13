@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require ('/var/secure/keys.php');
 require ('include/config.php');
 require ('include/functions.php');
 $wallet = new phpFunctions_Wallet();
@@ -36,7 +37,7 @@ EOD;
 
 //Check if invoice paid
 $invoiceId   = $_SESSION['InvoiceID'];
-$OrderPaid = $wallet->getInvoiceStatus ($invoiceId);
+$OrderPaid = $wallet->getInvoiceStatus ($invoiceId,$url,$apiKey);
 if ( $OrderPaid == 'FAIL' ) {
 	die ('Payment not successful - please try again');
 }
