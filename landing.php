@@ -19,8 +19,8 @@
     $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 
     $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass); // Password may need to be updated if you changed it
-    $privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
-    $publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
+    $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
+    $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
     $client        = new \BTCPayServer\Client\Client();
     $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
     
