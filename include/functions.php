@@ -62,9 +62,6 @@ return $result;
 
 public function getInvoiceStatus($invoiceId) {
 require ('/var/secure/keys.php');
-echo $invoiceId;
-echo $url;
-echo $apiKey;
 
 $ch = curl_init();
 curl_setopt_array($ch, array(
