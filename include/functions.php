@@ -60,7 +60,8 @@ curl_close($ch);
 return $result;
 }
 
-public function getInvoiceStatus($invoiceId,$url,$apiKey) {
+public function getInvoiceStatus($invoiceId) {
+require ('/var/secure/keys.php');
 echo $invoiceId;
 echo $url;
 echo $apiKey;
