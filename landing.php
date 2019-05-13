@@ -1,8 +1,8 @@
 <?php 
     session_start(); // start a session before any output - config is always called first
 
-    require_once ('/var/secure/keys.php'); //secured location - sensitive keys
-    require_once ('include/config.php'); // coin configuration
+    require ('/var/secure/keys.php'); //secured location - sensitive keys
+    require ('include/config.php'); // coin configuration
     require ('include/functions.php'); // standard functions
     require ('vendor/autoload.php'); //loads the btcpayserver library
 

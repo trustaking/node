@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once ('include/config.php');
+require ('include/config.php');
 require ('include/functions.php');
 $wallet = new phpFunctions_Wallet();
 
