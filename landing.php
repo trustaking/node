@@ -6,15 +6,6 @@
     require ('include/functions.php'); // standard functions
     require ('vendor/autoload.php'); //loads the btcpayserver library
 
-//    echo $apiKey.'<br>'; 
-//    echo $encryt_pass.'<br>'; //  = 'YourTopSecretPassword';
-//    echo $pair_token.'<br>'; //   = 'DzV6mvGTvWdCrhNaP9fuiPBsnb4eFEBauh3hDuZ4cG4P'
-//    echo $service_desc.'<br>'; // = '1 month Trustaking service';
-//    echo $price.'<br>'; //        = '2.00';
-//    echo $redirectURL.'<br>'; //  = 'https://x42.trustaking.com/activate.php';
-//    echo $email.'<br>'; //        = '';
-//    echo $btcpayserver.'<br>'; // = 'https://btcpay.trustaking.com';
-
     $wallet = new phpFunctions_Wallet();
     $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 
