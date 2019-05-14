@@ -9,6 +9,9 @@
     $wallet = new phpFunctions_Wallet();
     $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 
+    // Store the OrderID in session
+    $_SESSION['OrderID']=$OrderID;
+
     $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass); // Password may need to be updated if you changed it
     $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
     $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
