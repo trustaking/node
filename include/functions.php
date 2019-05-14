@@ -90,7 +90,7 @@ foreach ($response as $key => $value) {
   $OrderIDCheck = $value["orderId"];
 }
 
-if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == ) {
+if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
   $result = "PASS";
 } else {
   $result = "FAIL";
