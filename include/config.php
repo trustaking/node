@@ -8,7 +8,7 @@ $api_port='38222';
 $encryt_pass  = 'YourTopSecretPassword';
 $service_desc = '1 month Trustaking service';
 $price        = '2.00';
-$redirectURL  = 'https://x42.trustaking.com/activate.php';
+$redirectURL  = 'http://35.185.115.152/activate.php';
 $email        = '';
 
 // general variables
