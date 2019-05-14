@@ -1,8 +1,8 @@
 <?php 
-require_once ('include/config.php');
+require ('include/config.php');
 require ('include/functions.php');
-require '/home/hunter/projects/trustaking/keys.php';
-require '/home/hunter/web/vendor/autoload.php';
+require ('/var/secure/keys.php');
+require ('vendor/autoload.php');
 
 $wallet = new phpFunctions_Wallet();
 
