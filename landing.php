@@ -1,5 +1,5 @@
 <?php 
-    session_start(); // start a session before any output - config is always called first
+    session_start(); // start a session before any output
 
     require ('/var/secure/keys.php'); //secured location - sensitive keys
     require ('include/config.php'); // coin configuration

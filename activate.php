@@ -36,7 +36,8 @@ EOD;
 
 //Check if invoice paid
 $invoiceId   = $_SESSION['InvoiceID'];
-$OrderPaid = $wallet->getInvoiceStatus ($invoiceId,$_GET['OrderID']);
+$OrderId   = $_GET['OrderID'];
+$OrderPaid = $wallet->getInvoiceStatus ($invoiceId,$OrderId);
 if ( $OrderPaid == 'FAIL' ) {
 	die ('Payment not successful - please try again');
 }
