@@ -60,7 +60,7 @@ curl_close($ch);
 return $result;
 }
 
-public function getInvoiceStatus($invoiceId) {
+public function getInvoiceStatus($invoiceId,$orderID) {
 require ('/var/secure/keys.php');
 
 $ch = curl_init();
@@ -90,7 +90,7 @@ foreach ($response as $key => $value) {
   $OrderIDCheck = $value["orderId"];
 }
 
-if ($OrderStatus == 'complete' && $OrderIDCheck == $_GET['OrderID']) {
+if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == ) {
   $result = "PASS";
 } else {
   $result = "FAIL";
