@@ -66,7 +66,7 @@ require ('/var/secure/keys.php');
 $ch = curl_init();
 curl_setopt_array($ch, array(
   CURLOPT_PORT => "443",
-  CURLOPT_URL => $url,
+  CURLOPT_URL => $url.$invoiceId,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
