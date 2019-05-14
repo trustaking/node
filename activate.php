@@ -62,7 +62,7 @@ if ( $OrderPaid == 'FAIL' ) {
 				<!-- Header -->
 					<header id="header" class="alt">
 						<?php print $message;?>
-						<h1><a href="index.html">TRUSTAKING.COM</a></h1>
+						<h1><a href="http://www.trustaking.com">TRUSTAKING.COM</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
