@@ -69,7 +69,7 @@ if ( $OrderPaid == 'FAIL' ) {
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-											<li><a href="index.html">Home</a></li>
+											<li><a href="http://www.trustaking.com">Home</a></li>
 										</ul>
 									</div>
 								</li>
