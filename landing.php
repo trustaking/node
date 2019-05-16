@@ -1,82 +1,21 @@
 <?php 
     session_start(); // start a session before any output
-
-    require ('/var/secure/keys.php'); //secured location - sensitive keys
-    require ('include/config.php'); // coin configuration
     require ('include/functions.php'); // standard functions
-    require ('vendor/autoload.php'); //loads the btcpayserver library
-
+    require ('include/config.php'); // coin configuration
     $wallet = new phpFunctions_Wallet();
-    $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 
-    // Store the OrderID in session
+    // Generate & store the InvoiceID in session
+    $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
     $_SESSION['OrderID']=$OrderID;
 
-    $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass); // Password may need to be updated if you changed it
-    $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
-    $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
-    $client        = new \BTCPayServer\Client\Client();
-    $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
-    
-    $client->setPrivateKey($privateKey);
-    $client->setPublicKey($publicKey);
-    $client->setUri($btcpayserver);
-    $client->setAdapter($adapter);
-    $token = new \BTCPayServer\Token();
-    $token->setToken($pair_token);
-
-    // Token object is injected into the client
-    $client->setToken($token);
-
-    // * This is where we will start to create an Invoice object, make sure to check
-    // * the InvoiceInterface for methods that you can use.
-    $invoice = new \BTCPayServer\Invoice();
-    $buyer = new \BTCPayServer\Buyer();
-    $buyer
-    ->setEmail($email);
-    // Add the buyers info to invoice
-    $invoice->setBuyer($buyer);
-
-    // Item is used to keep track of a few things
-    $item = new \BTCPayServer\Item();
-    $item
-    //    ->setCode('skuNumber')
-        ->setDescription($service_desc)
-        ->setPrice($price );
-    $invoice->setItem($item);
-
-    // BTCPayServer supports multiple different currencies. Most shopping cart applications
-    // and applications in general have defined set of currencies that can be used.
-    // Setting this to one of the supported currencies will create an invoice using
-    // the exchange rate for that currency.
-    $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
-
-    // Configure the rest of the invoice
-    $invoice
-        ->setOrderId($OrderID)
-        //->setNotificationUrl('https://store.example.com/btcpayserver/callback')
-        ->setRedirectURL($redirectURL);
-
-    // Updates invoice with new information such as the invoice id and the URL where
-    // a customer can view the invoice.
-
-    try {
-    echo "Creating invoice at BTCPayServer now.".PHP_EOL;
-    $client->createInvoice($invoice);
-    } catch (\Exception $e) {
-        echo "Exception occured: " . $e->getMessage().PHP_EOL;
-        $request  = $client->getRequest();
-        $response = $client->getResponse();
-        echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
-        echo (string) $response.PHP_EOL.PHP_EOL;
-        exit(1); // We do not want to continue if something went wrong
-    }
+    // Create invoice
+    $inv = $wallet->CreateInvoice($OrderID);
+    $invoiceId= $inv['invoice_id'];
+    $invoiceURL= $inv['invoice_url'];
 
     // Store the InvoiceID in session
-    $_SESSION['InvoiceID']=$invoice->getId();
+    $_SESSION['InvoiceID']=$invoiceId;
 
     // Forwarding to payment page
-    header('Location:' . $invoice->getUrl()); //<<redirect to payment page
-
-//header('Location: activation.php'); // <<redirect to activation page for testing
-//echo '<b>Invoice:</b><br>'.$invoice->getId().'" created, see '.$invoice->getUrl() .'<br>';
+    header('Location:' . $invoiceURL); //<<redirect to payment page
+    //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
