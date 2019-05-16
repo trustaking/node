@@ -135,4 +135,72 @@ public function NewGetInvoiceStatus($invoiceId,$orderID) {
   return $result;
 }
 
+public function CreateInvoice() {
+  require ('/var/secure/keys.php'); //secured location - sensitive keys
+  require ('include/config.php'); // coin configuration
+  require ('vendor/autoload.php'); //loads the btcpayserver library
+
+  $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+  $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
+  $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
+  $client        = new \BTCPayServer\Client\Client();
+  $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
+  
+  $client->setPrivateKey($privateKey);
+  $client->setPublicKey($publicKey);
+  $client->setUri($btcpayserver);
+  $client->setAdapter($adapter);
+  
+  $token = new \BTCPayServer\Token();
+  $token->setToken($pair_token);
+  $token->setFacade('merchant');
+  $client->setToken($token);
+
+    // * This is where we will start to create an Invoice object, make sure to check
+    // * the InvoiceInterface for methods that you can use.
+    $invoice = new \BTCPayServer\Invoice();
+    $buyer = new \BTCPayServer\Buyer();
+    $buyer
+    ->setEmail($email);
+    // Add the buyers info to invoice
+    $invoice->setBuyer($buyer);
+
+    // Item is used to keep track of a few things
+    $item = new \BTCPayServer\Item();
+    $item
+    //    ->setCode('skuNumber')
+        ->setDescription($service_desc)
+        ->setPrice($price );
+    $invoice->setItem($item);
+
+    // BTCPayServer supports multiple different currencies. Most shopping cart applications
+    // and applications in general have defined set of currencies that can be used.
+    // Setting this to one of the supported currencies will create an invoice using
+    // the exchange rate for that currency.
+    $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
+
+    // Configure the rest of the invoice
+    $invoice
+        ->setOrderId($OrderID)
+        //->setNotificationUrl('https://store.example.com/btcpayserver/callback')
+        ->setRedirectURL($redirectURL);
+
+    // Updates invoice with new information such as the invoice id and the URL where
+    // a customer can view the invoice.
+
+    try {
+    echo "Creating invoice at BTCPayServer now.".PHP_EOL;
+    $client->createInvoice($invoice);
+    } catch (\Exception $e) {
+        echo "Exception occured: " . $e->getMessage().PHP_EOL;
+        $request  = $client->getRequest();
+        $response = $client->getResponse();
+        echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
+        echo (string) $response.PHP_EOL.PHP_EOL;
+        exit(1); // We do not want to continue if something went wrong
+    }
+
+    return array('invoice_id' => $invoice->getId(), 'invoice_url' => $invoice->getUrl());
+}
+
 }
