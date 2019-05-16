@@ -6,7 +6,7 @@ $api_port='';
 
 // Service specific variables.
 $service_desc='';
-$price= '';
+$price='';
 $redirectURL='';
 $email='';
 
