@@ -17,7 +17,5 @@
     $_SESSION['InvoiceID']=$invoiceId;
 
     // Forwarding to payment page
-//    header('Location:' . $invoiceURL); //<<redirect to payment page
-
-//header('Location: activation.php'); // <<redirect to activation page for testing
-echo '<b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
+    header('Location:' . $invoiceURL); //<<redirect to payment page
+    //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
