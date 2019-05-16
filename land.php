@@ -13,9 +13,6 @@
     $invoiceId= $inv['invoice_id'];
     $invoiceURL= $inv['invoice_url'];
 
-echo $invoiceId;
-echo $invoiceURL;
-
     // Store the InvoiceID in session
     $_SESSION['InvoiceID']=$invoiceId;
 
