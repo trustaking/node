@@ -41,8 +41,8 @@
     $item = new \BTCPayServer\Item();
     $item
     //    ->setCode('skuNumber')
-        ->setDescription('1 month Trustaking service')
-        ->setPrice('2.00');
+        ->setDescription($service_desc)
+        ->setPrice($price );
     $invoice->setItem($item);
 
     // BTCPayServer supports multiple different currencies. Most shopping cart applications

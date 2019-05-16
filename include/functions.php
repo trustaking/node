@@ -99,7 +99,7 @@ if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $
 return $result;
 }
 
-public function NewgetInvoiceStatus($invoiceId,$orderID) {
+public function NewGetInvoiceStatus($invoiceId,$orderID) {
   require ('/var/secure/keys.php'); //secured location - sensitive keys
   require ('include/config.php'); // coin configuration
   require ('vendor/autoload.php'); //loads the btcpayserver library
@@ -124,15 +124,40 @@ public function NewgetInvoiceStatus($invoiceId,$orderID) {
   
   $OrderIDCheck = $invoice->getOrderId();
   $OrderStatus = $invoice->getStatus();
-  $excstatus = $invoice->getExceptionStatus();
+  $ExcStatus = $invoice->getExceptionStatus();
     
   if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
     $result = "PASS";
-  } else {
+  } else { //TODO: Handle partial payments
     $result = "FAIL";
   }
   
   return $result;
 }
+
+public function NewGetInvoiceStatus($invoiceId,$orderID) {
+  require ('/var/secure/keys.php'); //secured location - sensitive keys
+  require ('include/config.php'); // coin configuration
+  require ('vendor/autoload.php'); //loads the btcpayserver library
+
+  $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+  $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
+  $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
+  $client        = new \BTCPayServer\Client\Client();
+  $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
+  
+  $client->setPrivateKey($privateKey);
+  $client->setPublicKey($publicKey);
+  $client->setUri($btcpayserver);
+  $client->setAdapter($adapter);
+  
+  $token = new \BTCPayServer\Token();
+  $token->setToken($pair_token);
+  $token->setFacade('merchant');
+  $client->setToken($token);
+
+}
+
+
 
 }
