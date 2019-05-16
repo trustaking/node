@@ -114,17 +114,17 @@ public function NewgetInvoiceStatus($invoiceId,$orderID) {
   $client->setPublicKey($publicKey);
   $client->setUri($btcpayserver);
   $client->setAdapter($adapter);
+  
   $token = new \BTCPayServer\Token();
   $token->setToken($pair_token);
-
-  // Token object is injected into the client
+  $token->setFacade('merchant');
   $client->setToken($token);
 
   $invoice = $client->getInvoice($invoiceId);
   
   $OrderStatus = $invoice->getStatus();
   $excstatus = $invoice->getExceptionStatus();
-  $OrderIDCheck = $invoice->getOrderID();
+//  $OrderIDCheck = $invoice->getOrderID();
   
   if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
     $result = "PASS";
