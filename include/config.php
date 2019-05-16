@@ -8,10 +8,10 @@ $api_port='38222';
 $encryt_pass  = 'YourTopSecretPassword';
 
 //TODO: Inject the redirectURL, Service, Price.
-$service_desc = '12 months Trustaking service';
-$price        = '15.00';
-$redirectURL  = 'http://35.185.115.152/activate.php';
-$email        = '';
+$service_desc='12 months Trustaking service';
+$price= '15.00';
+$redirectURL='http://35.185.115.152/activate.php';
+$email='';
 
 // general variables
 $server_ip='localhost'; // '0.0.0.0' target server ip. [ex.] 10.0.0.15
