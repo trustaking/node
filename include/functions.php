@@ -122,10 +122,10 @@ public function NewgetInvoiceStatus($invoiceId,$orderID) {
 
   $invoice = $client->getInvoice($invoiceId);
   
+  $OrderIDCheck = $invoice->getOrderId();
   $OrderStatus = $invoice->getStatus();
   $excstatus = $invoice->getExceptionStatus();
-//  $OrderIDCheck = $invoice->getOrderID();
-  
+    
   if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
     $result = "PASS";
   } else {
