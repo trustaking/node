@@ -98,4 +98,42 @@ if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $
 
 return $result;
 }
+
+public function NewgetInvoiceStatus($invoiceId,$orderID) {
+  require ('/var/secure/keys.php'); //secured location - sensitive keys
+  require ('include/config.php'); // coin configuration
+  require ('include/functions.php'); // standard functions
+  require ('vendor/autoload.php'); //loads the btcpayserver library
+
+  $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+  $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
+  $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
+  $client        = new \BTCPayServer\Client\Client();
+  $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
+  
+  $client->setPrivateKey($privateKey);
+  $client->setPublicKey($publicKey);
+  $client->setUri($btcpayserver);
+  $client->setAdapter($adapter);
+  $token = new \BTCPayServer\Token();
+  $token->setToken($pair_token);
+
+  // Token object is injected into the client
+  $client->setToken($token);
+
+  $invoice = $client->getInvoice($invoiceId);
+  
+  $OrderStatus = $invoice->getStatus();
+  $excstatus = $invoice->getExceptionStatus();
+  $OrderIDCheck = $invoice->getOrderID();
+  
+  if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
+    $result = "PASS";
+  } else {
+    $result = "FAIL";
+  }
+  
+  return $result;
+}
+
 }
