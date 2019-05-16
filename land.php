@@ -1,6 +1,7 @@
 <?php 
     session_start(); // start a session before any output
     require ('include/functions.php'); // standard functions
+    require ('include/config.php'); // coin configuration
     $wallet = new phpFunctions_Wallet();
 
     // Generate & store the InvoiceID in session
