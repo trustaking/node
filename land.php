@@ -9,7 +9,7 @@
     $_SESSION['OrderID']=$OrderID;
 
     // Create invoice
-    $inv = $wallet->CreateInvoice();
+    $inv = $wallet->CreateInvoice($OrderID);
     $invoiceId= $inv['invoice_id'];
     $invoiceURL= $inv['invoice_url'];
 
