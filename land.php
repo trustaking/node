@@ -20,7 +20,8 @@ echo $invoiceURL;
     $_SESSION['InvoiceID']=$invoiceId;
 
     // Forwarding to payment page
-    header('Location:' . $invoiceURL); //<<redirect to payment page
+//    header('Location:' . $invoiceURL); //<<redirect to payment page
 
 //header('Location: activation.php'); // <<redirect to activation page for testing
-//echo '<b>Invoice:</b><br>'.$invoice->getId().'" created, see '.$invoice->getUrl() .'<br>';
+echo '<b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
+echo '<b>Invoice:</b><br>'.$invoice->getId().'" created, see '.$invoice->getUrl() .'<br>';
