@@ -102,7 +102,6 @@ return $result;
 public function NewgetInvoiceStatus($invoiceId,$orderID) {
   require ('/var/secure/keys.php'); //secured location - sensitive keys
   require ('include/config.php'); // coin configuration
-  require ('include/functions.php'); // standard functions
   require ('vendor/autoload.php'); //loads the btcpayserver library
 
   $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
