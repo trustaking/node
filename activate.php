@@ -14,11 +14,6 @@ $message = <<<EOD
 EOD;
 } else {
 
-// Grab the next unused address 
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
-$address = $wallet->CallAPI ($url);
-//TODO: error trap the address
-
 // Grab Staking info
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $stakinginfo = $wallet->CallAPI ($url);
@@ -34,8 +29,11 @@ EOD;
 }
 }
 
+// Retrieve from Session variable 
+$address =  $_SESSION['Address'];
+
 //Check if invoice paid
-$invoiceId   = $_SESSION['InvoiceID'];
+$invoiceId = $_SESSION['InvoiceID'];
 $OrderId   = $_SESSION['OrderID'];
 $OrderPaid = $wallet->GetInvoiceStatus ($invoiceId,$OrderId);
 if ( $OrderPaid == 'FAIL' ) {
