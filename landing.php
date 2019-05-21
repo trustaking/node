@@ -43,7 +43,8 @@
     if ( $address == '' || empty($address) ) {
         die (' Something went wrong! - please try again.');
     } else {
-    $_SESSION['Address']=$address;
+        $_SESSION['Address']=$address;
+        }
     }
 
     // Generate & store the InvoiceID in session
@@ -64,5 +65,4 @@
     // Forwarding to payment page
     header('Location:' . $invoiceURL); //<<redirect to payment page
     //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
-
 ?>
