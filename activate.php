@@ -1,41 +1,51 @@
 <?php 
 session_start();
-require ('include/config.php');
+require_once ('include/config.php');
 require ('include/functions.php');
 $wallet = new phpFunctions_Wallet();
+
+if ( $_SESSION['Address'] == '' || empty($_SESSION['Address']) || 
+	 $_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
+	 $_SESSION['Price'] == '' || empty($_SESSION['Price']) || 
+	 $_SESSION['Days_Online'] == '' || empty($_SESSION['Days_Online']) || 
+	 $_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID']) ) {
+	die (' The session has expired - please try again.');
+}
 
 //Check if node is online before further checks
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
 $check_server = $wallet->checkSite ($url);
 
 if ( $check_server == '' || empty($check_server) ) {
+	die (' The server appears to be unresponsive.');
+}
+
+if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
-<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Full Node is offline</label></ul>
+<li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
 EOD;
 } else {
-
-// Grab Staking info
+// Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$stakinginfo = $wallet->CallAPI ($url);
+$get_stakinginfo = $wallet->CallAPI ($url); 
 
-if ($stakinginfo['staking']=1) {
+if ( !is_array($get_stakinginfo) ) {
+	die (' There was an error with your API parameters.');
+}
+
+if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
-<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:green'> Staking is online</label></ul>
+<li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
 EOD;
 } else {
 $message = <<<EOD
-<ul class="icons"><label class="icon fa-circle" style='font-size:16px;color:red'> Staking is offline</label></ul>
+<li><a href=""class="icon fa-circle" style='color:red'>Staking offline</a></li>
 EOD;
 }
 }
-
-// Retrieve from Session variable 
-$address =  $_SESSION['Address'];
 
 //Check if invoice paid
-$invoiceId = $_SESSION['InvoiceID'];
-$OrderId   = $_SESSION['OrderID'];
-$OrderPaid = $wallet->GetInvoiceStatus ($invoiceId,$OrderId);
+$OrderPaid = $wallet->GetInvoiceStatus ($_SESSION['InvoiceID'],$_SESSION['OrderID']);
 if ( $OrderPaid == 'FAIL' ) {
 	die ('Payment not successful - please try again');
 }
@@ -82,7 +92,7 @@ if ( $OrderPaid == 'FAIL' ) {
 						</header>
 							<section class="wrapper style5">
 								<div class="inner">
-								<h3>ORDER #<?php print $OrderId;?></h3>
+								<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
 								<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
 								<p>Then open a terminal window and run the following script:</p>
 								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
@@ -119,6 +129,5 @@ if ( $OrderPaid == 'FAIL' ) {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
 </html>

@@ -96,9 +96,8 @@ public function GetInvoiceStatus($invoiceId,$orderID) {
   return $result;
 }
 
-public function CreateInvoice($OrderID) {
+public function CreateInvoice($OrderID,$Price,$Description,$redirectURL) {
   require ('/var/secure/keys.php'); //secured location - sensitive keys
-  require ('include/config.php'); // coin configuration
   require ('vendor/autoload.php'); //loads the btcpayserver library
 
   $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
@@ -121,28 +120,29 @@ public function CreateInvoice($OrderID) {
   // * the InvoiceInterface for methods that you can use.
   $invoice = new \BTCPayServer\Invoice();
   $buyer = new \BTCPayServer\Buyer();
-  $buyer
-  ->setEmail($email);
+  //$buyer->setEmail($email);
 
   // Add the buyers info to invoice
-  $invoice->setBuyer($buyer);
+  $invoice
+      ->setBuyer($buyer);
 
   // Item is used to keep track of a few things
   $item = new \BTCPayServer\Item();
   $item
-  //    ->setCode('skuNumber')
-      ->setDescription($service_desc)
-      ->setPrice($price );
+      //->setCode('skuNumber')
+      ->setDescription($Description)
+      ->setPrice($Price);
   $invoice->setItem($item);
 
   // Setting this to one of the supported currencies will create an invoice using
   // the exchange rate for that currency.
-  $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
+  $invoice
+      ->setCurrency(new \BTCPayServer\Currency('USD'));
 
   // Configure the rest of the invoice
   $invoice
-      ->setOrderId($OrderID)
       //->setNotificationUrl('https://store.example.com/btcpayserver/callback')
+      ->setOrderId($OrderID)
       ->setRedirectURL($redirectURL);
 
   // Updates invoice with new information such as the invoice id and the URL where
