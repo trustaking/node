@@ -11,7 +11,7 @@ $end_date = new DateTime(date($service_end_date));
 $difference = $now->diff($end_date);
 $days_remaining = ceil($difference->format("%a"));
 $_SESSION['Days_Online']=$days_remaining;
-$_SESSION['Price'] = ceil(($price / $online_days) * $days_remaining);
+$_SESSION['Price'] = ceil(($price / $_SESSION['Days_Online']) * $days_remaining);
 if ($_SESSION['Price']>$price) {
 	$_SESSION['Price']=$price;
 }
