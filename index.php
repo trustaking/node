@@ -39,11 +39,11 @@ if ( !is_array($get_stakinginfo) ) {
 
 if ($get_stakinginfo['enabled']>0) {
 $enabled = <<<EOD
-<a href=""class="icon fa-circle" style='color:green'></a>
+<a href="index.html" class="icon fa-circle" style="color:green">TRUSTAKING.COM</a>
 EOD;
 } else {
 $enabled = <<<EOD
-<a href=""class="icon fa-circle" style='color:red'></a><
+<a href="index.html" class="icon fa-circle" style="color:red">TRUSTAKING.COM</a>
 EOD;
 }
 
