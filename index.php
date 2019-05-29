@@ -37,7 +37,7 @@ if ( !is_array($get_stakinginfo) ) {
 	die (' There was an error with your API parameters.');
 }
 
-if ($get_stakinginfo['enabled']>0) {
+if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
 EOD;
