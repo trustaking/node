@@ -96,7 +96,7 @@ if ( $OrderPaid == 'FAIL' ) {
 								<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
 								<p>Then open a terminal window and run the following script:</p>
 								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
-								<p>Here is your hot wallet address when prompted: <pre><code><?php print $address; ?></code></pre></p>
+								<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 								<br/>
 								<p>Run this script at any time to see your cold staking balance:</p>
 								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.sh )</code></pre>
