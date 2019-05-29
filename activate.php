@@ -33,6 +33,17 @@ if ( !is_array($get_stakinginfo) ) {
 	die (' There was an error with your API parameters.');
 }
 
+
+if ($get_stakinginfo['enabled']>0) {
+$enabled = <<<EOD
+<a href="index.html" class="icon fa-circle" style="color:green">TRUSTAKING.COM</a>
+EOD;
+} else {
+$enabled = <<<EOD
+<a href="index.html" class="icon fa-circle" style="color:red">TRUSTAKING.COM </a>
+EOD;
+}
+
 if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
@@ -69,15 +80,16 @@ if ( $OrderPaid == 'FAIL' ) {
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<?php print $message;?>
-						<h1><a href="http://www.trustaking.com">TRUSTAKING.COM</a></h1>
+						<h1><?php print $enabled;?></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-											<li><a href="http://www.trustaking.com">Home</a></li>
+										<?php print $message;?>
+											<li><a href="index.php">Home</a></li>
+											<li><a href="about.html">FAQ</a></li>
 										</ul>
 									</div>
 								</li>
