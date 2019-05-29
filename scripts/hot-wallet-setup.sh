@@ -13,7 +13,7 @@ UNDERLINE='\033[4m'
 apiport=38222
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
-HotWalletName="hot-wallet"
+HotWalletName="hot"
 HotWalletSecretWords=""
 HotWalletPassword=""
 HotWalletPassphrase=""
@@ -31,7 +31,7 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "Please enter some details about your Hot wallet (that will used for staking)"
 echo 
-read -p "Name (default=hot-wallet):" response
+read -p "Name (default=hot):" response
 if [[ "$response" != "" ]] ; then 
    HotWalletName="$response" 
 fi
@@ -57,7 +57,6 @@ echo
 ##### Convert the hot wallet to a cold staking wallet ######
 
 echo -e "* Preparing your Hot wallet for cold staking   ... please wait."
-
 curl -sX POST "http://localhost:$apiport/api/ColdStaking/cold-staking-account" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"walletName\": \"$HotWalletName\",  \"walletPassword\": \"$HotWalletPassword\",  \"isColdWalletAccount\": false}" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
@@ -68,7 +67,6 @@ echo
 echo -e "* Fetching your Hot wallet details for cold staking   ... please wait."
 
 HotWalletColdStakingHotAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$HotWalletName&IsColdWalletAddress=false" -H  "accept: application/json")
-
 HotWalletColdStakingHotAddress=${HotWalletColdStakingHotAddress:12:34}
 
 #HotWalletColdStakingHotAddress=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$HotWalletName&AccountName=coldStakingHotAddresses" -H  "accept: application/json"))
