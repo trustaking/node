@@ -13,7 +13,7 @@ UNDERLINE='\033[4m'
 apiport=38222
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
-ColdWalletName="cold-wallet"
+ColdWalletName="MyColdWallet"
 ColdWalletSecretWords=""
 ColdWalletPassword=""
 ColdWalletPassphrase=""
@@ -31,7 +31,7 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "${BOLD}Firstly, let's create your cold wallet (which will hold the funds offline)${NONE}"
 echo 
-read -p "Name (default=cold-wallet): " response
+read -p "Name (default=MyColdWallet): " response
 if [[ "$response" != "" ]] ; then 
    ColdWalletName="$response" 
 fi
@@ -45,8 +45,7 @@ echo
 echo -e "${RED}* Creating your Cold wallet ... please wait.${NONE}"
 
 ColdWalletSecretWords=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/mnemonic?language=english&wordCount=12" -H "accept: application/json")) ### grab a 12 word mneumonic
-
-curl -sX POST "http://localhost:$apiport/api/Wallet/recover" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"mnemonic\": \"$ColdWalletSecretWords\",  \"password\": \"$ColdWalletPassword\",  \"passphrase\": \"$ColdWalletPassphrase\",  \"name\": \"$ColdWalletName\",  \"creationDate\": \"2019-01-01T07:33:09.051Z\"}" &>> ${logfile}
+curl -sX POST "http://localhost:$apiport/api/Wallet/create" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"mnemonic\": \"$ColdWalletSecretWords\",  \"password\": \"$ColdWalletPassword\",  \"passphrase\": \"$ColdWalletPassphrase\",  \"name\": \"$ColdWalletName\"}" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
 echo

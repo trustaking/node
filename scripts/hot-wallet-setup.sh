@@ -48,8 +48,7 @@ echo -e "*Creating your Hot wallet ... please wait."
 ### grab a 12 word mneumonic
 
 HotWalletSecretWords=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/mnemonic?language=english&wordCount=12" -H "accept: application/json")) 
-
-curl -sX POST "http://localhost:$apiport/api/Wallet/recover" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"mnemonic\": \"$HotWalletSecretWords\",  \"password\": \"$HotWalletPassword\",  \"passphrase\": \"$HotWalletPassphrase\",  \"name\": \"$HotWalletName\",  \"creationDate\": \"2019-01-01T07:33:09.051Z\"}" &>> ${logfile}
+curl -sX POST "http://localhost:$apiport/api/Wallet/create" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"mnemonic\": \"$HotWalletSecretWords\",  \"password\": \"$HotWalletPassword\",  \"passphrase\": \"$HotWalletPassphrase\",  \"name\": \"$HotWalletName\"}" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
 echo
