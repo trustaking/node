@@ -87,7 +87,7 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 			<div id="page-wrapper">
 			<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html"><?php print $enabled;?>TRUSTAKING.COM</a></h1>
+						<h1><?php print $enabled;?></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
