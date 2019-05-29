@@ -91,3 +91,9 @@ echo -e "Passphrase	:" $HotWalletPassphrase
 echo -e "Mnemonic  	:" $HotWalletSecretWords
 echo -e "Hot address     :${RED}" $HotWalletColdStakingHotAddress
 echo -e "${NONE}"
+
+[ ! -d /var/secure ] && mkdir -p /var/secure 
+touch /var/secure/credentials.sh
+echo "STAKINGNAME=$HotWalletName" &>> /var/secure/credentials.sh
+echo "STAKINGPASSWORD=$HotWalletPassword" &>> /var/secure/credentials.sh
+chmod 0644 /var/secure/credentials.sh
