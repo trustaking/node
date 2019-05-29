@@ -38,6 +38,16 @@ if ( !is_array($get_stakinginfo) ) {
 }
 
 if ($get_stakinginfo['enabled']>0) {
+$enabled = <<<EOD
+<a href=""class="icon fa-circle" style='color:green'></a>
+EOD;
+} else {
+$enabled = <<<EOD
+<a href=""class="icon fa-circle" style='color:red'></a><
+EOD;
+}
+
+if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
 EOD;
@@ -77,7 +87,7 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 			<div id="page-wrapper">
 			<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">TRUSTAKING.COM</a></h1>
+						<h1><a href="index.html"><?php print $enabled;?>TRUSTAKING.COM</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">

@@ -13,7 +13,7 @@ UNDERLINE='\033[4m'
 apiport=38222
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
-ColdWalletName="cold-wallet"
+ColdWalletName="MyColdWallet"
 ColdWalletSecretWords=""
 ColdWalletPassword=""
 ColdWalletPassphrase=""
@@ -31,7 +31,7 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "${BOLD}Use this to add funds to your existing cold wallet.${NONE}"
 echo 
-read -p "Name (default=cold-wallet) : " response
+read -p "Name (default=MyColdWallet) : " response
 if [[ "$response" != "" ]] ; then 
    ColdWalletName="$response" 
 fi
@@ -62,7 +62,6 @@ echo
 #echo -e "${RED}* Fetching your Cold wallet details  ... please wait.${NONE}"
 
 ColdWalletColdStakingColdAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$ColdWalletName&IsColdWalletAddress=true" -H  "accept: application/json")
-
 ColdWalletColdStakingColdAddress=${ColdWalletColdStakingColdAddress:12:34}
 
 #echo -e "${GREEN}Done.${NONE}"

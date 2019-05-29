@@ -13,7 +13,7 @@ UNDERLINE='\033[4m'
 apiport=38222
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_${date_stamp}.log"
-ColdWalletName="cold-wallet"
+ColdWalletName="MyColdWallet"
 ColdWalletSecretWords=""
 ColdWalletPassword=""
 ColdWalletPassphrase=""
@@ -32,7 +32,7 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "Use this script to get your current balance"
 echo 
-read -p "Name (default=cold-wallet): " response
+read -p "Name (default=MyColdWallet): " response
 if [[ "$response" != "" ]] ; then 
    ColdWalletName="$response" 
 fi
