@@ -77,7 +77,6 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 			<div id="page-wrapper">
 			<!-- Header -->
 					<header id="header" class="alt">
-					<?php print $message;?>
 						<h1><a href="index.html">TRUSTAKING.COM</a></h1>
 						<nav id="nav">
 							<ul>
@@ -101,7 +100,7 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 							<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
 							<p>The trusted home of <br />
 							cold staking<br />
-							<a href="#main" class="more scrolly"><b>PAYMENT</b></a>
+							<a href="#main" class="more scrolly"></a>
 
 						<form method="post" action="landing.php">
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
