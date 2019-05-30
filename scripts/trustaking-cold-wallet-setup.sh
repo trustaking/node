@@ -35,13 +35,11 @@ read -p "Name (default=MyColdWallet): " response
 if [[ "$response" != "" ]] ; then 
    ColdWalletName="$response" 
 fi
-read -p "Password: " response
-ColdWalletPassword="$response"
-read -p "Passphrase: " response
-ColdWalletPassphrase="$response"
-echo 
+read -p "Password: " ColdWalletPassword
+read -p "Passphrase: " ColdWalletPassphrase
 ##### Setup the Cold wallet ########
 
+echo 
 echo -e "${RED}* Creating your Cold wallet ... please wait.${NONE}"
 
 ColdWalletSecretWords=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/mnemonic?language=english&wordCount=12" -H "accept: application/json")) ### grab a 12 word mneumonic

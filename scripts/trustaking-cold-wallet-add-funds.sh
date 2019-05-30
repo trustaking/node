@@ -35,8 +35,7 @@ read -p "Name (default=MyColdWallet) : " response
 if [[ "$response" != "" ]] ; then 
    ColdWalletName="$response" 
 fi
-read -p "Password: " response
-ColdWalletPassword="$response"
+read -p "Password: " ColdWalletPassword
 echo 
 
 ##### Grab the Cold wallet funding address ##########

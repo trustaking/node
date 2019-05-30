@@ -35,10 +35,8 @@ read -p "Name (default=hot):" response
 if [[ "$response" != "" ]] ; then 
    HotWalletName="$response" 
 fi
-read -p "Password:" response
-HotWalletPassword="$response"
-read -p "Passphrase:" response
-HotWalletPassphrase="$response"
+read -p "Password:" HotWalletPassword
+read -p "Passphrase:" HotWalletPassphrase
 echo 
 
 ##### Setup the hot wallet ########

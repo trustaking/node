@@ -35,8 +35,7 @@ read -p "Name (default=MyColdWallet): " response
 if [[ "$response" != "" ]] ; then 
    ColdWalletName="$response" 
 fi
-read -p "Password: " response
-ColdWalletPassword="$response"
+read -p "Password: " ColdWalletPassword
 echo
 
 ##### Where do you want to return the funds to? ######
