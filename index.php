@@ -21,10 +21,6 @@ $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
 $check_server = $wallet->checkSite ($url);
 
 if ( $check_server == '' || empty($check_server) ) {
-	die (' The server appears to be unresponsive.');
-}
-
-if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
 EOD;
@@ -57,8 +53,6 @@ $message = <<<EOD
 EOD;
 }
 }
-
-$OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -112,9 +106,9 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 							cold staking<br />
 							<a href="#main" class="more scrolly"></a>
 
-						<form method="post" action="landing.php">
+						<form method="post" action="activate-test.php">
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-								<input type="submit" class="button icon fa-shopping-cart" value="$<?php print $_SESSION['Price'];?> Pay Now" />
+								<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 						</form>
 						<h6></h6><i><?php print $_SESSION['Days_Online'];?> days of cold staking remaining. Service ends on <?php print $end_date->format('Y-m-d');?></i>
 						<a href="#main" class="more scrolly"></a>
