@@ -117,7 +117,7 @@ EOD;
 						</header>
 							<section class="wrapper style5">
 								<div class="inner">
-								<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
+								<h3>ACTIVATE COLD STAKING</h3>
 								<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
 								<p>Then open a terminal window and run the following script:</p>
 								<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
