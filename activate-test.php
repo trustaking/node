@@ -2,6 +2,7 @@
 session_start();
 require ('include/config.php');
 require ('include/functions.php');
+require ('/var/secure/keys.php');
 $wallet = new phpFunctions_Wallet();
 
     // Deal with the bots first
