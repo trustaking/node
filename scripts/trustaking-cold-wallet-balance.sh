@@ -10,19 +10,10 @@ BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
 ##### Define Variables ######
-apiport=38222
+apiport=38221
 date_stamp="$(date +%y-%m-%d-%s)"
-logfile="/tmp/log_${date_stamp}.log"
 ColdWalletName="MyColdWallet"
-ColdWalletSecretWords=""
-ColdWalletPassword=""
-ColdWalletPassphrase=""
-ColdWalletInitialFundingAddress=""
-ColdWalletColdStakingHotAddress=""
-ColdWalletColdStakingColdAddress=""
-ColdStakingAmount=""
-ColdStakingTX=""
-ColdStakingBal=""
+logfile="/tmp/balance.log"
 
 ######## Get some information from the user about the wallet ############
 clear
@@ -40,10 +31,11 @@ echo
 
 ##### Grab the balance ######
 
-ColdStakingBal=$(curl -sX GET "http://localhost:$apiport/api/Wallet/maxbalance?WalletName=$ColdWalletName&AccountName=coldStakingColdAddresses&FeeType=medium" -H  "accept: application/json")
-ColdStakingBal=${ColdStakingBal:22:12}
-ColdStakingBalance=$(echo "scale=8; $ColdStakingBal/100000000" | bc)
+ColdStakingBal=$(curl -sX GET "http://localhost:$apiport/api/Wallet/balance?WalletName=$ColdWalletName&AccountName=coldStakingColdAddresses" -H  "accept: application/json")
 
-echo -e "Here is the current balance for wallet $ColdWalletName: ${GREEN}"$ColdStakingBalance
+ConfirmedBalance=${ColdStakingBal:128:12}
+ConfirmedBalance=$(echo "scale=8; $ConfirmedBalance/1000000" | bc)
+echo -e "Here is the current confirmed balance at ${date_stamp} for wallet $ColdWalletName: "${ConfirmedBalance} >> $logfile
+echo -e "Here is the current confirmed balance at ${date_stamp} for wallet $ColdWalletName: ${GREEN}"${ConfirmedBalance}
 echo -e "${NONE}"
 echo
