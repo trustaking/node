@@ -40,10 +40,9 @@ echo
 
 ##### Where do you want to return the funds to? ######
 
-read -p "What address do you want to withdraw to?" response
-ReturnAddress="$response"
-read -p "Confirm how many coins you wish to withdraw from Cold Staking :" response
-ColdStakingAmount="$response"
+read -p "What address do you want to withdraw to?" ReturnAddress
+echo
+read -p "Confirm how many coins you wish to withdraw from Cold Staking :" ColdStakingAmount
 echo
 
 ##### Prepare the cold staking cancel tx ######

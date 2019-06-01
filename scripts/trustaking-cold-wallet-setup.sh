@@ -88,10 +88,9 @@ ColdWalletColdStakingColdAddress=${ColdWalletColdStakingColdAddress:12:34}
 
 ##### Enter the Staking Address from Trustaking.com ######
 
-read -p "Enter your address from trustaking.com: " response
-HotWalletColdStakingHotAddress="$response"
-read -p "Confirm how many coins you wish to start staking at trustaking.com: " response
-ColdStakingAmount="$response"
+read -p "Enter your address from trustaking.com: " HotWalletColdStakingHotAddress
+echo
+read -p "Confirm how many coins you wish to start staking at trustaking.com: " ColdStakingAmount
 echo
 
 ##### Prepare the cold staking tx ######

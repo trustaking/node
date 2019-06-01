@@ -68,10 +68,9 @@ ColdWalletColdStakingColdAddress=${ColdWalletColdStakingColdAddress:12:34}
 
 ##### Enter the Staking Address from Trustaking.com ######
 
-read -p "Enter your address from trustaking.com: " response
-HotWalletColdStakingHotAddress="$response"
-read -p "Confirm how many coins you wish to start staking at trustaking.com: " response
-ColdStakingAmount="$response"
+read -p "Enter your hot wallet address from trustaking.com: " HotWalletColdStakingHotAddress
+echo
+read -p "Confirm how many coins you wish to start staking at trustaking.com: " ColdStakingAmount
 echo
 
 ##### Prepare the cold staking tx ######
@@ -95,13 +94,12 @@ echo -e "${GREEN}Done.${NONE}"
 echo
 echo -e "${RED}Here's your cold wallet details. These are you're responsibility trustaking.com has no way to recover this information - keep this information safe offline:${NONE}"
 echo
-echo -e "${RED}Name      	:${NONE}" $ColdWalletName
-echo -e "${RED}Password  	:${NONE}" $ColdWalletPassword
-echo -e "${RED}Passphrase	:${NONE}" $ColdWalletPassphrase
-echo -e "${RED}Funding address :${NONE}" $ColdWalletInitialFundingAddress
-echo -e "${RED}Cold address    :${NONE}" $ColdWalletColdStakingColdAddress
-echo -e "${RED}Hot address     :${NONE}" $HotWalletColdStakingHotAddress
-echo -e "${RED}Amount          :${NONE}" $ColdStakingAmount
+echo -e "${RED}Name      	      :${NONE}" $ColdWalletName
+echo -e "${RED}Password  	      :${NONE}" $ColdWalletPassword
+echo -e "${RED}Funding address    :${NONE}" $ColdWalletInitialFundingAddress
+echo -e "${RED}Cold address       :${NONE}" $ColdWalletColdStakingColdAddress
+echo -e "${RED}Trustaking address :${NONE}" $HotWalletColdStakingHotAddress
+echo -e "${RED}Amount            :${NONE}" $ColdStakingAmount
 #echo -e "${RED}Hex or error    :${NONE}" $ColdStakingTX
 
 
