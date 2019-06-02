@@ -1,6 +1,7 @@
 ##### Define Variables ######
 $apiport=38222
 $ColdWalletName="cold-wallet"
+$now = get-date
 
 ######## Get some information from the user about the wallet ############
 Clear-Host
@@ -15,10 +16,9 @@ if ($response) {
 }
 
 ##### Grab the balance ######
-$WebResponse = Invoke-WebRequest "http://localhost:$apiport/api/Wallet/maxbalance?WalletName=$ColdWalletName&AccountName=account%200&FeeType=medium"  
+$WebResponse = Invoke-WebRequest "http://localhost:$apiport/api/Wallet/balance?WalletName=$ColdWalletName&AccountName=coldStakingColdAddresses"  
 $result = $WebResponse.Content | ConvertFrom-Json
-$ColdStakingBal=$result.maxSpendableAmount
-## BASH ColdStakingBalance=$(echo "scale=8; $ColdStakingBal/100000000" | bc)
-$ColdStakingBalance=$ColdStakingBal/100000000
+$ColdStakingBalance=$result.balances.amountConfirmed / 100000000
 
-Write-Host "`r`nHere is the current balance for wallet "$ColdWalletName":" $ColdStakingBalance
+Write-Host "`r`nHere is the current confirmed balance at $now for wallet " $ColdWalletName ": " -NoNewline
+Write-Host $ColdStakingBalance -ForegroundColor Green
