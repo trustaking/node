@@ -4,6 +4,7 @@ require ('include/config.php');
 require ('include/functions.php');
 require ('/var/secure/keys.php');
 $wallet = new phpFunctions_Wallet();
+$isWin = $wallet->isWindows();
 
     // Deal with the bots first
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
@@ -120,7 +121,7 @@ EOD;
 								<h3>ACTIVATE COLD STAKING</h3>
 								<p>Before you get started, open your local wallet and ensure it's fully synced.</p><br>
 								<p>Then open a terminal window and run the following script and follow the prompts:</p>
-								<?php if(!isWindows()) { ?>
+								<?php if(!$isWin) { ?>
 									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup<?php print $ext ?> )</code></pre>
 									<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 									<br/>

@@ -162,7 +162,7 @@ public function CreateInvoice($OrderID,$Price,$Description,$redirectURL) {
   return array('invoice_id' => $invoice->getId(), 'invoice_url' => $invoice->getUrl());
 }
 
-function getOS() {
+private function getOS() {
 
     global $user_agent;
     $user_agent     =   $_SERVER['HTTP_USER_AGENT'];
@@ -201,7 +201,8 @@ function getOS() {
     }
     return $os_platform;
 }
-function getBrowser() {
+
+private function getBrowser() {
 
     global $user_agent;
     $browser        =   "Unknown Browser";
@@ -227,9 +228,9 @@ function getBrowser() {
     return $browser;
 }
 
-function isWindows()
+public function isWindows()
 {
-    $user_os  =  getOS();
+    $user_os  =  $this->getOS();
     $findme   = 'Windows';
     $pos = strpos($user_os, $findme);
     $os = false;
