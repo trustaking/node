@@ -33,8 +33,8 @@ echo
 
 ColdStakingBal=$(curl -sX GET "http://localhost:$apiport/api/Wallet/balance?WalletName=$ColdWalletName&AccountName=coldStakingColdAddresses" -H  "accept: application/json")
 
-ConfirmedBalance=${ColdStakingBal:128:12}
-ConfirmedBalance=$(echo "scale=8; $ConfirmedBalance/1000000" | bc)
+ConfirmedBalance=${ColdStakingBal:134:12}
+ConfirmedBalance=$(echo "scale=8; $ConfirmedBalance/100000000" | bc)
 echo -e "Here is the current confirmed balance at ${date_stamp} for wallet $ColdWalletName: "${ConfirmedBalance} >> $logfile
 echo -e "Here is the current confirmed balance at ${date_stamp} for wallet $ColdWalletName: ${GREEN}"${ConfirmedBalance}
 echo -e "${NONE}"
