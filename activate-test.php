@@ -120,9 +120,9 @@ EOD;
 								<div class="inner">
 								<h3>ACTIVATE COLD STAKING</h3>
 								<p>Before you get started, open your local wallet and ensure it's fully synced.</p><br>
-								<p>Then open a terminal window and run the following script and follow the prompts:</p>
 								<?php if(!$isWin) { ?>
-									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup<?php print $ext ?> )</code></pre>
+									<p>Then open a terminal window and run the following script and follow the prompts:</p>
+									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
 									<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 									<br/>
 									<p>Run this script at any time to see your cold staking balance:</p>
@@ -134,6 +134,7 @@ EOD;
 								<?php 
 								} else { 
 								?>
+									<p>Then open a Powershell window and run the following script and follow the prompts:</p>
 									<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.ps1'))</code></pre>
 									<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 									<br/>
