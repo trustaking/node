@@ -8,7 +8,7 @@ Function LogWriter
 $apiport=38222
 $date_stamp=(Get-Date).ToString('yyyyMMddTHHmmssffffZ')
 $logfile="$env:temp\trustaking-$date_stamp-output.log"
-$ColdWalletName="cold-wallet"
+$ColdWalletName="MyColdWallet"
 $ColdWalletSecretWords=""
 $ColdWalletPassword=""
 $ColdWalletPassphrase=""
@@ -23,7 +23,7 @@ Write-Host "####################################################################
 Write-Host "########### TRUSTAKING.COM LOCAL WALLET - COLD STAKING SETUP ##########" -ForegroundColor Red
 Write-Host "#######################################################################`r`n" -ForegroundColor Red
 Write-Host "Firstly, let's create your cold wallet (which will hold the funds offline)"
-$response = Read-Host -Prompt "Please enter your preferred Cold Wallet Name (default=cold-wallet)" 
+$response = Read-Host -Prompt "Please enter your preferred Cold Wallet Name (default=MyColdWallet)" 
 if ($response) {
     $ColdWalletName = $response
 }

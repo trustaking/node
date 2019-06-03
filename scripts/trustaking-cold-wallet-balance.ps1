@@ -1,6 +1,6 @@
 ##### Define Variables ######
 $apiport=38222
-$ColdWalletName="cold-wallet"
+$ColdWalletName="MyColdWallet"
 $now = get-date
 
 ######## Get some information from the user about the wallet ############
@@ -10,7 +10,7 @@ Write-Host "########### TRUSTAKING.COM LOCAL WALLET - COLD STAKING SETUP #######
 Write-Host "#######################################################################`r`n" -ForegroundColor Red
 Write-Host "Use this script to get your current balance"
 
-$response = Read-Host -Prompt "Please enter the name of your wallet (default=cold-wallet)" 
+$response = Read-Host -Prompt "Please enter the name of your wallet (default=MyColdWallet)" 
 if ($response) {
     $ColdWalletName = $response
 }
