@@ -39,3 +39,4 @@ echo -e "Here is the current confirmed balance at ${date_stamp} for wallet $Cold
 echo -e "Here is the current confirmed balance at ${date_stamp} for wallet $ColdWalletName: ${GREEN}"${ConfirmedBalance}
 echo -e "${NONE}"
 echo
+read -p "Press a key to finish." response

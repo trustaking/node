@@ -123,5 +123,5 @@ echo -e "${RED}Cold address    :${NONE}" $ColdWalletColdStakingColdAddress
 echo -e "${RED}Hot address     :${NONE}" $HotWalletColdStakingHotAddress
 echo -e "${RED}Amount          :${NONE}" $ColdStakingAmount
 #echo -e "${RED}Hex or error    :${NONE}" $ColdStakingTX
-
-
+echo
+read -p "Press a key to finish." response

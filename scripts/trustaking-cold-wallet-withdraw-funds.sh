@@ -66,9 +66,8 @@ echo -e "${GREEN}Done.${NONE}"
 echo
 echo -e "Here's all the details of the withdrawal:"
 echo
-
 echo -e "Return address :" $ReturnAddress
 echo -e "Amount         :" $ColdStakingAmount
-echo -e "Hex or error   :" $ColdStakingTX
-
-
+#echo -e "Hex or error   :" $ColdStakingTX
+echo
+read -p "Press a key to finish." response
