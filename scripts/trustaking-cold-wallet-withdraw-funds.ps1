@@ -15,22 +15,22 @@ $ColdStakingTX=""
 
 ######## Get some information from the user about the wallet ############
 Clear-Host
-Write-Host "#######################################################################" -ForegroundColor Red
-Write-Host "########### TRUSTAKING.COM LOCAL WALLET - WITHDRAW FUNDS ##############" -ForegroundColor Red
-Write-Host "#######################################################################`r`n" -ForegroundColor Red
-Write-Host "Use this to withdraw funds from trustaking.com"
+Write-Host "#######################################################################" -ForegroundColor Red -BackgroundColor Gray
+Write-Host "########### TRUSTAKING.COM LOCAL WALLET - WITHDRAW FUNDS ##############" -ForegroundColor Red -BackgroundColor Gray
+Write-Host "#######################################################################`r`n" -ForegroundColor Red -BackgroundColor Gray
+Write-Host "Use this to withdraw funds from trustaking.com`n"
 $response = Read-Host -Prompt "Please enter your Cold Wallet Name (default=MyColdWallet)" 
 if ($response) {
     $ColdWalletName = $response
 }
-$ColdWalletPassword = Read-Host -Prompt "Password for Cold Wallet"
+$ColdWalletPassword = Read-Host -Prompt "`nPassword for Cold Wallet"
 
 ##### Where do you want to return the funds to? ######
-$ReturnAddress = Read-Host -Prompt "What address do you want to withdraw to?"
-$ColdStakingAmount = Read-Host -Prompt "Confirm how many coins you wish to withdraw from Cold Staking" 
+$ReturnAddress = Read-Host -Prompt "`nWhat address do you want to withdraw to?"
+$ColdStakingAmount = Read-Host -Prompt "`nConfirm how many coins you wish to withdraw from Cold Staking" 
 
 ##### Prepare the cold staking cancel tx ######
-Write-Host "* Preparing to withdraw from your cold staking and return funds ... please wait."
+Write-Host "`n* Preparing to withdraw from your cold staking and return funds ... please wait." -ForegroundColor DarkCyan
 
  $json = @{
     receivingAddress = $ReturnAddress
@@ -45,8 +45,7 @@ $ColdStakingTX = $result.transactionHex
 LogWriter @result
 
 ##### Transmit the cold staking tx ######
-
-Write-Host "* Broadcasting your your cold staking withdrawal transaction ... please wait."
+Write-Host "`n* Broadcasting your your cold staking withdrawal transaction ... please wait." -ForegroundColor DarkCyan
 $json = @{
     hex = $ColdStakingTX
 } | ConvertTo-Json
@@ -55,8 +54,7 @@ $result = $response.Content | ConvertFrom-Json
 LogWriter @result 
 LogWriter "** End of Log **"
 
-Write-Host "Done."
-Write-Host "Here's all the details of the withdrawal:"
-Write-Host "Return address" $ReturnAddress
-Write-Host "Amount        " $ColdStakingAmount
-Write-Host "Hex or error  " $ColdStakingTX
+Write-Host "`nTransaction complete.  Here are your withdrawal transaction details:" 
+Write-Host "Return address:" $ReturnAddress
+Write-Host "Amount        :" $ColdStakingAmount
+Write-Host "Hex or error  :" $ColdStakingTX "`n"
