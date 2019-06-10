@@ -24,10 +24,10 @@ $isWin = $wallet->isWindows();
                     $verified=true;
             } else {
                     $verified=false;
-                    die (' Something went wrong! - please try again.');
+                    die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
             }
         } else { // there is an error /
-            die (' Something went wrong! - please try again.');
+            die (' Something went wrong with Recaptcha! - please try again in a new tab.');
         }
     }
 
@@ -70,7 +70,7 @@ EOD;
     $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
     $address = $wallet->CallAPI ($url);
     if ( $address == '' || empty($address) ) {
-        die (' Something went wrong! - please try again.');
+        die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
     } else {
         $_SESSION['Address']=$address;
         }

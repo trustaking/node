@@ -18,10 +18,6 @@ $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
 $check_server = $wallet->checkSite ($url);
 
 if ( $check_server == '' || empty($check_server) ) {
-	die (' The server appears to be unresponsive.');
-}
-
-if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
 EOD;
@@ -31,7 +27,7 @@ $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $get_stakinginfo = $wallet->CallAPI ($url); 
 
 if ( !is_array($get_stakinginfo) ) {
-	die (' There was an error with your API parameters.');
+	die (' There was an error connecting with the full node.');
 }
 
 
