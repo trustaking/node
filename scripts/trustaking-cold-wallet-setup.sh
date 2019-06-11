@@ -80,8 +80,7 @@ curl -sX POST "http://localhost:$apiport/api/ColdStaking/cold-staking-account" -
 #echo -e "${RED}* Fetching your Cold wallet details  ... please wait.${NONE}"
 
 ColdWalletColdStakingColdAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$ColdWalletName&IsColdWalletAddress=true" -H  "accept: application/json")
-
-ColdWalletColdStakingColdAddress=${ColdWalletColdStakingColdAddress:12:34}
+ColdWalletColdStakingColdAddress=$(echo $ColdWalletColdStakingColdAddress | cut -d \" -f4)
 
 #echo -e "${GREEN}Done.${NONE}"
 #echo
