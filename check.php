@@ -17,7 +17,7 @@ if (isset($_POST['address'])) {
 //			if ($b[0] == $address) {$balance=$b[1];}
 //	}
 
-echo $get_balances;
+	print_r ($get_balances);
 
 }
 
