@@ -10,13 +10,16 @@ if (isset($_POST['address'])) {
 	$url = $scheme.'://'.$server_ip.':'.$api_port."api/BlockStore/getaddressesbalances?addresses=$address&minConfirmations=0";
 	$get_balances = $wallet->CallAPI ($url); 
 
-	if ( !is_array($get_balances) ) {
-		die (' There was an error with your login parameters. Are your credentials correct?');
-	} else {
-	foreach($get_balances as $a => $b){
-			if ($b[0] == $address) {$balance=$b[1];}
-	}
-}}
+//	if ( !is_array($get_balances) ) {
+//		die (' There was an error with your login parameters. Are your credentials correct?');
+//	} else {
+//	foreach($get_balances as $a => $b){
+//			if ($b[0] == $address) {$balance=$b[1];}
+//	}
+
+echo $get_balances;
+
+}
 
 //Check if node is online before further checks
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
