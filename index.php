@@ -28,6 +28,9 @@ if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
 EOD;
+$enabled = <<<EOD
+<a href="index.html" class="icon fa-circle" style="color:red">TRUSTAKING.COM </a>
+EOD;
 } else {
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
@@ -82,7 +85,6 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
         </script>
 	</head>
 	<body class="landing is-preload">
-
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 			<!-- Header -->
