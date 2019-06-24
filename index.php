@@ -71,18 +71,19 @@ foreach($get_balance as $a => $b){
 	foreach($b as $c => $d){
 		foreach($d as $e => $f){
 print_r ($a);
-echo "<br />";
+echo "<hr />B-";
 print_r ($b);
-echo "<br />";
+echo "<hr />C-";
 print_r ($c);
-echo "<br />";
+echo "<hr />D-";
 print_r ($d);
-echo "<br />";
+echo "<hr />E-";
 print_r ($e);
-echo "<br />";
+echo "<hr />F-";
 print_r ($f);
+echo "<hr />";
 
-//echo $e['amountConfirmed'];
+echo ">>" . $c['amountConfirmed'];
 }}}
 
 if ($bal>0) {
