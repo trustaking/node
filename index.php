@@ -64,10 +64,10 @@ $url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$W
 $get_balance = $wallet->CallAPI ($url); 
 //print_r ($get_balance);
 
-if ( !is_array($get_balances) ) {
+if ( !is_array($get_balance) ) {
 	die (' There was an error with your login parameters. Are your credentials correct?');
 } else {
-foreach($get_balances as $a => $b){
+foreach($get_balance as $a => $b){
 //	if ($b[0] == $address) {$balance=$b[1];}
 print_r ($a);
 print_r ($b);
