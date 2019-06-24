@@ -24,7 +24,24 @@ if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
 EOD;
+$enabled = <<<EOD
+<a href="index.html" class="icon fa-circle" style="color:red">TRUSTAKING.COM </a>
+EOD;
 } else {
+
+// Grab balance
+$url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
+$get_balance = $wallet->CallAPI ($url); 
+	
+if ( !is_array($get_balance) ) {
+	die (' There was an error with your login parameters. Are your credentials correct?');
+} else {
+foreach($get_balance as $a => $b){
+	foreach($b as $c => $d){
+}
+$bal = $d['amountConfirmed']/100000000;
+}}
+
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $get_stakinginfo = $wallet->CallAPI ($url); 
@@ -45,13 +62,15 @@ EOD;
 
 if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
+<li><a href=""class="icon fa-circle" style='color:green'>Staking: $bal</a></li>
 EOD;
 } else {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Staking offline</a></li>
 EOD;
 }
+
+$OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 }
 ?>
 <!DOCTYPE HTML>
@@ -76,7 +95,6 @@ EOD;
         </script>
 	</head>
 	<body class="landing is-preload">
-
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 			<!-- Header -->
@@ -106,9 +124,9 @@ EOD;
 							cold staking<br />
 							<a href="#main" class="more scrolly"></a>
 
-						<form method="post" action="activate-test.php">
+						<form method="post" action="landing.php">
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-								<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
+								<input type="submit" class="button icon fa-shopping-cart" value="$<?php print $_SESSION['Price'];?> Pay Now" />
 						</form>
 						<h6></h6><i><?php print $_SESSION['Days_Online'];?> days of cold staking remaining. Service ends on <?php print $end_date->format('Y-m-d');?></i>
 						<a href="#main" class="more scrolly"></a>
