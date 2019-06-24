@@ -4,12 +4,10 @@ require_once ('include/config.php');
 require ('include/functions.php');
 $wallet = new phpFunctions_Wallet();
 
-if (isset($_POST['address'])) {
-    $address = $_POST['address'];
+$url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
+$get_balance = $wallet->CallAPI ($url); 
+echo $get_balance['amountConfirmed'];
 
-	$url = $scheme.'://'.$server_ip.':'.$api_port."/api/BlockStore/getaddressesbalances?addresses=$address&minConfirmations=0";
-	
-	$get_balances = $wallet->CallAPI ($url); 
 
 //	if ( !is_array($get_balances) ) {
 //		die (' There was an error with your login parameters. Are your credentials correct?');
@@ -18,9 +16,6 @@ if (isset($_POST['address'])) {
 //			if ($b[0] == $address) {$balance=$b[1];}
 //	}
 
-	print_r ($get_balances);
-
-}
 
 //Check if node is online before further checks
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;

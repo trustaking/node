@@ -20,9 +20,9 @@ if ($_SESSION['Price']>$price) {
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
 $check_server = $wallet->checkSite ($url);
 
-if ( $check_server == '' || empty($check_server) ) {
-	die (' The server appears to be unresponsive.');
-}
+//if ( $check_server == '' || empty($check_server) ) {
+//	die (' The server appears to be unresponsive.');
+//}
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
@@ -59,6 +59,22 @@ $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Staking offline</a></li>
 EOD;
 }
+
+$url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
+$get_balance = $wallet->CallAPI ($url); 
+$bal = $get_balance['amountConfirmed'];
+echo $bal;
+
+if ($get_balance['amountConfirmed']>0) {
+	$balance = <<<EOD
+	<li><a href="" style='color:green'>Total: $bal/a></li>
+	EOD;
+	} else {
+	$balance = <<<EOD
+	<li><a href="" style='color:red'>Total: 0</a></li>
+	EOD;
+	}
+
 }
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
@@ -97,6 +113,7 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 									<div id="menu">
 										<ul>
 											<?php print $message;?>
+											<?php print $balance;?>
 											<li><a href="index.php">Home</a></li>
 											<li><a href="about.html">FAQ</a></li>
 										</ul>
