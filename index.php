@@ -77,7 +77,7 @@ echo "<hr />D-";
 print_r ($d);
 echo "<hr />";
 }
-echo ">>" . $c['amountConfirmed'];
+echo ">>" . $d['amountConfirmed'];
 }
 
 if ($bal>0) {
