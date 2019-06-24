@@ -82,7 +82,7 @@ EOD;
 $balance = <<<EOD
 <li><a href="" style='color:red'>Total: 0</a></li>
 EOD;
-}
+}}
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 }
