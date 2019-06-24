@@ -32,6 +32,20 @@ $enabled = <<<EOD
 <a href="index.html" class="icon fa-circle" style="color:red">TRUSTAKING.COM </a>
 EOD;
 } else {
+
+// Grab balance
+$url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
+$get_balance = $wallet->CallAPI ($url); 
+	
+if ( !is_array($get_balance) ) {
+	die (' There was an error with your login parameters. Are your credentials correct?');
+} else {
+foreach($get_balance as $a => $b){
+	foreach($b as $c => $d){
+}
+$bal = $d['amountConfirmed']/100000000;
+}}
+
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $get_stakinginfo = $wallet->CallAPI ($url); 
@@ -52,35 +66,13 @@ EOD;
 
 if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
+<li><a href=""class="icon fa-circle" style='color:green'>Staking: $bal</a></li>
 EOD;
 } else {
 $message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Staking offline</a></li>
 EOD;
 }
-
-$url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
-$get_balance = $wallet->CallAPI ($url); 
-
-if ( !is_array($get_balance) ) {
-	die (' There was an error with your login parameters. Are your credentials correct?');
-} else {
-foreach($get_balance as $a => $b){
-	foreach($b as $c => $d){
-}
-$bal = $d['amountConfirmed']/100000000;
-}
-
-if ($bal>0) {
-$balance = <<<EOD
-<li><a href="" style='color:green'>Total: $bal</a></li>
-EOD;
-} else {
-$balance = <<<EOD
-<li><a href="" style='color:red'>Total: 0</a></li>
-EOD;
-}}
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 }
