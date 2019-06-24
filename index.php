@@ -73,7 +73,7 @@ foreach($get_balance as $a => $b){
 //print_r ($a);
 print_r ($c);
 echo $c['amountConfirmed'];
-}
+}}
 
 if ($bal>0) {
 $balance = <<<EOD
