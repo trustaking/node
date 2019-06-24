@@ -111,7 +111,6 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 									<div id="menu">
 										<ul>
 											<?php print $message;?>
-											<?php print $balance;?>
 											<li><a href="index.php">Home</a></li>
 											<li><a href="about.html">FAQ</a></li>
 										</ul>
