@@ -72,8 +72,7 @@ foreach($get_balances as $a => $b){
 print_r ($a);
 print_r ($b);
 
-}
-
+}}
 
 if ($bal>0) {
 $balance = <<<EOD
@@ -86,8 +85,7 @@ EOD;
 }
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
-}
-
+}}
 ?>
 <!DOCTYPE HTML>
 <html>
