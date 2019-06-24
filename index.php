@@ -62,11 +62,20 @@ EOD;
 
 $url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
 $get_balance = $wallet->CallAPI ($url); 
-print_r ($get_balance);
-//$bal = $get_balance['amountConfirmed'];
-//echo $bal;
+//print_r ($get_balance);
 
-if ($get_balance['amountConfirmed']>0) {
+if ( !is_array($get_balances) ) {
+	die (' There was an error with your login parameters. Are your credentials correct?');
+} else {
+foreach($get_balances as $a => $b){
+//	if ($b[0] == $address) {$balance=$b[1];}
+print_r ($a);
+print_r ($b);
+
+}
+
+
+if ($bal>0) {
 $balance = <<<EOD
 <li><a href="" style='color:green'>Total: $bal/a></li>
 EOD;
