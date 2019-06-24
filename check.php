@@ -8,7 +8,7 @@ if (isset($_POST['address'])) {
     $address = $_POST['address'];
 
 	$url = $scheme.'://'.$server_ip.':'.$api_port."/api/BlockStore/getaddressesbalances?addresses=$address&minConfirmations=0";
-	echo $url;
+	
 	$get_balances = $wallet->CallAPI ($url); 
 
 //	if ( !is_array($get_balances) ) {
