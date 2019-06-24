@@ -66,18 +66,17 @@ $bal = $get_balance['amountConfirmed'];
 echo $bal;
 
 if ($get_balance['amountConfirmed']>0) {
-	$balance = <<<EOD
-	<li><a href="" style='color:green'>Total: $bal/a></li>
-	EOD;
-	} else {
-	$balance = <<<EOD
-	<li><a href="" style='color:red'>Total: 0</a></li>
-	EOD;
-	}
-
+$balance = <<<EOD
+<li><a href="" style='color:green'>Total: $bal/a></li>
+EOD;
+} else {
+$balance = <<<EOD
+<li><a href="" style='color:red'>Total: 0</a></li>
+EOD;
 }
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
+
 ?>
 <!DOCTYPE HTML>
 <html>
