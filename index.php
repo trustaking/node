@@ -71,8 +71,8 @@ foreach($get_balance as $a => $b){
 //	if ($b[0] == $address) {$balance=$b[1];}
 //print_r ($a);
 print_r ($b);
-echo $b['amountConfirmed']
-}}
+echo $b['amountConfirmed'];
+}
 
 if ($bal>0) {
 $balance = <<<EOD
