@@ -85,7 +85,7 @@ EOD;
 }
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
-}}
+}
 ?>
 <!DOCTYPE HTML>
 <html>
