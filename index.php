@@ -68,10 +68,11 @@ if ( !is_array($get_balance) ) {
 	die (' There was an error with your login parameters. Are your credentials correct?');
 } else {
 foreach($get_balance as $a => $b){
+	foreach($get_balance as $c => $d){
 //	if ($b[0] == $address) {$balance=$b[1];}
 //print_r ($a);
-print_r ($b);
-echo $b['amountConfirmed'];
+print_r ($c);
+echo $c['amountConfirmed'];
 }
 
 if ($bal>0) {
