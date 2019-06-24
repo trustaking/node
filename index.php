@@ -68,8 +68,8 @@ if ( !is_array($get_balance) ) {
 	die (' There was an error with your login parameters. Are your credentials correct?');
 } else {
 foreach($get_balance as $a => $b){
-	foreach($get_balance as $c => $d){
-		foreach($get_balance as $e => $f){
+	foreach($b as $c => $d){
+		foreach($d as $e => $f){
 print_r ($a);
 echo "<br />";
 print_r ($b);
