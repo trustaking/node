@@ -70,8 +70,19 @@ if ( !is_array($get_balance) ) {
 foreach($get_balance as $a => $b){
 	foreach($get_balance as $c => $d){
 		foreach($get_balance as $e => $f){
+print_r ($a);
+echo "<br />";
+print_r ($b);
+echo "<br />";
+print_r ($c);
+echo "<br />";
+print_r ($d);
+echo "<br />";
 print_r ($e);
-echo $e['amountConfirmed'];
+echo "<br />";
+print_r ($f);
+
+//echo $e['amountConfirmed'];
 }}}
 
 if ($bal>0) {
