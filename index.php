@@ -62,8 +62,9 @@ EOD;
 
 $url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
 $get_balance = $wallet->CallAPI ($url); 
-$bal = $get_balance['amountConfirmed'];
-echo $bal;
+print_r ($get_balance);
+//$bal = $get_balance['amountConfirmed'];
+//echo $bal;
 
 if ($get_balance['amountConfirmed']>0) {
 $balance = <<<EOD
