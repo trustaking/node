@@ -127,7 +127,7 @@ EOD;
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 								<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 						</form>
-						<h6></h6><i><?php print $_SESSION['Days_Online'];?> days of cold staking remaining. Service ends on <?php print $end_date->format('Y-m-d');?></i>
+						<i>Currently in testing - the full nodes are running on the testnet!</i>
 						<a href="#main" class="more scrolly"></a>
 					</section>
 		<!-- Main -->
