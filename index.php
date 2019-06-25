@@ -124,7 +124,7 @@ EOD;
 							cold staking<br />
 							<a href="#main" class="more scrolly"></a>
 
-						<form method="post" action="activate-test.php">
+						<form method="post" action="activate.php">
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 								<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 						</form>
