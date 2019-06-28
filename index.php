@@ -138,8 +138,8 @@ EOD;
 						<div class="inner">
 							<header class="major">
 								<h2>Full Node as a Service</h2>
-								<p>Effortless cold staking with no technical knowledge required</p>
-								<p>Trustaking.com Full Node as a Service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We are going to rely on those tips and donations as long as we possibly can, and this will give as many people as possible the opportunity to test out cold staking. Hopefully, people will appreciate the service we offer and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page on https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund
+								<p><b>Effortless cold staking with no technical knowledge required</b></p>
+								<p>Trustaking.com Full Node as a Service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as we possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service we offer and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> if you want to help.<p> 
 							</header>
 							<ul class="icons major">
 								<li><span class="icon fa-diamond major style1"><span class="label">Lorem</span></span></li>
