@@ -122,16 +122,11 @@ EOD;
 							<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
 							<p>The trusted home of <br />
 							cold staking<br />
-							<a href="#main" class="more scrolly"></a>
-
 						<form method="post" action="activate.php">
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 								<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 						</form>
-						<form method="post" action="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">
-								<input type="submit" value="Tips" />
-						</form>
-						<i>Currently in testing - the full nodes are running on the testnet!</i>
+						<p>We are currently running testnet! We have opened a crowdfunding page <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> if you want to help.</p>
 						<a href="#main" class="more scrolly"></a>
 					</section>
 		<!-- Main -->
