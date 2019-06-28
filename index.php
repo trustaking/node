@@ -126,10 +126,11 @@ EOD;
             					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 								<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 						</form>
-						<p>We are currently running testnet! We have opened a crowdfunding page <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> if you want to help.</p>
-						<a href="#main" class="more scrolly"></a>
 					</section>
-		<!-- Main -->
+					<p>We are currently running testnet! We have opened a crowdfunding page <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> if you want to help.</p>
+						<a href="#main" class="more scrolly"></a>
+
+	<!-- Main -->
 		<article id="main">
 				<!-- One -->
 					<section id="one" class="wrapper style1 special">
