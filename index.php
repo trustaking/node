@@ -3,7 +3,6 @@ session_start();
 require ('include/config.php');
 require ('include/functions.php');
 require ('/var/secure/keys.php');
-$wallet = new phpFunctions_Wallet();
 
 // Set  price and work out how long the server will run for
 $now = new DateTime();

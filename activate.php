@@ -39,12 +39,12 @@ $isWin = $wallet->isWindows();
   		 die (' The session has expired - please try again.');
 	}
 
-    //Check if node is online before and grab address before taking payment
-    $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
-    $check_server = $wallet->checkSite ($url);
+//Check if node is online before and grab address before taking payment
+$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
+$check_server = $wallet->checkSite ($url);
 
-	if ( $check_server == '' || empty($check_server) ) {
-	$message = <<<EOD
+if ( $check_server == '' || empty($check_server) ) {
+$message = <<<EOD
 <li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
 EOD;
 	} else {
