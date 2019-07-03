@@ -1,8 +1,7 @@
 <?php 
 session_start(); 
-require ('include/config.php');
-require ('include/functions.php');
 require ('/var/secure/keys.php');
+include('include/node-check.php');
 
 // Set  price and work out how long the server will run for
 $now = new DateTime();

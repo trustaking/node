@@ -1,4 +1,3 @@
-<?php include('include/node-check.php'); ?>
 <!-- Header -->
 <header id="header" class="alt">
 	<h1><?php print $enabled;?></h1>
