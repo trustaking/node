@@ -1,9 +1,7 @@
 <?php 
 session_start();
-require ('include/config.php');
-require ('include/functions.php');
 require ('/var/secure/keys.php');
-$wallet = new phpFunctions_Wallet();
+include('include/node-check.php');
 $isWin = $wallet->isWindows();
 
     // Deal with the bots first
@@ -39,43 +37,18 @@ $isWin = $wallet->isWindows();
   		 die (' The session has expired - please try again.');
 	}
 
-//Check if node is online before and grab address before taking payment
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
-$check_server = $wallet->checkSite ($url);
 
-if ( $check_server == '' || empty($check_server) ) {
-$message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:red'>Node offline</a></li>
-EOD;
-	} else {
 
-// Get Node Staking Details
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$get_stakinginfo = $wallet->CallAPI ($url); 
-
-if ( !is_array($get_stakinginfo) ) {
-	die (' There was an error with your API parameters.');
+// Grab the next unused address 
+$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
+$address = $wallet->CallAPI ($url);
+if ( $address == '' || empty($address) ) {
+    die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
+  } else {
+    $_SESSION['Address']=$address;
 }
-
-if ($get_stakinginfo['staking']>0) {
-$message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:green'>Staking online</a></li>
-EOD;
-} else {
-$message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:red'>Staking offline</a></li>
-EOD;
-}
-    // Grab the next unused address 
-    $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
-    $address = $wallet->CallAPI ($url);
-    if ( $address == '' || empty($address) ) {
-        die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
-    } else {
-        $_SESSION['Address']=$address;
-        }
-	}
-?><?php include('include/header.php'); ?>
+?>
+<?php include('include/header.php'); ?>
 <?php include('include/menu.php'); ?>
 <!-- Main -->
 <article id="main">
