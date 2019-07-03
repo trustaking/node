@@ -16,7 +16,7 @@ if ($_SESSION['Price']>$price) {
 
 $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 ?>
-<?php include('include/header.php'); ?>
+<?php include('include/header-recap.php'); ?>
 <?php include('include/menu.php'); ?>
 
 <!-- Banner -->
