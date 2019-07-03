@@ -3,41 +3,34 @@ session_start();
 require ('/var/secure/keys.php');
 include('include/node-check.php');
 $isWin = $wallet->isWindows();
-
-    // Deal with the bots first
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
-    
-        // Build POST request:
-        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-        $recaptcha_response = $_POST['recaptcha_response'];
-    
-        // Make and decode POST request:
-        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $captcha_secret_key . '&response=' . $recaptcha_response);
-        $recaptcha = json_decode($recaptcha);
-
-        if($recaptcha->success==true){
-
-            // Take action based on the score returned:
-            if ($recaptcha->score >= 0.5) {
-                    $verified=true;
-            } else {
-                    $verified=false;
-                    die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
-            }
-        } else { // there is an error /
-            die (' Something went wrong with Recaptcha! - please try again in a new tab.');
-        }
+// Deal with the bots first
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
+    // Build POST request:
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_response = $_POST['recaptcha_response'];
+    // Make and decode POST request:
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $captcha_secret_key . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
+    if($recaptcha->success==true){
+        // Take action based on the score returned:
+        if ($recaptcha->score >= 0.5) {
+			$verified=true;
+         } else {
+             $verified=false;
+             die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
+         }
+     } else { // there is an error /
+       die (' Something went wrong with Recaptcha! - please try again in a new tab.');
     }
+}
 
-	//Check Session is still alive
+//Check Session is still alive
 
-	if (//$_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
+if (//$_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
 	$_SESSION['Price'] == '' || empty($_SESSION['Price']) || 
 	$_SESSION['Days_Online'] == '' || empty($_SESSION['Days_Online'])) {
-  		 die (' The session has expired - please try again.');
-	}
-
-
+  	die (' The session has expired - please try again.');
+}
 
 // Grab the next unused address 
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
