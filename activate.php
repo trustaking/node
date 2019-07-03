@@ -12,15 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $captcha_secret_key . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
     if($recaptcha->success==true){
-        // Take action based on the score returned:
+    	// Take action based on the score returned:
         if ($recaptcha->score >= 0.5) {
 			$verified=true;
          } else {
-             $verified=false;
-             die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
-         }
-     } else { // there is an error /
-       die (' Something went wrong with Recaptcha! - please try again in a new tab.');
+            $verified=false;
+            die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
+        }
+      } else { // there is an error /
+        die (' Something went wrong with Recaptcha! - please try again in a new tab.');
     }
 }
 
