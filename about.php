@@ -8,7 +8,7 @@
 	<section class="wrapper style5">
 		<div class="inner">
 			<h3>What are the fees?</h3>
-				<p>There will be no fees for cold staking using Trustaking.com Full Node as a Service. We have decided that we are going to trial a donation/tips based business model. We are going to rely on those tips and donations as long as we possibly can, and this will give as many people as possible the opportunity to test out cold staking. Hopefully, people will appreciate the service we offer and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page on https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund
+				<p>This service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> if you want to help.<p> 
 			<h3>What is staking?</h3>
 				<p>Staking is essential to the Proof of Stake consensus mechanism used on the various blockchain networks.</p>
 			<p>Blocks are verified and mined by network participants who are willing to set aside a portion of their coins, effectively freezing them so they cannot be spent. In return, these participants are granted the right to verify transactions and earn bonuses paid in coins.</p>
