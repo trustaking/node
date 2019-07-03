@@ -59,100 +59,41 @@ if ( $OrderPaid == 'FAIL' ) {
 }
 
 ?>
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>trustaking.com</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	</head>
-	<body class="landing is-preload">
-
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
-
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><?php print $enabled;?></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-										<?php print $message;?>
-											<li><a href="index.php">Home</a></li>
-											<li><a href="about.html">FAQ</a></li>
-											<li><a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">Tips</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
-					</header>
-
-				<!-- Main -->
-					<article id="main">
-						<header>
-							<img src="images/coin_logo-<?php print $ticker; ?>.png" alt="" width="200"/>
-						</header>
-							<section class="wrapper style5">
-								<div class="inner">
-								<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
-								<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
-								<?php if(!$isWin) { ?>
-									<p>Then open a terminal window and run the following script and follow the prompts:</p>
-									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
-									<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
-									<br/>
-									<p>Run this script at any time to see your cold staking balance:</p>
-									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.sh )</code></pre>
-									<p>If you need to add funds at a later date use this command:</p>
-									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.sh )</code></pre>
-									<p>And finally, when you want to withdraw your funds use this command:</p>
-									<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.sh )</code></pre>
-								<?php 
-								} else { 
-								?>
-									<p>Then open a Powershell window and run the following script and follow the prompts:</p>
-									<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.ps1'))</code></pre>
-									<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
-									<br/>
-									<p>Run this script at any time to see your cold staking balance:</p>
-									<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.ps1'))</code></pre>
-									<p>If you need to add funds at a later date use this command:</p>
-									<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.ps1'))</code></pre>
-									<p>And finally, when you want to withdraw your funds use this command:</p>
-									<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.ps1'))</code></pre>
-								<?php } ?>
-								</div>
-							</section>
-					</article>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="icons">
-							<li><a href="https://discord.gg/BRcDVqM" class="fab fa-discord"></a></li>
-							<li><a href="mailto:admin@trustaking.com" class="icon fa-envelope-o"></a></li>
-						</ul>
-						<ul class="copyright">
-							<li>&copy; TRUSTAKING.COM</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</footer>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-	</body>
-</html>
+<?php include('include/header.php'); ?>
+<?php include('include/menu.php'); ?>
+<!-- Main -->
+<article id="main">
+	<header>
+		<img src="images/coin_logo-<?php print $ticker; ?>.png" alt="" width="200"/>
+	</header>
+	<section class="wrapper style5">
+		<div class="inner">
+			<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
+			<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
+			<?php if(!$isWin) { ?>
+				<p>Then open a terminal window and run the following script and follow the prompts:</p>
+				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
+				<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
+				<br/>
+				<p>Run this script at any time to see your cold staking balance:</p>
+				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.sh )</code></pre>
+				<p>If you need to add funds at a later date use this command:</p>
+				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.sh )</code></pre>
+				<p>And finally, when you want to withdraw your funds use this command:</p>
+				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.sh )</code></pre>
+			<?php } else { ?>
+				<p>Then open a Powershell window and run the following script and follow the prompts:</p>
+				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.ps1'))</code></pre>
+				<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
+				<br/>
+				<p>Run this script at any time to see your cold staking balance:</p>
+				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.ps1'))</code></pre>
+				<p>If you need to add funds at a later date use this command:</p>
+				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.ps1'))</code></pre>
+				<p>And finally, when you want to withdraw your funds use this command:</p>
+				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.ps1'))</code></pre>
+			<?php } ?>
+		</div>
+	</section>
+</article>
+<?php include('include/footer.php'); ?>

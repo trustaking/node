@@ -9,7 +9,7 @@
 						        <ul>
 						            <?php print $message;?>
 						            <li><a href="index.php">Home</a></li>
-						            <li><a href="about.html">FAQ</a></li>
+						            <li><a href="about.php">FAQ</a></li>
 						            <li><a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">Tips</a></li>
 						        </ul>
 						    </div>
