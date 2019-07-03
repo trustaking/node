@@ -1,3 +1,4 @@
+<?php include('include/node-check.php'); ?>
 <?php include('include/header.php'); ?>
 <?php include('include/menu.php'); ?>
 <!-- Main -->
