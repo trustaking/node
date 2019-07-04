@@ -1,1 +1,1 @@
-# trustaking.com - fulle node as a service
+# trustaking.com - full node as a service
