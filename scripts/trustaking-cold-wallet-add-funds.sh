@@ -11,6 +11,7 @@ UNDERLINE='\033[4m'
 
 ##### Define Variables ######
 apiport=38222
+apiver=""
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
 ColdWalletName="MyColdWallet"
@@ -42,7 +43,7 @@ echo
 
 #echo -e "${RED}* Getting the Initial funding address ... please wait."
 
-ColdWalletInitialFundingAddress=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200" -H  "accept: application/json"))
+ColdWalletInitialFundingAddress=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200${apiver}" -H  "accept: application/json"))
 
 #echo -e "${GREEN}Done.${NONE}"
 #echo

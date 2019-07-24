@@ -66,8 +66,6 @@ echo -e "* Fetching your Hot wallet details for cold staking   ... please wait."
 HotWalletColdStakingHotAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$HotWalletName&IsColdWalletAddress=false" -H  "accept: application/json")
 HotWalletColdStakingHotAddress=${HotWalletColdStakingHotAddress:12:34}
 
-#HotWalletColdStakingHotAddress=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$HotWalletName&AccountName=coldStakingHotAddresses" -H  "accept: application/json"))
-
 echo -e "${GREEN}Done.${NONE}"
 echo
 

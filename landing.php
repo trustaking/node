@@ -32,7 +32,7 @@ $wallet = new phpFunctions_Wallet();
  if ( $check_server == '' || empty($check_server) ) {
     } else {
     // Grab the next unused address 
-    $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName ;
+    $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Wallet/unusedaddress?WalletName='.$WalletName.'&AccountName='.$AccountName.$api_ver ;
     $address = $wallet->CallAPI ($url);
     if ( $address == '' || empty($address) ) {
         die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');

@@ -6,6 +6,7 @@ Function LogWriter
 
 ##### Define Variables ######
 $apiport=38222
+$apiver=""
 $date_stamp=(Get-Date).ToString('yyyyMMddTHHmmssffffZ')
 $logfile="$env:temp\trustaking-$date_stamp-output.log"
 $ColdWalletName="MyColdWallet"
@@ -28,7 +29,7 @@ if ($response) {
 $ColdWalletPassword = Read-Host -Prompt "`nPassword for Cold Wallet"
 
 ##### Grab the Cold wallet funding address ##########
-$WebResponse = Invoke-WebRequest "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200"
+$WebResponse = Invoke-WebRequest "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200$apiver"
 $ColdWalletInitialFundingAddress = $WebResponse.Content -replace '"', ""
 
 ##### Display info about the Cold wallet & funding details ######

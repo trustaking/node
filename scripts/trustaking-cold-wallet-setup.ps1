@@ -6,6 +6,7 @@ Function LogWriter
 
 ##### Define Variables ######
 $apiport=38222
+$apiver=""
 $date_stamp=(Get-Date).ToString('yyyyMMddTHHmmssffffZ')
 $logfile="$env:temp\trustaking-$date_stamp-output.log"
 $ColdWalletName="MyColdWallet"
@@ -50,7 +51,7 @@ Write-Host "* Cold Wallet Creation Result:" $response.StatusDescription -Foregro
 
 ##### Grab the Cold wallet funding address ##########
 #Write-Host "* Getting the Initial funding address ... please wait."
-$WebResponse = Invoke-WebRequest "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200"
+$WebResponse = Invoke-WebRequest "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200$apiver"
 $ColdWalletInitialFundingAddress = $WebResponse.Content -replace '"', ""
 LogWriter "ColdWalletInitialFundingAddress: $ColdWalletInitialFundingAddress"
 
