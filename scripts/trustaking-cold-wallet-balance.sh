@@ -25,7 +25,7 @@ echo -e "Use this script to get your current balance"
 echo 
 read -p "Name (default=MyColdWallet): " response
 if [[ "$response" != "" ]] ; then 
-   ColdWalletName="$response" 
+   ColdWalletName=${response} 
 fi
 echo
 
