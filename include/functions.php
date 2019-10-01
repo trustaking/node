@@ -141,9 +141,9 @@ public function CreateInvoice($OrderID,$Price,$Description,$redirectURL) {
 
   // Configure the rest of the invoice
   $invoice
-      //->setNotificationUrl('https://store.example.com/btcpayserver/callback')
       ->setOrderId($OrderID)
-      ->setRedirectURL($redirectURL);
+      ->setRedirectURL($redirectURL)
+      ->setNotificationUrl($ipnURL);
 
   // Updates invoice with new information such as the invoice id and the URL where
   // a customer can view the invoice.
