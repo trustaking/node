@@ -6,6 +6,8 @@ $myfile = fopen("/var/secure/BTCPayServerIPN.log", "a");
 $raw_post_data = file_get_contents('php://input');
 $date = date('m/d/Y h:i:s a', time());
 
+var_dump($raw_post_data);
+
 if (false === $raw_post_data) {
     fwrite($myfile, $date . " : Error. Could not read from the php://input stream or invalid BTCPayServer IPN received.\n");
     fclose($myfile);
@@ -13,8 +15,6 @@ if (false === $raw_post_data) {
 }
 
 $ipn = json_decode($raw_post_data);
-
-print_r ($raw_post_data);
 
 if (true === empty($ipn)) {
     fwrite($myfile, $date . " : Error. Could not decode the JSON payload from BTCPayServer.\n");
