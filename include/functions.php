@@ -98,6 +98,7 @@ public function GetInvoiceStatus($invoiceId,$orderID) {
 
 public function CreateInvoice($OrderID,$Price,$Description,$redirectURL,$ipnURL) {
   require ('/var/secure/keys.php'); //secured location - sensitive keys
+  require ('include/config.php'); // coin configuration
   require ('vendor/autoload.php'); //loads the btcpayserver library
 
   $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
@@ -141,9 +142,9 @@ public function CreateInvoice($OrderID,$Price,$Description,$redirectURL,$ipnURL)
 
   // Configure the rest of the invoice
   $invoice
+      ->setNotificationUrl($ipnURL)
       ->setOrderId($OrderID)
-      ->setRedirectURL($redirectURL)
-      ->setNotificationUrl($ipnURL);
+      ->setRedirectURL($redirectURL);
 
   // Updates invoice with new information such as the invoice id and the URL where
   // a customer can view the invoice.
