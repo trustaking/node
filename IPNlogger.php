@@ -1,10 +1,6 @@
 <?php
-session_start();
 require ('/var/secure/keys.php');
-require ('include/functions.php');
 require ('include/config.php');
-
-$wallet = new phpFunctions_Wallet();
 
 $myfile = fopen("/var/secure/BTCPayServerIPN.log", "a");
 $raw_post_data = file_get_contents('php://input');
