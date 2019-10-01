@@ -2,7 +2,7 @@
 require ('/var/secure/keys.php');
 require ('include/config.php');
 
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 $myfile = fopen("/var/secure/BTCPayServerIPN.log", "a");
 $raw_post_data = file_get_contents('php://input');
