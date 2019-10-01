@@ -9,6 +9,7 @@ $service_desc='';
 $price='';
 $online_days='';
 $redirectURL='';
+$ipnURL='';
 $email='';
 
 // general variables
