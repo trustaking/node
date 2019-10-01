@@ -28,7 +28,7 @@ if ($_SESSION['Price']>$price) {
 			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 			<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 		</form>
-			<p><br />We have opened a crowdfund <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> to keep the service free of charge.<br />We are currently running testnet!</p>
+			<p><br />We have opened a crowdfund <a href="https://donations.trustaking.com/">here</a> to keep the service free of charge.<br />We are currently running testnet!</p>
 			<a href="#main" class="more scrolly"></a>
 </section>
 
@@ -40,7 +40,7 @@ if ($_SESSION['Price']>$price) {
 			<header class="major">
 				<h2>Full Node as a Service</h2>
 				<p><b>Effortless cold staking with no technical knowledge required</b></p>
-				<p>This service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://btcpay.trustaking.com/apps/3ZLoV6ywKzV1JTBdx6DXEBWHXSxe/crowdfund">here</a> if you want to help.<p> 
+				<p>This service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://donations.trustaking.com/">here</a> if you want to help.<p> 
 			</header>
 			<ul class="icons major">
 				<li><span class="icon fa-diamond major style1"><span class="label">Lorem</span></span></li>
