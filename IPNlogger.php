@@ -14,7 +14,7 @@ if (false === $raw_post_data) {
 
 $ipn = json_decode($raw_post_data);
 
-print_r ($ipn);
+print_r ($raw_post_data);
 
 if (true === empty($ipn)) {
     fwrite($myfile, $date . " : Error. Could not decode the JSON payload from BTCPayServer.\n");
