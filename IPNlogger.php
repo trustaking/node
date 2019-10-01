@@ -28,20 +28,14 @@ if (true === empty($ipn->id)) {
 
 // Now fetch the invoice from BTCPayServer
 // This is needed, since the IPN does not contain any authentication
-$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
-$privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
-$publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
-$client        = new \BTCPayServer\Client\Client();
-$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 
-$client->setPrivateKey($privateKey);
-$client->setPublicKey($publicKey);
+$client = new \BTCPayServer\Client\Client();
+$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setUri($btcpayserver);
 $client->setAdapter($adapter);
 
 $token = new \BTCPayServer\Token();
 $token->setToken($pair_token);
-$token->setFacade('merchant');
 $client->setToken($token);
 
 /**
@@ -53,10 +47,10 @@ $invoiceStatus = $invoice->getStatus();
 $invoiceExceptionStatus = $invoice->getExceptionStatus();
 $invoicePrice = $invoice->getPrice();
 
-fwrite($myfile, $date . " : IPN received for BTCPayServer invoice ".$invoiceId." . Status = " .$invoiceStatus." / exceptionStatus = " . $invoiceExceptionStatus." Price = ". $invoicePrice." Tax Included = ". $taxIncluded."\n");
-fwrite($myfile, "Raw IPN: ". $raw_post_data."\n");
+fwrite($myfile, $date . " : IPN received for BTCPay invoice " . $invoiceId . " . Status = " . $invoiceStatus . " / exceptionStatus = " . $invoiceExceptionStatus . " Price = " . $invoicePrice . "\n");
+fwrite($myfile, "Raw IPN: " . $raw_post_data . "\n");
 
-//Respond with HTTP 200, so BTCPayServer knows the IPN has been received correctly
-//If BTCPayServer receives <> HTTP 200, then BTCPayServer will try to send the IPN again with increasing intervals for two more hours.
+//Respond with HTTP 200, so BTCPay knows the IPN has been received correctly
+//If BTCPay receives <> HTTP 200, then BitPay will try to send the IPN again with increasing intervals for two more hours.
 header("HTTP/1.1 200 OK");
 ?>
