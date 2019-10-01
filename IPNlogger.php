@@ -2,11 +2,13 @@
 require ('/var/secure/keys.php');
 require ('include/config.php');
 
+require __DIR__ . '/../../vendor/autoload.php';
+
 $myfile = fopen("/var/secure/BTCPayServerIPN.log", "a");
 $raw_post_data = file_get_contents('php://input');
 $date = date('m/d/Y h:i:s a', time());
 
-var_dump($raw_post_data);
+//var_dump($raw_post_data);
 
 if (false === $raw_post_data) {
     fwrite($myfile, $date . " : Error. Could not read from the php://input stream or invalid BTCPayServer IPN received.\n");
