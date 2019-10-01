@@ -96,7 +96,7 @@ public function GetInvoiceStatus($invoiceId,$orderID) {
   return $result;
 }
 
-public function CreateInvoice($OrderID,$Price,$Description,$redirectURL) {
+public function CreateInvoice($OrderID,$Price,$Description,$redirectURL,$ipnURL) {
   require ('/var/secure/keys.php'); //secured location - sensitive keys
   require ('vendor/autoload.php'); //loads the btcpayserver library
 

@@ -47,7 +47,7 @@ $_SESSION['OrderID']=$OrderID;
 // Full service description
 $serv=$_SESSION['Days_Online'].$service_desc;
 // Create invoice
-$inv = $wallet->CreateInvoice($OrderID,$_SESSION['Price'],$serv,$redirectURL);
+$inv = $wallet->CreateInvoice($OrderID,$_SESSION['Price'],$serv,$redirectURL,$ipnURL);
 $invoiceId= $inv['invoice_id'];
 $invoiceURL= $inv['invoice_url'];
 // Store the InvoiceID in session
