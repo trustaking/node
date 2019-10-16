@@ -61,7 +61,7 @@ echo
 
 #echo -e "${RED}* Fetching your Cold wallet details  ... please wait.${NONE}"
 
-ColdWalletColdStakingColdAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$ColdWalletName&IsColdWalletAddress=true" -H  "accept: application/json")
+ColdWalletColdStakingColdAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$ColdWalletName&IsColdWalletAddress=true${apiver}" -H  "accept: application/json")
 ColdWalletColdStakingColdAddress=${ColdWalletColdStakingColdAddress:12:34}
 
 #echo -e "${GREEN}Done.${NONE}"
@@ -101,7 +101,7 @@ echo -e "${RED}Funding address    :${NONE}" $ColdWalletInitialFundingAddress
 echo -e "${RED}Cold address       :${NONE}" $ColdWalletColdStakingColdAddress
 echo -e "${RED}Trustaking address :${NONE}" $HotWalletColdStakingHotAddress
 echo -e "${RED}Amount            :${NONE}" $ColdStakingAmount
-#echo -e "${RED}Hex or error    :${NONE}" $ColdStakingTX
+echo -e "${RED}Hex or error    :${NONE}" $ColdStakingTX
 echo
 read -p "Press a key to finish." response
 
