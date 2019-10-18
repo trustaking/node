@@ -13,13 +13,9 @@ UNDERLINE='\033[4m'
 apiport=38222
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_${date_stamp}.log"
-ColdWalletName="MyColdWallet"
-ColdWalletSecretWords=""
+ColdWalletName=""
 ColdWalletPassword=""
-ColdWalletPassphrase=""
-ColdWalletInitialFundingAddress=""
-ColdWalletColdStakingHotAddress=""
-ColdWalletColdStakingColdAddress=""
+ReturnAddress=""
 ColdStakingAmount=""
 ColdStakingTX=""
 
@@ -31,10 +27,7 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "Use this to withdraw funds from trustaking.com"
 echo 
-read -p "Name (default=MyColdWallet): " response
-if [[ "$response" != "" ]] ; then 
-   ColdWalletName="$response" 
-fi
+read -p "Wallet Name: " ColdWalletName
 read -p "Password: " ColdWalletPassword
 echo
 
@@ -50,8 +43,7 @@ echo
 echo -e "* Preparing to withdraw from your cold staking and return funds ... please wait."
 
 ColdStakingTX=$(curl -sX POST "http://localhost:$apiport/api/ColdStaking/cold-staking-withdrawal" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"receivingAddress\": \"$ReturnAddress\",  \"walletName\": \"$ColdWalletName\",  \"walletPassword\": \"$ColdWalletPassword\",  \"amount\": \"$ColdStakingAmount\",  \"fees\": \"0.0002\"}")
-
-ColdStakingTX=${ColdStakingTX:19:512}
+ColdStakingTX=$(echo $ColdStakingTX | cut -d \" -f4)
 
 echo -e "${GREEN}Done.${NONE}"
 echo

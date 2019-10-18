@@ -14,11 +14,8 @@ apiport=38222
 apiver=""
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
-ColdWalletName="MyColdWallet"
-ColdWalletSecretWords=""
+ColdWalletName=""
 ColdWalletPassword=""
-ColdWalletPassphrase=""
-ColdWalletInitialFundingAddress=""
 ColdWalletColdStakingHotAddress=""
 ColdWalletColdStakingColdAddress=""
 ColdStakingAmount=""
@@ -32,40 +29,13 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "${BOLD}Use this to add funds to your existing cold wallet.${NONE}"
 echo 
-read -p "Name (default=MyColdWallet) : " response
-if [[ "$response" != "" ]] ; then 
-   ColdWalletName="$response" 
-fi
+read -p "Your wallet name  : " ColdWalletName
 read -p "Password: " ColdWalletPassword
 echo 
 
-##### Grab the Cold wallet funding address ##########
-
-#echo -e "${RED}* Getting the Initial funding address ... please wait."
-
-ColdWalletInitialFundingAddress=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/unusedaddress?WalletName=$ColdWalletName&AccountName=account%200${apiver}" -H  "accept: application/json"))
-
-#echo -e "${GREEN}Done.${NONE}"
-#echo
-
-##### Display info about the Cold wallet & funding details ######
-
-echo -e "${GREEN}Send the funds you want to cold stake to this initial funding address on your Cold wallet then wait for the coins to confirm: ${NONE}"
-echo
-echo -e $ColdWalletInitialFundingAddress
-echo
-read -p "Press a key to continue." response
-echo
-
 ##### Get the Cold Wallet - Cold Address ######
-
-#echo -e "${RED}* Fetching your Cold wallet details  ... please wait.${NONE}"
-
 ColdWalletColdStakingColdAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$ColdWalletName&IsColdWalletAddress=true${apiver}" -H  "accept: application/json")
-ColdWalletColdStakingColdAddress=${ColdWalletColdStakingColdAddress:12:34}
-
-#echo -e "${GREEN}Done.${NONE}"
-#echo
+ColdWalletColdStakingColdAddress=$(echo $ColdWalletColdStakingColdAddress | cut -d \" -f4)
 
 ##### Enter the Staking Address from Trustaking.com ######
 
@@ -77,18 +47,10 @@ echo
 ##### Prepare the cold staking tx ######
 
 echo -e "${RED}* Preparing your cold staking transaction ... please wait.${NONE}"
-
 ColdStakingTX=$(curl -sX POST "http://localhost:$apiport/api/ColdStaking/setup-cold-staking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"coldWalletAddress\": \"$ColdWalletColdStakingColdAddress\",  \"hotWalletAddress\": \"$HotWalletColdStakingHotAddress\",  \"walletName\": \"$ColdWalletName\",  \"walletPassword\": \"$ColdWalletPassword\",  \"walletAccount\": \"account 0\",  \"amount\": \"$ColdStakingAmount\",  \"fees\": \"0.0002\"}")
-
-ColdStakingTX=${ColdStakingTX:19:512}
-
-#echo -e "${GREEN}Done.${NONE}"
-#echo
+ColdStakingTX=$(echo $ColdStakingTX | cut -d \" -f4)
 
 ##### Transmit the cold staking tx ######
-
-#echo -e "${RED}*Broadcasting your your cold staking transaction ... please wait.${NONE}"
-
 curl -sX POST "http://localhost:$apiport/api/Wallet/send-transaction" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{\"hex\":\"$ColdStakingTX\"}" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
@@ -96,12 +58,10 @@ echo
 echo -e "${RED}Here's your cold wallet details. These are you're responsibility trustaking.com has no way to recover this information - keep this information safe offline:${NONE}"
 echo
 echo -e "${RED}Name      	      :${NONE}" $ColdWalletName
-echo -e "${RED}Password  	      :${NONE}" $ColdWalletPassword
-echo -e "${RED}Funding address    :${NONE}" $ColdWalletInitialFundingAddress
 echo -e "${RED}Cold address       :${NONE}" $ColdWalletColdStakingColdAddress
 echo -e "${RED}Trustaking address :${NONE}" $HotWalletColdStakingHotAddress
-echo -e "${RED}Amount            :${NONE}" $ColdStakingAmount
-echo -e "${RED}Hex or error    :${NONE}" $ColdStakingTX
+echo -e "${RED}Amount             :${NONE}" $ColdStakingAmount
+#echo -e "${RED}Hex or error    :${NONE}" $ColdStakingTX
 echo
 read -p "Press a key to finish." response
 
