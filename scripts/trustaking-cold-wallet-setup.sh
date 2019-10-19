@@ -20,6 +20,10 @@ ColdWalletColdStakingHotAddress=""
 ColdWalletColdStakingColdAddress=""
 ColdStakingAmount=""
 ColdStakingTX=""
+if { "apiver"="&Segwit=true" } then
+    SegwitSetting=",  \"segwitChangeAddress\": true"
+fi 
+
 
 ######## Get some information from the user about the wallet ############
 clear
@@ -52,7 +56,7 @@ echo
 ##### Prepare the cold staking tx ######
 
 echo -e "${RED}* Preparing & broadcasting your cold staking transaction ... please wait.${NONE}"
-ColdStakingTX=$(curl -sX POST "http://localhost:$apiport/api/ColdStaking/setup-cold-staking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"coldWalletAddress\": \"$ColdWalletColdStakingColdAddress\",  \"hotWalletAddress\": \"$HotWalletColdStakingHotAddress\",  \"walletName\": \"$ColdWalletName\",  \"walletPassword\": \"$ColdWalletPassword\",  \"walletAccount\": \"account 0\",  \"amount\": \"$ColdStakingAmount\",  \"fees\": \"0.0002\",  \"segwitChangeAddress\": true}")
+ColdStakingTX=$(curl -sX POST "http://localhost:$apiport/api/ColdStaking/setup-cold-staking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"coldWalletAddress\": \"$ColdWalletColdStakingColdAddress\",  \"hotWalletAddress\": \"$HotWalletColdStakingHotAddress\",  \"walletName\": \"$ColdWalletName\",  \"walletPassword\": \"$ColdWalletPassword\",  \"walletAccount\": \"account 0\",  \"amount\": \"$ColdStakingAmount\",  \"fees\": \"0.0002\"${SegwitSetting}")
 ColdStakingTX=$(echo $ColdStakingTX | cut -d \" -f4)
 
 ##### Transmit the cold staking tx ######
