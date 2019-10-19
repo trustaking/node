@@ -20,10 +20,9 @@ ColdWalletColdStakingHotAddress=""
 ColdWalletColdStakingColdAddress=""
 ColdStakingAmount=""
 ColdStakingTX=""
-if { "apiver"="&Segwit=true" } then
+if [[ "apiver"="&Segwit=true" ]] ; then
     SegwitSetting=",  \"segwitChangeAddress\": true"
 fi 
-
 
 ######## Get some information from the user about the wallet ############
 clear
