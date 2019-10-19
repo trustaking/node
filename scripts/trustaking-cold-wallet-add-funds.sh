@@ -51,7 +51,7 @@ echo
 ##### Prepare the cold staking tx ######
 
 echo -e "${RED}* Preparing your cold staking transaction ... please wait.${NONE}"
-ColdStakingTX=$(curl -sX POST "http://localhost:$apiport/api/ColdStaking/setup-cold-staking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"coldWalletAddress\": \"$ColdWalletColdStakingColdAddress\",  \"hotWalletAddress\": \"$HotWalletColdStakingHotAddress\",  \"walletName\": \"$ColdWalletName\",  \"walletPassword\": \"$ColdWalletPassword\",  \"walletAccount\": \"account 0\",  \"amount\": \"$ColdStakingAmount\",  \"fees\": \"0.0002\"${SegwitSetting}")
+ColdStakingTX=$(curl -sX POST "http://localhost:$apiport/api/ColdStaking/setup-cold-staking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"coldWalletAddress\": \"$ColdWalletColdStakingColdAddress\",  \"hotWalletAddress\": \"$HotWalletColdStakingHotAddress\",  \"walletName\": \"$ColdWalletName\",  \"walletPassword\": \"$ColdWalletPassword\",  \"walletAccount\": \"account 0\",  \"amount\": \"$ColdStakingAmount\",  \"fees\": \"0.0002\"${SegwitSetting}}")
 ColdStakingTX=$(echo $ColdStakingTX | cut -d \" -f4)
 
 ##### Transmit the cold staking tx ######
