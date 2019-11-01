@@ -9,7 +9,7 @@ if ( $_SESSION['Address'] == '' || empty($_SESSION['Address']) ||
 	 $_SESSION['Price'] == '' || empty($_SESSION['Price']) || 
 	 $_SESSION['Days_Online'] == '' || empty($_SESSION['Days_Online']) || 
 	 $_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID']) ) {
-	die (' The session has expired - please try again.');
+		$wallet->web_redirect ("index.php");	
 }
 
 //Check if invoice paid
@@ -29,30 +29,8 @@ if ( $OrderPaid == 'FAIL' ) {
 	<section class="wrapper style5">
 		<div class="inner">
 			<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
-			<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced.</p><br>
-			<?php if(!$isWin) { ?>
-				<p>Then open a terminal window and run the following script and follow the prompts:</p>
-				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
-				<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
-				<br/>
-				<p>Run this script at any time to see your cold staking balance:</p>
-				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.sh )</code></pre>
-				<p>If you need to add funds at a later date use this command:</p>
-				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.sh )</code></pre>
-				<p>And finally, when you want to withdraw your funds use this command:</p>
-				<pre><code>bash <( curl -s http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.sh )</code></pre>
-			<?php } else { ?>
-				<p>Then open a Powershell window and run the following script and follow the prompts:</p>
-				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.ps1'))</code></pre>
-				<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
-				<br/>
-				<p>Run this script at any time to see your cold staking balance:</p>
-				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-balance.ps1'))</code></pre>
-				<p>If you need to add funds at a later date use this command:</p>
-				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-add-funds.ps1'))</code></pre>
-				<p>And finally, when you want to withdraw your funds use this command:</p>
-				<pre><code>iex ((New-Object System.Net.WebClient).DownloadString('http://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-withdraw-funds.ps1'))</code></pre>
-			<?php } ?>
+			<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p><br>
+			<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 		</div>
 	</section>
 </article>

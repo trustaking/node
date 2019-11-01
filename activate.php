@@ -53,7 +53,7 @@ if ( $address == '' || empty($address) ) {
 		<h3>ACTIVATE COLD STAKING</h3>
 			<p>Before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p><br>
 			<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
-			<?php if($coldstakeui='') { ?>
+			<?php if($coldstakeui!='1') { ?>
 				<?php if(!$isWin) { ?>
 					<p>Then open a terminal window and run the following script and follow the prompts:</p>
 					<pre><code>bash <( curl -s https://<?php print $ticker; ?>.trustaking.com/scripts/trustaking-cold-wallet-setup.sh )</code></pre>
