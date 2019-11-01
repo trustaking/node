@@ -17,6 +17,7 @@ $server_ip='localhost'; // '0.0.0.0' target server ip. [ex.] 10.0.0.15
 $scheme='http' ;// tcp protocol to access json on coin. [default]
 $AccountName='coldStakingHotAddresses' ; // special account for cold staking addresses
 $api_ver='';
+$coldstakeui='';
 
 //TODO: Inject wallet name
 $WalletName='hot' ; // Hot wallet name
