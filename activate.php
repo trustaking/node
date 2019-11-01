@@ -51,7 +51,7 @@ if ( $address == '' || empty($address) ) {
 <section class="wrapper style5">
 	<div class="inner">
 		<h3>ACTIVATE COLD STAKING</h3>
-			<p>Before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p><br>
+			<p>Before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p>
 			<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 			<?php if($coldstakeui!='1') { ?>
 				<?php if(!$isWin) { ?>

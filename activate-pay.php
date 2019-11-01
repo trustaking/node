@@ -29,7 +29,7 @@ if ( $OrderPaid == 'FAIL' ) {
 	<section class="wrapper style5">
 		<div class="inner">
 			<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
-			<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p><br>
+			<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p>
 			<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 		</div>
 	</section>
