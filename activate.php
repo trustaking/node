@@ -53,6 +53,7 @@ if ( $address == '' || empty($address) ) {
 		<h3>ACTIVATE COLD STAKING</h3>
 			<p>Before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p>
 			<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
+			<p>Important ... <b>DO NOT SEND COINS DIRECTLY TO THIS ADDRESS</b> ... its for cold staking only. If you're not sure ask for help on Discord<p>
 			<?php if($coldstakeui!='1') { ?>
 				<?php if(!$isWin) { ?>
 					<p>Then open a terminal window and run the following script and follow the prompts:</p>
