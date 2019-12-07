@@ -10,7 +10,7 @@
 			            <?php print $message;?>
 			            <li><a href="index.php">Home</a></li>
 			            <li><a href="about.php">FAQ</a></li>
-						<li><a href="https://github.com/thecrypt0hunter/node-installer">VPS Node Installer Repo</a></li>
+						<li><a href="https://github.com/thecrypt0hunter/node-installer">VPS Node Installer</a></li>
 						<li><a href="https://donations.trustaking.com/">Donations</a></li>
 			        </ul>
 			    </div>
