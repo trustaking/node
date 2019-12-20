@@ -51,7 +51,7 @@ $wallet = new phpFunctions_Wallet();
   
     // Curl Request
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_URL, $recaptcha_url);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POSTFIELDS, array(
