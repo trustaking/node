@@ -47,21 +47,45 @@ $wallet = new phpFunctions_Wallet();
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_response = $_POST['recaptcha_response'];
-    // Make and decode POST request:
-    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $captcha_secret_key . '&response=' . $recaptcha_response);
-    $recaptcha = json_decode($recaptcha);
-    if($recaptcha->success==true){
-        // Take action based on the score returned:
-        if ($recaptcha->score >= 0.5) {
-            $verified=true;
-         } else {
-            $verified=false;
-            die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
-        }
-      } else { // there is an error /
-        die (" Something went wrong with Recaptcha! - please try again in a new tab.");
+    $remoteip = $_SERVER["REMOTE_ADDR"];
+  
+    // Curl Request
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, array(
+        'secret' => $captcha_secret_key,
+        'response' => $recaptcha_response,
+        'remoteip' => $remoteip
+        ));
+    $curlData = curl_exec($curl);
+    curl_close($curl);
+
+    // Parse data
+    $recaptcha = json_decode($curlData, true);
+    if ($recaptcha["success"]) {
+      $verified=true;
+    } else {
+      $verified=false;
+      die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
     }
 }
+// Make and decode POST request:
+//    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $captcha_secret_key . '&response=' . $recaptcha_response);
+//    $recaptcha = json_decode($recaptcha);
+//    if($recaptcha->success==true){
+        // Take action based on the score returned:
+//        if ($recaptcha->score >= 0.5) {
+//            $verified=true;
+//         } else {
+//            $verified=false;
+//            die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
+//        }
+//      } else { // there is an error /
+//        die (" Something went wrong with Recaptcha! - please try again in a new tab.");
+//    }
+//}
 
  //Check if node is online before and grab address before taking payment
  $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
