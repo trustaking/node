@@ -14,11 +14,10 @@
         <script>
             grecaptcha.ready(function () {
                 grecaptcha.execute('<?php echo $captcha_site_key; ?>', { action: 'payment' }).then(function (token) {
-                    var recaptchaResponse = document.getElementById('recaptchaResponse');
-					console.log(recaptchaResponse)
-                    recaptchaResponse.value = token;
-                });
-            });
+					document.querySelectorAll(".recaptchaResponse").
+					forEach(elem => (elem.value = token))
+					;
+  			});
         </script>
 	</head>
 	<body class="landing is-preload">
