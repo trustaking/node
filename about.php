@@ -8,8 +8,10 @@
 	</header>
 	<section class="wrapper style5">
 		<div class="inner">
+			<?php if ($payment != '1') { ?>
 			<h3>What are the fees?</h3>
 				<p>This service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://donations.trustaking.com/">here</a> if you want to help.<p> 
+			<?php }; ?>
 			<h3>What is staking?</h3>
 				<p>Staking is essential to the Proof of Stake consensus mechanism used on the various blockchain networks.</p>
 			<p>Blocks are verified and mined by network participants who are willing to set aside a portion of their coins, effectively freezing them so they cannot be spent. In return, these participants are granted the right to verify transactions and earn bonuses paid in coins.</p>
@@ -25,9 +27,9 @@
 			<h3>What is "Full Node as a Service"?</h3>
 				<p>Full Node as a Service (FNaaS) is a node running in the cloud that is setup, operated, maintained, secured and monitoring by a third party. </p>
 			<h3>What service does Trustaking.com provide?</h3>
-				<p>Trustaking.com operate a "Full Node as a Service" pool providing users with a secure hot wallet on their chosen network. By utilising Trustaking's FNaaS technology a user can setup and run Cold Staking very quickly, safe in the knowledge that their coins never leave their cold storage wallet.</p>
+				<p>Trustaking.com operates a "Full Node as a Service" pool providing users with a secure coldstaking wallet on their chosen network. By utilising Trustaking's FNaaS technology a user can setup and run Cold Staking very quickly, safe in the knowledge that their coins never leave their cold storage wallet.</p>
 			<h3>What coins does Trustaking.com support</h3>
-				<p>Trustaking.com currently supports Stratis and any chain built using the same technology. As new coins come online they will be added to the Trustaking.com portfolio.</p>
+				<p>Trustaking.com currently supports Blockcore, Stratis and any chain built using the same technology. As new coins come online they will be added to the Trustaking.com portfolio.</p>
 			<hr />
 			<h3>Disclaimer<h3></h3>
 				<p>Please be aware that Trustaking.com never handles your coins and will never ask for your private keys or seed phrase.</p>

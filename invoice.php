@@ -3,6 +3,44 @@ session_start();
 require ('/var/secure/keys.php');
 require ('include/functions.php');
 require ('include/config.php');
+
+// Set price and and Expiry based on plan number
+
+if (isset($_POST["Plan"])) {
+  $_SESSION['Plan'] = $_POST["Plan"]; // Grab plan and add to session
+} else {
+  header('Location:' . 'index.php'); //  otherwise redirect to home page
+}
+
+switch ($_SESSION['Plan']) {
+    case "0":
+    $_SESSION['Price']='0';
+    $_SESSION['Plan_Desc']='Free Trial';
+		$d=strtotime("+1 week");
+		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+		break;
+    case "1":
+		$_SESSION['Price']='2';
+    $_SESSION['Plan_Desc']='Bronze';
+    $d=strtotime("+1 month");
+		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+		break;
+    case "2":
+		$_SESSION['Price']='9';
+    $_SESSION['Plan_Desc']='Silver';
+    $d=strtotime("+6 months");
+		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+		break;
+	case "3":
+    $_SESSION['Price']='12';
+    $_SESSION['Plan_Desc']='Gold';
+		$d=strtotime("+1 year");
+		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+		break;
+	default:
+		break;
+	}
+
 $wallet = new phpFunctions_Wallet();
     
  // Deal with the bots first
@@ -22,7 +60,7 @@ $wallet = new phpFunctions_Wallet();
             die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
         }
       } else { // there is an error /
-        die (' Something went wrong with Recaptcha! - please try again in a new tab.');
+        die (" Something went wrong with Recaptcha! - please try again in a new tab.");
     }
 }
 
@@ -42,12 +80,11 @@ $wallet = new phpFunctions_Wallet();
     }
 
 // Generate & store the InvoiceID in session
-$OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
-$_SESSION['OrderID']=$OrderID;
+$_SESSION['OrderID']=$ticker . '-' . $_SESSION['Address'];
 // Full service description
-$serv=$_SESSION['Days_Online'].$service_desc;
+$serv="Trustaking ". $_SESSION['Plan_Desc'] ." - Service Expiry: " . $_SESSION['Expiry'];
 // Create invoice
-$inv = $wallet->CreateInvoice($OrderID,$_SESSION['Price'],$serv,$redirectURL,$ipnURL);
+$inv = $wallet->CreateInvoice($_SESSION['OrderID'],$_SESSION['Price'],$serv,$redirectURL,$ipnURL);
 $invoiceId= $inv['invoice_id'];
 $invoiceURL= $inv['invoice_url'];
 // Store the InvoiceID in session

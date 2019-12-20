@@ -23,8 +23,8 @@ public function crypto_rand($min,$max,$pedantic=True) {
 }
 
 public function checkSite( $url ) {
-    $useragent = $_SERVER['HTTP_USER_AGENT'];
 
+    $useragent = $_SERVER['HTTP_USER_AGENT'];
     $options = array(
             CURLOPT_RETURNTRANSFER => true,      // return web page
             CURLOPT_HEADER         => false,     // do not return headers
@@ -48,119 +48,126 @@ public function checkSite( $url ) {
 
 public function CallAPI($url) {
 
-$ch = curl_init() ; //  Initiate curl
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
-curl_setopt($ch, CURLOPT_URL,$url); // Set the url
-curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
-$response = curl_exec($ch); // Execute
-$response = json_decode($response,true);
-$error = curl_errno($ch);
-$result = $response;
-curl_close($ch);
-return $result;
+    $ch = curl_init() ; //  Initiate curl
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
+    curl_setopt($ch, CURLOPT_URL,$url); // Set the url
+    curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
+    $response = curl_exec($ch); // Execute
+    $response = json_decode($response,true);
+    $error = curl_errno($ch);
+    $result = $response;
+    curl_close($ch);
+    return $result;
 }
 
 public function GetInvoiceStatus($invoiceId,$orderID) {
-  require ('/var/secure/keys.php'); //secured location - sensitive keys
-  require ('include/config.php'); // coin configuration
-  require ('vendor/autoload.php'); //loads the btcpayserver library
+    require ('/var/secure/keys.php'); //secured location - sensitive keys
+    require ('include/config.php'); // coin configuration
+    require ('vendor/autoload.php'); //loads the btcpayserver library
 
-  $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
-  $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
-  $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
-  $client        = new \BTCPayServer\Client\Client();
-  $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
+    $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+    $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
+    $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
+    $client        = new \BTCPayServer\Client\Client();
+    $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
   
-  $client->setPrivateKey($privateKey);
-  $client->setPublicKey($publicKey);
-  $client->setUri($btcpayserver);
-  $client->setAdapter($adapter);
+    $client->setPrivateKey($privateKey);
+    $client->setPublicKey($publicKey);
+    $client->setUri($btcpayserver);
+    $client->setAdapter($adapter);
   
-  $token = new \BTCPayServer\Token();
-  $token->setToken($pair_token);
-  $token->setFacade('merchant');
-  $client->setToken($token);
+    $token = new \BTCPayServer\Token();
+    $token->setToken($pair_token);
+    $token->setFacade('merchant');
+    $client->setToken($token);
 
-  $invoice = $client->getInvoice($invoiceId);
+    $invoice = $client->getInvoice($invoiceId);
   
-  $OrderIDCheck = $invoice->getOrderId();
-  $OrderStatus = $invoice->getStatus();
-  $ExcStatus = $invoice->getExceptionStatus();
+    $OrderIDCheck = $invoice->getOrderId();
+    $OrderStatus = $invoice->getStatus();
+    $ExcStatus = $invoice->getExceptionStatus();
     
-  if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
-    $result = "PASS";
-  } else { //TODO: Handle partial payments
-    $result = "FAIL";
-  }
-  
-  return $result;
+    if (($OrderStatus == 'complete' || $OrderStatus == 'paid') && $OrderIDCheck == $orderID) {
+        $result = "PASS"; } 
+     else { //TODO: Handle partial payments
+        $result = "FAIL";
+    }
+    return $result;
 }
 
 public function CreateInvoice($OrderID,$Price,$Description,$redirectURL,$ipnURL) {
-  require ('/var/secure/keys.php'); //secured location - sensitive keys
-  require ('include/config.php'); // coin configuration
-  require ('vendor/autoload.php'); //loads the btcpayserver library
+    require ('/var/secure/keys.php'); //secured location - sensitive keys
+    require ('include/config.php'); // coin configuration
+    require ('vendor/autoload.php'); //loads the btcpayserver library
 
-  $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
-  $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
-  $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
-  $client        = new \BTCPayServer\Client\Client();
-  $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
+    $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+    $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
+    $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
+    $client        = new \BTCPayServer\Client\Client();
+    $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
   
-  $client->setPrivateKey($privateKey);
-  $client->setPublicKey($publicKey);
-  $client->setUri($btcpayserver);
-  $client->setAdapter($adapter);
+    $client->setPrivateKey($privateKey);
+    $client->setPublicKey($publicKey);
+    $client->setUri($btcpayserver);
+    $client->setAdapter($adapter);
   
-  $token = new \BTCPayServer\Token();
-  $token->setToken($pair_token);
-//  $token->setFacade('merchant');
-  $client->setToken($token);
+    $token = new \BTCPayServer\Token();
+    $token->setToken($pair_token);
+    //$token->setFacade('merchant');
+    $client->setToken($token);
 
-  // * This is where we will start to create an Invoice object, make sure to check
-  // * the InvoiceInterface for methods that you can use.
-  $invoice = new \BTCPayServer\Invoice();
-  $buyer = new \BTCPayServer\Buyer();
-  //$buyer->setEmail($email);
+    // * This is where we will start to create an Invoice object, make sure to check
+    // * the InvoiceInterface for methods that you can use.
+    $invoice = new \BTCPayServer\Invoice();
+    $buyer = new \BTCPayServer\Buyer();
+    //$buyer->setEmail($email);
 
-  // Add the buyers info to invoice
-  $invoice
-      ->setBuyer($buyer);
+    // Add the buyers info to invoice
+    $invoice
+        ->setBuyer($buyer);
 
-  // Item is used to keep track of a few things
-  $item = new \BTCPayServer\Item();
-  $item
-      //->setCode('skuNumber')
-      ->setDescription($Description)
-      ->setPrice($Price);
-  $invoice->setItem($item);
+    // Item is used to keep track of a few things
+    $item = new \BTCPayServer\Item();
+    $item
+        //->setCode('skuNumber')
+        ->setDescription($Description)
+        ->setPrice($Price);
+    $invoice->setItem($item);
 
-  // Setting this to one of the supported currencies will create an invoice using
-  // the exchange rate for that currency.
-  $invoice
-      ->setCurrency(new \BTCPayServer\Currency('USD'));
+    // Setting this to one of the supported currencies will create an invoice using
+    // the exchange rate for that currency.
+    $invoice
+        ->setCurrency(new \BTCPayServer\Currency('USD'));
 
-  // Configure the rest of the invoice
-  $invoice
-      ->setNotificationUrl($ipnURL)
-      ->setOrderId($OrderID)
-      ->setRedirectURL($redirectURL);
+    // Configure the rest of the invoice
+    $invoice
+        ->setNotificationUrl($ipnURL)
+        ->setOrderId($OrderID)
+        ->setRedirectURL($redirectURL);
 
-  // Updates invoice with new information such as the invoice id and the URL where
-  // a customer can view the invoice.
-  try {
-  echo "Creating invoice at BTCPayServer now.".PHP_EOL;
-  $client->createInvoice($invoice);
-  } catch (\Exception $e) {
+    // Updates invoice with new information such as the invoice id and the URL where
+    // a customer can view the invoice.
+    try {
+    echo "Creating invoice at BTCPayServer now.".PHP_EOL;
+    $client->createInvoice($invoice);
+    } catch (\Exception $e) {
       echo "Exception occured: " . $e->getMessage().PHP_EOL;
       $request  = $client->getRequest();
       $response = $client->getResponse();
       echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
       echo (string) $response.PHP_EOL.PHP_EOL;
       exit(1); // We do not want to continue if something went wrong
-  }
+    }
 
-  return array('invoice_id' => $invoice->getId(), 'invoice_url' => $invoice->getUrl());
+    return array('invoice_id' => $invoice->getId(), 'invoice_url' => $invoice->getUrl());
+}
+
+public function web_redirect($url, $permanent = false) {
+	if($permanent) {
+		header('HTTP/1.1 301 Moved Permanently');
+	}
+	header('Location: '.$url);
+	exit();
 }
 
 private function getOS() {

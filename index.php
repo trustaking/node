@@ -3,22 +3,162 @@ session_start();
 require ('/var/secure/keys.php');
 include('include/node-check.php');
 
-// Set  price and work out how long the server will run for
-$now = new DateTime();
-$end_date = new DateTime(date($service_end_date));
-$difference = $now->diff($end_date);
-$days_remaining = ceil($difference->format("%a"));
-$_SESSION['Days_Online']=$days_remaining;
-$_SESSION['Price'] = ceil(($price / $_SESSION['Days_Online']) * $days_remaining);
-if ($_SESSION['Price']>$price) {
-	$_SESSION['Price']=$price;
-}
+$_SESSION['Session'] = 'Open';
+
 ?>
 <?php include('include/header-recap.php'); ?>
 <?php include('include/menu.php'); ?>
 
+
+<?php if ($payment == '1') { ?>
 <!-- Banner -->
 <section id="banner">
+	<div class="inner">
+		<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
+		<p>The trusted home of <br />
+		cold staking<br />
+	</div>
+	<p><br />Choose your Trustaking plan</p>
+	<a href="#main" class="more scrolly"></a>
+	</section>
+<!-- Main -->
+<article id="main">
+	<div class="subscription-plans">
+		<div class="plan-box-center">
+			<div class="panel panel-plan box-active">
+				<div class="panel-heading" style="background-color: #555; color: white">
+					<h4 class="pull-left panel-title text-center">													
+						Bronze </h4>
+				</div>
+				<div class="plan-price-box text-info">
+					<span class="price">$2</span> / month
+				</div>
+			<div class="panel-body pt-0">
+			<h4 class="text-primary text-teal-800 mb-0">Features</h4>
+				<ul class="mt-0 mb-0 text-info top-border-none plans-intro">
+					<li>
+					Duration: <span class="text-primary">1 month</span>
+					</li>
+					<li>
+						Expiration: <span class="text-primary"><?php echo date("d-M-Y",strtotime("+1 month")) ?></span>
+					</li>
+					<li>
+						Price: <span class="text-primary"><span class="text-warning">$2</span></span>
+					</li>
+				</ul>
+			</div>
+			<div class="panel-footer pt-10 pb-10 text-center">	
+			<form method="post" action="invoice.php">
+				<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+				<input type="hidden" name="Plan" value="1">
+				<input type="submit" class="button primary small fitn" value="Select Plan" />
+			</form>
+			</div>
+		</div>		
+	</div>
+	<div class="plan-box-center">
+		<div class="panel panel-plan box-active">
+			<div class="panel-heading" style="background-color: #555; color: white">
+				<h4 class="pull-left panel-title text-center">Silver</h4>
+			</div>
+			<div class="plan-price-box text-info">
+				<span class="price">$1.50</span> / month
+			</div>
+			<div class="panel-body pt-0">
+				<h4 class="text-primary text-teal-800 mb-0">Features</h4>
+				<ul class="mt-0 mb-0 text-info top-border-none plans-intro">
+				<li>
+						Duration: <span class="text-primary">6 month</span>
+					</li>
+					<li>
+						Expiration: <span class="text-primary"><?php echo date("d-M-Y",strtotime("+6 months")) ?></span>
+					</li>
+					<li>
+						Price: <span class="text-primary"><span class="text-warning">$9</span></span>
+					</li>
+				</ul>
+			</div>
+			<div class="panel-footer pt-10 pb-10 text-center">	
+				<form method="post" action="invoice.php">
+					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+					<input type="hidden" name="Plan" value="2">
+					<input type="submit" class="button primary small fitn" value="Select Plan" />
+				</form>
+			</div>
+		</div>	
+	</div>
+	<div class="plan-box-center">
+		<div class="panel panel-plan box-active">
+			<div class="panel-heading" style="background-color: #555; color: white">
+				<h4 class="pull-left panel-title text-center">													
+					Gold
+				</h4>
+			</div>
+			<div class="plan-price-box text-info">
+				<span class="price">$1</span> / month
+			</div>
+			<div class="panel-body pt-0">
+				<h4 class="text-primary text-teal-800 mb-0">Features</h4>
+				<ul class="mt-0 mb-0 text-info top-border-none plans-intro">
+					<li>
+						Duration: <span class="text-primary">12 month</span>
+					</li>
+					<li>
+						Expiration: <span class="text-primary"><?php echo date("d-M-Y",strtotime("+12 months")) ?></span>
+					</li>
+					<li>
+						Price: <span class="text-primary"><span class="text-warning">$12</span></span>
+					</li>
+				</ul>
+			</div>
+	<div class="panel-footer pt-10 pb-10 text-center">	
+		<form method="post" action="invoice.php">
+			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+			<input type="hidden" name="Plan" value="3">
+			<input type="submit" class="button primary small fitn" value="Select Plan" />
+		</form>
+	</div>
+	</div>   
+		</div>
+		<div class="plan-box-center">
+			<div class="panel panel-plan box-active">
+					<div class="panel-heading" style="background-color: #008c6e; color: white">
+						<h4 class="pull-left panel-title text-center">													
+							Free Trial
+						</h4>
+					</div>
+					<div class="plan-price-box text-info">
+						<span class="price">Free</span>	
+					</div>
+			<div class="panel-body pt-0">
+				<h4 class="text-primary text-teal-800 mb-0">Features</h4>
+				<ul class="mt-0 mb-0 text-info top-border-none plans-intro">
+					<li>
+						Duration: <span class="text-primary">1 week</span>
+					</li>
+					<li>
+						Expiration: <span class="text-primary"><?php echo date("d-M-Y",strtotime("+1 week")) ?></span>
+					</li>
+					<li>
+						Price: <span class="text-primary"><span class="text-warning">$0</span></span>
+					</li>
+				</ul>
+			</div>
+				<div class="panel-footer pt-10 pb-10 text-center">	
+					<form method="post" action="invoice.php">
+						<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+						<input type="hidden" name="Plan" value="0">
+						<input type="submit" class="button primary small fitn" value="Select Plan" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+
+<?php } else { ?>
+
+	<section id="banner">
 	<div class="inner">
 		<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
 		<p>The trusted home of <br />
@@ -32,8 +172,9 @@ if ($_SESSION['Price']>$price) {
 			<a href="#main" class="more scrolly"></a>
 </section>
 
-<!-- Main -->
-<article id="main">
+<?php }; ?>
+
+<article id="one">
 <!-- One -->
 	<section id="one" class="wrapper style1 special">
 		<div class="inner">

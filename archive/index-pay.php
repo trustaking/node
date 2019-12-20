@@ -3,18 +3,6 @@ session_start();
 require ('/var/secure/keys.php');
 include('include/node-check.php');
 
-// Set  price and work out how long the server will run for
-$now = new DateTime();
-$end_date = new DateTime(date($service_end_date));
-$difference = $now->diff($end_date);
-$days_remaining = ceil($difference->format("%a"));
-$_SESSION['Days_Online']=$days_remaining;
-$_SESSION['Price'] = ceil(($price / $_SESSION['Days_Online']) * $days_remaining);
-if ($_SESSION['Price']>$price) {
-	$_SESSION['Price']=$price;
-}
-
-$OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 ?>
 <?php include('include/header-recap.php'); ?>
 <?php include('include/menu.php'); ?>
@@ -26,7 +14,7 @@ $OrderID = $ticker . '-' . $wallet->crypto_rand(100000000000,999999999999);
 		<p>The trusted home of <br />
 		cold staking<br />
 		<a href="#main" class="more scrolly"></a>
-		<form method="post" action="landing.php">
+		<form method="post" action="invoice.php">
 			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 			<input type="submit" class="button icon fa-shopping-cart" value="$<?php print $_SESSION['Price'];?> Pay Now" />
 		</form>
