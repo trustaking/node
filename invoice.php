@@ -5,9 +5,8 @@ require ('include/functions.php');
 require ('include/config.php');
 
 // Set price and and Expiry based on plan number
-
-if (isset($_POST["Plan"])) {
-  $_SESSION['Plan'] = $_POST["Plan"]; // Grab plan and add to session
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
+  $_SESSION['Plan'] = $_POST["Plan"]; // Grab plan number and add to session
 } else {
   header('Location:' . 'index.php'); //  otherwise redirect to home page
 }
@@ -82,7 +81,7 @@ $wallet = new phpFunctions_Wallet();
 // Generate & store the InvoiceID in session
 $_SESSION['OrderID']=$ticker . '-' . $_SESSION['Address'];
 // Full service description
-$serv="Trustaking ". $_SESSION['Plan_Desc'] ." - Service Expiry: " . $_SESSION['Expiry'];
+$serv= "Trustaking ". $_SESSION['Plan_Desc'] ." - Service Expiry: " . $_SESSION['Expiry'];
 // Create invoice
 $inv = $wallet->CreateInvoice($_SESSION['OrderID'],$_SESSION['Price'],$serv,$redirectURL,$ipnURL);
 $invoiceId= $inv['invoice_id'];

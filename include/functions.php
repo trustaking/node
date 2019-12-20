@@ -123,8 +123,7 @@ public function CreateInvoice($OrderID,$Price,$Description,$redirectURL,$ipnURL)
     //$buyer->setEmail($email);
 
     // Add the buyers info to invoice
-    $invoice
-        ->setBuyer($buyer);
+    $invoice->setBuyer($buyer);
 
     // Item is used to keep track of a few things
     $item = new \BTCPayServer\Item();
@@ -148,7 +147,7 @@ public function CreateInvoice($OrderID,$Price,$Description,$redirectURL,$ipnURL)
     // Updates invoice with new information such as the invoice id and the URL where
     // a customer can view the invoice.
     try {
-    echo "Creating invoice at BTCPayServer now.".PHP_EOL;
+    echo "Creating invoice at Trustaking.com now.".PHP_EOL;
     $client->createInvoice($invoice);
     } catch (\Exception $e) {
       echo "Exception occured: " . $e->getMessage().PHP_EOL;
