@@ -48,7 +48,7 @@ $_SESSION['Session'] = 'Open';
 				</ul>
 			</div>
 			<div class="panel-footer pt-10 pb-10 text-center">	
-			<form method="post" action="invoice.php">
+			<form method="post" action="invoice.php" name="bronze" id="bronze">
 				<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 				<input type="hidden" name="Plan" value="1">
 				<input type="submit" class="button primary small fitn" value="Select Plan" />
@@ -79,7 +79,7 @@ $_SESSION['Session'] = 'Open';
 				</ul>
 			</div>
 			<div class="panel-footer pt-10 pb-10 text-center">	
-				<form method="post" action="invoice.php">
+				<form method="post" action="invoice.php" name="silver" id="silver">
 					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 					<input type="hidden" name="Plan" value="2">
 					<input type="submit" class="button primary small fitn" value="Select Plan" />
@@ -112,7 +112,7 @@ $_SESSION['Session'] = 'Open';
 				</ul>
 			</div>
 	<div class="panel-footer pt-10 pb-10 text-center">	
-		<form method="post" action="invoice.php">
+		<form method="post" action="invoice.php" name="gold" id="gold">
 			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 			<input type="hidden" name="Plan" value="3">
 			<input type="submit" class="button primary small fitn" value="Select Plan" />
@@ -145,7 +145,7 @@ $_SESSION['Session'] = 'Open';
 				</ul>
 			</div>
 				<div class="panel-footer pt-10 pb-10 text-center">	
-					<form method="post" action="invoice.php">
+					<form method="post" action="invoice.php" name="free" id="free">
 						<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 						<input type="hidden" name="Plan" value="0">
 						<input type="submit" class="button primary small fitn" value="Select Plan" />
