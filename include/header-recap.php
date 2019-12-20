@@ -12,10 +12,13 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src='https://www.google.com/recaptcha/api.js?render=<?php echo $captcha_site_key; ?>'></script>
         <script>
-			grecaptcha.execute('<?php echo $captcha_site_key; ?>', { action: 'payment' }).then(function (token) {
-				document
-				.querySelectorAll(".recaptchaResponse")
-				.forEach(elem => (elem.value = token));
+			grecaptcha.ready(function () {
+				grecaptcha.execute('<?php echo $captcha_site_key; ?>', { action: 'payment' }).then(function (token) {
+					document.getElementById('recaptchaResponse1').value = token;
+					document.getElementById('recaptchaResponse2').value = token;
+					document.getElementById('recaptchaResponse3').value = token;
+					document.getElementById('recaptchaResponse4').value = token;
+				});
 			});
         </script>
 	</head>
