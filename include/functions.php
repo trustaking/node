@@ -26,16 +26,16 @@ public function checkSite( $url ) {
 
     $useragent = $_SERVER['HTTP_USER_AGENT'];
     $options = array(
-            CURLOPT_RETURNTRANSFER => true,      // return web page
-            CURLOPT_HEADER         => false,     // do not return headers
-            CURLOPT_FOLLOWLOCATION => true,      // follow redirects
+            CURLOPT_RETURNTRANSFER => true,       // return web page
+            CURLOPT_HEADER         => false,      // do not return headers
+            CURLOPT_FOLLOWLOCATION => true,       // follow redirects
             CURLOPT_USERAGENT      => $useragent, // who am i
             CURLOPT_AUTOREFERER    => true,       // set referer on redirect
             CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
             CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
             CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
-            CURLOPT_SSL_VERIFYPEER => false,     // SSL verification not required
-            CURLOPT_SSL_VERIFYHOST => false,     // SSL verification not required
+            CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
+            CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
@@ -48,10 +48,27 @@ public function checkSite( $url ) {
 
 public function CallAPI($url) {
 
-    $ch = curl_init() ; //  Initiate curl
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
-    curl_setopt($ch, CURLOPT_URL,$url); // Set the url
-    curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
+//    $ch = curl_init() ; //  Initiate curl
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
+//    curl_setopt($ch, CURLOPT_URL,$url); // Set the url
+//    curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
+
+    $useragent = $_SERVER['HTTP_USER_AGENT'];
+    $options = array(
+            CURLOPT_RETURNTRANSFER => true,       // return web page
+            CURLOPT_HEADER         => false,      // do not return headers
+            CURLOPT_FOLLOWLOCATION => true,       // follow redirects
+            CURLOPT_USERAGENT      => $useragent, // who am i
+            CURLOPT_AUTOREFERER    => true,       // set referer on redirect
+            CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
+            CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
+            CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
+            CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
+            CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1, // Set HTTP 1.1
+    );
+    $ch = curl_init( $url );
+    curl_setopt_array( $ch, $options );
     $response = curl_exec($ch); // Execute
     $response = json_decode($response,true);
     $error = curl_errno($ch);
