@@ -36,6 +36,11 @@ public function checkSite( $url ) {
             CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
             CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
             CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
+            CURLOPT_HTTPHEADER => array(
+                // here Set your security here requred headers
+                "accept: application/json",
+                "content-type: application/json-patch+json"
+              ),
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
