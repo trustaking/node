@@ -46,7 +46,7 @@ public function checkSite( $url ) {
     return ($httpcode == 200);
 }
 
-public function CallAPI($url) {
+public function CallAPI($url,$request_type) {
 
 //    $ch = curl_init() ; //  Initiate curl
 //    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
@@ -65,7 +65,7 @@ public function CallAPI($url) {
             CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
             CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
             CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
-            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1, // Set HTTP 1.1
+            CURLOPT_CUSTOMREQUEST => $request_type,
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );

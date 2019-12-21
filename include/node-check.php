@@ -18,7 +18,7 @@ EOD;
 
 // Grab balance
 $url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
-$get_balance = $wallet->CallAPI ($url); 
+$get_balance = $wallet->CallAPI ($url,"GET"); 
 	
 if ( !is_array($get_balance) ) {
 	die (' There was an error with your login parameters. Are your credentials correct?');
@@ -31,7 +31,7 @@ $bal = $d['amountConfirmed']/100000000;
 
 // Get Node Staking Details
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$get_stakinginfo = $wallet->CallAPI ($url); 
+$get_stakinginfo = $wallet->CallAPI ($url,"GET"); 
 
 if ( !is_array($get_stakinginfo) ) {
 	die (' There was an error with your API parameters.');
