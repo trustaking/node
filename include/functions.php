@@ -36,11 +36,6 @@ public function checkSite( $url ) {
             CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
             CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
             CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
-            CURLOPT_HTTPHEADER => array(
-                // here Set your security here requred headers
-                "accept: application/json",
-                "content-type: application/json-patch+json"
-              ),
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
@@ -51,7 +46,21 @@ public function checkSite( $url ) {
     return ($httpcode == 200);
 }
 
+
+
 public function CallAPI($url,$request_type) {
+
+//TODO ADD USERFIELDS
+
+// Create POST fields array
+//$userFields = [
+//    'username' => 'jdname',
+//   'age' => '25',
+//   'lastname' => 'gondaliya',
+//   'firstname' => 'jaydeep',
+//];
+
+//CURLOPT_POSTFIELDS => json_encode($userFields),
 
 //    $ch = curl_init() ; //  Initiate curl
 //    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
@@ -71,6 +80,11 @@ public function CallAPI($url,$request_type) {
             CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
             CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
             CURLOPT_CUSTOMREQUEST => $request_type,
+            CURLOPT_HTTPHEADER => array(
+                // here Set your security here requred headers
+                "accept: application/json",
+                "content-type: application/json-patch+json",
+              ),
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
