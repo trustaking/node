@@ -16,7 +16,8 @@ switch ($_SESSION['Plan']) {
     $_SESSION['Price']='0';
     $_SESSION['Plan_Desc']='Free Trial';
 		$d=strtotime("+1 week");
-		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+    $_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+    header('Location:' . 'activate.php'); // Bypass payment for free trial
 		break;
     case "1":
 		$_SESSION['Price']='2';

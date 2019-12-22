@@ -11,15 +11,17 @@ if ( $_SESSION['Session'] != 'Open' ) {
 
 //If payments are active, check if invoice paid
 
-if ($payment == '1') {
+if ($payment == '1' && $_SESSION['Plan']!='0') {
 
 	if ( $_SESSION['Address'] == '' || empty($_SESSION['Address']) || 
 		$_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
 		$_SESSION['Price'] == '' || empty($_SESSION['Price']) || 
 		$_SESSION['Expiry'] == '' || empty($_SESSION['Expiry']) || 
-		$_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID']) ) {
-	   $wallet->web_redirect ("index.php");
-}
+		$_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID']) ) 
+		{
+			$wallet->web_redirect ("index.php");
+		}
+
 	$OrderPaid = $wallet->GetInvoiceStatus ($_SESSION['InvoiceID'],$_SESSION['OrderID']);
 
 	if ( $OrderPaid == 'FAIL' ) {
@@ -30,10 +32,15 @@ if ($payment == '1') {
 
 // Set whitelist $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
 
-$address=$_SESSION['Address'];
-$expiry = $_SESSION['Expiry'];
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry?walletName='.$WalletName.'&address='.$address.'&stakingExpiry='.$expiry;
-$result = $wallet->CallAPI ($url,"POST");
+$params = [
+   'walletName' => $WalletName,
+   'address' => $_SESSION['Address'],
+   'stakingExpiry' => $_SESSION['Expiry'],
+   'firstname' => 'jaydeep',
+];
+
+$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
+$result = $wallet->CallAPI ($url,"POST",$params);
 if ( $result != '' || !empty($result) ) {
 	die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 }

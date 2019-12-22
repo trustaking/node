@@ -46,8 +46,6 @@ public function checkSite( $url ) {
     return ($httpcode == 200);
 }
 
-
-
 public function CallAPI($url,$request_type) {
 
 //TODO ADD USERFIELDS
@@ -85,6 +83,37 @@ public function CallAPI($url,$request_type) {
                 "accept: application/json",
                 "content-type: application/json-patch+json",
               ),
+    );
+    $ch = curl_init( $url );
+    curl_setopt_array( $ch, $options );
+    $response = curl_exec($ch); // Execute
+    $response = json_decode($response,true);
+    $error = curl_errno($ch);
+    $result = $response;
+    curl_close($ch);
+    return $result;
+}
+
+public function CallAPIParams($url,$request_type,$params) {
+
+    $useragent = $_SERVER['HTTP_USER_AGENT'];
+    $options = array(
+            CURLOPT_RETURNTRANSFER => true,       // return web page
+            CURLOPT_HEADER         => false,      // do not return headers
+            CURLOPT_FOLLOWLOCATION => true,       // follow redirects
+            CURLOPT_USERAGENT      => $useragent, // who am i
+            CURLOPT_AUTOREFERER    => true,       // set referer on redirect
+            CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
+            CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
+            CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
+            CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
+            CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
+            CURLOPT_CUSTOMREQUEST => $request_type,
+            CURLOPT_POSTFIELDS => json_encode($params),
+            CURLOPT_HTTPHEADER => array(
+                "accept: application/json",
+                "content-type: application/json-patch+json",
+                ),
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
