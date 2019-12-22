@@ -40,7 +40,7 @@ $params = [
 ];
 
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
-$result = $wallet->CallAPI ($url,"POST",$params);
+$result = $wallet->CallAPIParams ($url,"POST",$params);
 if ( $result != '' || !empty($result) ) {
 	die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 }
