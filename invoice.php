@@ -13,29 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
 
 switch ($_SESSION['Plan']) {
     case "0":
-    $_SESSION['Price']='0';
-    $_SESSION['Plan_Desc']='Free Trial';
-		$d=strtotime("+1 week");
-    $_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
-    header('Location:' . 'activate.php'); // Bypass payment for free trial
+      $_SESSION['Price']='0';
+      $_SESSION['Plan_Desc']='Free Trial';
+      $d=strtotime("+1 week");
+      $_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
 		break;
     case "1":
-		$_SESSION['Price']='2';
-    $_SESSION['Plan_Desc']='Bronze';
-    $d=strtotime("+1 month");
-		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+      $_SESSION['Price']='2';
+      $_SESSION['Plan_Desc']='Bronze';
+      $d=strtotime("+1 month");
+      $_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
 		break;
     case "2":
-		$_SESSION['Price']='9';
-    $_SESSION['Plan_Desc']='Silver';
-    $d=strtotime("+6 months");
-		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+      $_SESSION['Price']='9';
+      $_SESSION['Plan_Desc']='Silver';
+      $d=strtotime("+6 months");
+      $_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
 		break;
 	case "3":
-    $_SESSION['Price']='12';
-    $_SESSION['Plan_Desc']='Gold';
-		$d=strtotime("+1 year");
-		$_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
+      $_SESSION['Price']='12';
+      $_SESSION['Plan_Desc']='Gold';
+      $d=strtotime("+1 year");
+      $_SESSION['Expiry']=date("Y-m-d",$d) ."T". date("H:i:s", $d) .".000Z";
 		break;
 	default:
 		break;
@@ -72,11 +71,8 @@ $wallet = new phpFunctions_Wallet();
       die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
     }
 }
-// Make and decode POST request:
-//    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $captcha_secret_key . '&response=' . $recaptcha_response);
-//    $recaptcha = json_decode($recaptcha);
-//    if($recaptcha->success==true){
-        // Take action based on the score returned:
+
+// TODO: Decide whether to implement score check:
 //        if ($recaptcha->score >= 0.5) {
 //            $verified=true;
 //         } else {
@@ -85,8 +81,6 @@ $wallet = new phpFunctions_Wallet();
 //        }
 //      } else { // there is an error /
 //        die (" Something went wrong with Recaptcha! - please try again in a new tab.");
-//    }
-//}
 
  //Check if node is online before and grab address before taking payment
  $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
@@ -103,17 +97,24 @@ $wallet = new phpFunctions_Wallet();
         }
     }
 
-// Generate & store the InvoiceID in session
-$_SESSION['OrderID']=$ticker . '-' . $_SESSION['Address'];
-// Full service description
-$serv= "Trustaking ". $_SESSION['Plan_Desc'] ." - Service Expiry: " . $_SESSION['Expiry'];
-// Create invoice
-$inv = $wallet->CreateInvoice($_SESSION['OrderID'],$_SESSION['Price'],$serv,$redirectURL,$ipnURL);
-$invoiceId= $inv['invoice_id'];
-$invoiceURL= $inv['invoice_url'];
-// Store the InvoiceID in session
-$_SESSION['InvoiceID']=$invoiceId;
-// Forwarding to payment page
-header('Location:' . $invoiceURL); //<<redirect to payment page
-//echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
+// Bypass payment for free trial otherwise take payment
+if ($_SESSION['Plan'] == '0') {
+  header('Location:' . 'activate.php'); 
+} else {
+
+  // Generate & store the InvoiceID in session
+  $_SESSION['OrderID']=$ticker . '-' . $_SESSION['Address'];
+  // Full service description
+  $serv= "Trustaking ". $_SESSION['Plan_Desc'] ." - Service Expiry: " . $_SESSION['Expiry'];
+  // Create invoice
+  $inv = $wallet->CreateInvoice($_SESSION['OrderID'],$_SESSION['Price'],$serv,$redirectURL,$ipnURL);
+  $invoiceId= $inv['invoice_id'];
+  $invoiceURL= $inv['invoice_url'];
+  // Store the InvoiceID in session
+  $_SESSION['InvoiceID']=$invoiceId;
+  // Forwarding to payment page
+  header('Location:' . $invoiceURL); //<<redirect to payment page
+  //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
+
+}
 ?>
