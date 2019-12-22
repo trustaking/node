@@ -105,24 +105,13 @@ public function CallAPIParams($url,$request_type,$params) {
 
     $useragent = $_SERVER['HTTP_USER_AGENT'];
     $options = array(
-            CURLOPT_RETURNTRANSFER => true,       // return web page
-            CURLOPT_HEADER         => false,      // do not return headers
-            CURLOPT_FOLLOWLOCATION => true,       // follow redirects
-            CURLOPT_USERAGENT      => $useragent, // who am i
-            CURLOPT_AUTOREFERER    => true,       // set referer on redirect
-            CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
-            CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
-            CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
-            CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
-            CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
-//            CURLOPT_CUSTOMREQUEST => $request_type, // Pass in GET or POST
-            CURLOPT_POSTFIELDS => $payload,         // holds the json payload
-            CURLOPT_POST => $post,                  // POST
+            CURLOPT_RETURNTRANSFER => true,
             CURLINFO_HEADER_OUT => true,            //to track the handle's request string. 
+            CURLOPT_POSTFIELDS => $payload,         // holds the json payload
+            CURLOPT_POST => true, //$post,                  // POST
             CURLOPT_HTTPHEADER => array(
-                "accept: application/json",
-                "Content-Type: application/json-patch+json",
-                //'Content-Type: application/json',
+                'accept: application/json',
+                'Content-Type: application/json',
                 'Content-Length: ' . strlen($payload)),
     );
     $ch = curl_init( $url );
