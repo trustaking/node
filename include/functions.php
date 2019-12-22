@@ -96,6 +96,13 @@ public function CallAPI($url,$request_type) {
 
 public function CallAPIParams($url,$request_type,$params) {
 
+    $payload = json_encode($params);
+    if ($request_type == 'POST') {
+        $post=true;
+    } else {
+        $post=false;
+    }
+
     $useragent = $_SERVER['HTTP_USER_AGENT'];
     $options = array(
             CURLOPT_RETURNTRANSFER => true,       // return web page
@@ -108,12 +115,15 @@ public function CallAPIParams($url,$request_type,$params) {
             CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
             CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
             CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
-            CURLOPT_CUSTOMREQUEST => $request_type,
-            CURLOPT_POSTFIELDS => json_encode($params),
+//            CURLOPT_CUSTOMREQUEST => $request_type, // Pass in GET or POST
+            CURLOPT_POSTFIELDS => $payload,         // holds the json payload
+            CURLOPT_POST => $post,                  // POST
+            CURLINFO_HEADER_OUT => true,            //to track the handle's request string. 
             CURLOPT_HTTPHEADER => array(
-                "accept: application/json",
-                "content-type: application/json-patch+json",
-                ),
+//                "accept: application/json",
+//                "content-type: application/json-patch+json",
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($payload)),
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
