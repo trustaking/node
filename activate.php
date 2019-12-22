@@ -62,8 +62,9 @@ $result = $wallet->CallAPI ($url,"POST");
 		<div class="inner">
 			<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3>
 			<p>Thank you for your payment - before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p>
-			<p>Here is your hot wallet address when prompted: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
-			<p><b>IMPORTANT ... DO NOT SEND COINS DIRECTLY TO THIS ADDRESS</b> ... its for cold staking only </br> If you're in any doubt ... ask for help in Discord.<p>
+			<p>Here is your personal cold staking address: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
+			<p><b>IMPORTANT ... DO NOT SEND COINS DIRECTLY TO THIS ADDRESS</b> ... its for cold staking only </br></br>
+			If you're in any doubt ... ask for help in Discord.</p>
 		</div>
 	</section>
 </article>
