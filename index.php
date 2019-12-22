@@ -164,8 +164,9 @@ $_SESSION['Session'] = 'Open';
 		<p>The trusted home of <br />
 		cold staking<br />
 	</div>
-		<form method="post" action="activate.php">
-			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+		<form method="post" action="invoice.php" name="free" id="free">
+			<input type="hidden" name="recaptcha_response" id="recaptchaResponse1">
+			<input type="hidden" name="Plan" value="0">
 			<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 		</form>
 			<p><br />Send us a <a href="https://donations.trustaking.com/">tip</a> to keep the service free of charge.</p>

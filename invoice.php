@@ -98,7 +98,7 @@ $wallet = new phpFunctions_Wallet();
     }
 
 // Bypass payment for free trial otherwise take payment
-if ($_SESSION['Plan'] == '0') {
+if ($_SESSION['Plan'] == '0' || $payment == '0') {
   header('Location:' . 'activate.php'); 
 } else {
 
