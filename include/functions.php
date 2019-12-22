@@ -120,9 +120,9 @@ public function CallAPIParams($url,$request_type,$params) {
             CURLOPT_POST => $post,                  // POST
             CURLINFO_HEADER_OUT => true,            //to track the handle's request string. 
             CURLOPT_HTTPHEADER => array(
-//                "accept: application/json",
-//                "content-type: application/json-patch+json",
-                'Content-Type: application/json',
+                "accept: application/json",
+                "Content-Type: application/json-patch+json",
+                //'Content-Type: application/json',
                 'Content-Length: ' . strlen($payload)),
     );
     $ch = curl_init( $url );
