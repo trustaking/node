@@ -48,23 +48,6 @@ public function checkSite( $url ) {
 
 public function CallAPI($url,$request_type) {
 
-//TODO ADD USERFIELDS
-
-// Create POST fields array
-//$userFields = [
-//    'username' => 'jdname',
-//   'age' => '25',
-//   'lastname' => 'gondaliya',
-//   'firstname' => 'jaydeep',
-//];
-
-//CURLOPT_POSTFIELDS => json_encode($userFields),
-
-//    $ch = curl_init() ; //  Initiate curl
-//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it print the response
-//    curl_setopt($ch, CURLOPT_URL,$url); // Set the url
-//    curl_setopt($ch, CURLOPT_FAILONERROR, true); // Required for HTTP error codes to be reported via our call to curl_error($ch)
-
     $useragent = $_SERVER['HTTP_USER_AGENT'];
     $options = array(
             CURLOPT_RETURNTRANSFER => true,       // return web page
@@ -108,7 +91,7 @@ public function CallAPIParams($url,$request_type,$params) {
             CURLOPT_RETURNTRANSFER => true,
             CURLINFO_HEADER_OUT => true,            //to track the handle's request string. 
             CURLOPT_POSTFIELDS => $payload,         // holds the json payload
-            CURLOPT_POST => true, //$post,                  // POST
+            CURLOPT_POST => $post,                  // POST
             CURLOPT_HTTPHEADER => array(
                 'accept: application/json',
                 'Content-Type: application/json',
@@ -116,7 +99,7 @@ public function CallAPIParams($url,$request_type,$params) {
     );
     $ch = curl_init( $url );
     curl_setopt_array( $ch, $options );
-    $response = curl_exec($ch); // Execute
+    $response = curl_exec($ch);                     // Execute
     $response = json_decode($response,true);
     $error = curl_errno($ch);
     $result = $response;

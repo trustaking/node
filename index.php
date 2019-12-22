@@ -18,7 +18,7 @@ $_SESSION['Session'] = 'Open';
 		<p>The trusted home of <br />
 		cold staking<br />
 	</div>
-	<p><br />Choose your Trustaking plan</p>
+	<p><br />Choose your plan</p>
 	<a href="#main" class="more scrolly"></a>
 	</section>
 <!-- Main -->
