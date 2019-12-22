@@ -32,24 +32,27 @@ if ($payment == '1' && $_SESSION['Plan']!='0') {
 
 // Set whitelist $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
 
-$params = [
-   'walletName' => $WalletName,
-   'address' => $_SESSION['Address'],
-   'stakingExpiry' => $_SESSION['Expiry'],
-];
+if ($whitelist == '1') {
 
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
-$result = $wallet->CallAPIParams ($url,"POST",$params);
-if ( $result != '' || !empty($result) ) {
-	die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
+	$params = [
+	'walletName' => $WalletName,
+	'address' => $_SESSION['Address'],
+	'stakingExpiry' => $_SESSION['Expiry'],
+	];
+
+	$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
+	$result = $wallet->CallAPIParams ($url,"POST",$params);
+	if ( $result != '' || !empty($result) ) {
+		die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
+	}
+
+	// Restart Staking TODO - Decide if this is a daily restart at node level during testing
+	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/stopstaking?true';
+	$result = $wallet->CallAPI ($url,"POST");
+	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$WalletPassword.'&name='.$WalletName;
+	$result = $wallet->CallAPI ($url,"POST");
+
 }
-
-// Restart Staking TODO - Decide if this is a daily restart at node level during testing
-$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/stopstaking?true';
-$result = $wallet->CallAPI ($url,"POST");
-$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$WalletPassword.'&name='.$WalletName;
-$result = $wallet->CallAPI ($url,"POST");
-
 ?>
 <?php include('include/header.php'); ?>
 <?php include('include/menu.php'); ?>

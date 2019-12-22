@@ -14,5 +14,6 @@ $scheme='http' ;// tcp protocol to access json on coin. [default]
 $AccountName='coldStakingHotAddresses' ; // special account for cold staking addresses
 $api_ver=''; // additional parameters for api call
 $coldstakeui=''; // switch off the scripts
-$payment='1'; // is payment enabled
+$whitelist=''; //is whitelisting enabled
+$payment=''; // is payment enabled (has to be used when whitelisting is enabled)
 ?>
