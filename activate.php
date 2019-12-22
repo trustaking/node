@@ -36,7 +36,6 @@ $params = [
    'walletName' => $WalletName,
    'address' => $_SESSION['Address'],
    'stakingExpiry' => $_SESSION['Expiry'],
-   'firstname' => 'jaydeep',
 ];
 
 $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
