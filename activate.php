@@ -63,7 +63,7 @@ if ($whitelist == '1') {
 	</header>
 	<section class="wrapper style5">
 		<div class="inner">
-			<?php if ($payment == '1') { ?>
+			<?php if ($payment == '1' && $_SESSION['Plan']!='0') { ?>
 				<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3><p>Thank you for your payment!</p><br>
 			<?php } else { ?>
 				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/">here</a></p><br>
