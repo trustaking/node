@@ -1,6 +1,9 @@
-<?php include('include/node-check.php'); ?>
-<?php include('include/header.php'); ?>
-<?php include('include/menu.php'); ?>
+<?php 
+require ('/var/secure/keys.php');
+include('include/node-check.php');
+include('include/header.php');
+include('include/menu.php'); 
+?>
 <!-- Main -->
 <article id="main">
 	<header>
