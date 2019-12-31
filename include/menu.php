@@ -10,8 +10,9 @@
 			            <?php print $message;?>
 			            <li><a href="index.php">Home</a></li>
 						<li><a href="about.php">FAQ</a></li>
-						<li><a href="https://github.com/thecrypt0hunter/node-installer">VPS Node Installer</a></li>
-						<li><a href="https://donations.trustaking.com/">Donations</a></li>
+						<li><a href="https://github.com/thecrypt0hunter/node-installer" target="_blank">VPS Node Installer</a></li>
+						<li><a href="https://github.com/thecrypt0hunter/CoreWallet/releases" target="_blank">Core Wallet Download</a></li>
+						<li><a href="https://donations.trustaking.com/" target="_blank">Donations</a></li>
 					</ul>
 					<ul>
 						<li><a href="how-to.php" style='color:green'> HOW-TO GUIDES</a></li>
