@@ -1,5 +1,4 @@
 <?php 
-require ('/var/secure/keys.php');
 include('include/node-check.php');
 include('include/header.php');
 include('include/menu.php'); 

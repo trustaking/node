@@ -1,4 +1,5 @@
-<?php 
+<?php
+require ('/var/secure/keys.php');
 require ('include/config.php');
 require ('include/functions.php');
 $wallet = new phpFunctions_Wallet();

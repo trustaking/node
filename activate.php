@@ -1,6 +1,5 @@
 <?php 
 session_start();
-require ('/var/secure/keys.php');
 include('include/node-check.php');
 
 // Check session is live
