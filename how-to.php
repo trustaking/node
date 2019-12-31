@@ -26,7 +26,7 @@ include('include/menu.php');
                 <br><br>
                 <h5>Requirements</h5>
                 <ul>
-                <li>Core wallet synced up to 100%</li>
+                <li>Core wallet synced up to 100% - you may need to download a Core Wallet that supports Cold Staking <a href="https://github.com/thecrypt0hunter/CoreWallet/releases" target="_blank">here</a>.</li>
                 <li>Coins in your main wallet account (DASHBOARD)</li>
                 </ul>
                 <h5>Instructions</h5>
