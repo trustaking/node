@@ -25,7 +25,7 @@ $_SESSION['Session'] = 'Open';
 	<div class="subscription-plans">
 		<div class="plan-box-center">
 			<div class="panel panel-plan box-active">
-				<div class="panel-heading" style="background-color: #555; color: white">
+				<div class="panel-heading" style="background-color: #cd7f32; color: white">
 					<h4 class="pull-left panel-title text-center">													
 						Bronze </h4>
 				</div>
@@ -57,7 +57,7 @@ $_SESSION['Session'] = 'Open';
 	</div>
 	<div class="plan-box-center">
 		<div class="panel panel-plan box-active">
-			<div class="panel-heading" style="background-color: #555; color: white">
+			<div class="panel-heading" style="background-color: silver; color: white">
 				<h4 class="pull-left panel-title text-center">Silver</h4>
 			</div>
 			<div class="plan-price-box text-info">
@@ -88,7 +88,7 @@ $_SESSION['Session'] = 'Open';
 	</div>
 	<div class="plan-box-center">
 		<div class="panel panel-plan box-active">
-			<div class="panel-heading" style="background-color: #555; color: white">
+			<div class="panel-heading" style="background-color: gold; color: white">
 				<h4 class="pull-left panel-title text-center">													
 					Gold
 				</h4>
