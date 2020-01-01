@@ -20,6 +20,9 @@
 						<li><a href="how-to.php#vps">Setup VPS</a></li>
 						<li><a href="how-to.php#add-more">Add more coins</a></li>
 						<li><a href="how-to.php#withdraw">Withdraw coins</a></li>
+						<?php if ($whitelist == '1') { ?>
+							<li><a href="check_expiry.php">Check my expiry date</a></li>
+						<?php } ?>
 					</ul>
 			    </div>
 			</li>
