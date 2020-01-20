@@ -117,4 +117,3 @@ if ($_SESSION['Plan'] == '0' || $payment == '0') {
   //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
 
 }
-?>

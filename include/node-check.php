@@ -27,6 +27,7 @@ if ( !is_array($get_balance) ) {
 foreach($get_balance as $a => $b){
 	foreach($b as $c => $d){
 }
+//TODO: check that balance is returned and thow an error
 $bal = $d['amountConfirmed']/100000000;
 }}
 
