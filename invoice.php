@@ -41,46 +41,40 @@ switch ($_SESSION['Plan']) {
 	}
 
 $wallet = new phpFunctions_Wallet();
-    
- // Deal with the bots first
- if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
-    // Build POST request:
-    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $recaptcha_response = $_POST['recaptcha_response'];
-    $remoteip = $_SERVER["REMOTE_ADDR"];
+
+//if ('1' == '0') { // THIS LINE IS JUST NEEDED FOR LOCAL TESTING
+  if ($payment != '1' || $_SESSION['Plan'] = '0') {
+    // Deal with the bots first
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
+      // Build POST request:
+      $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+      $recaptcha_response = $_POST['recaptcha_response'];
+      $remoteip = $_SERVER["REMOTE_ADDR"];
+      $action = $_POST['action'];
   
-    // Curl Request
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $recaptcha_url);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, array(
+      // Curl Request
+      $curl = curl_init();
+      curl_setopt($curl, CURLOPT_URL, $recaptcha_url);
+      curl_setopt($curl, CURLOPT_POST, true);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($curl, CURLOPT_POSTFIELDS, array(
         'secret' => $captcha_secret_key,
         'response' => $recaptcha_response,
         'remoteip' => $remoteip
-        ));
-    $curlData = curl_exec($curl);
-    curl_close($curl);
-
-    // Parse data
-    $recaptcha = json_decode($curlData, true);
-    if ($recaptcha["success"]) {
-      $verified=true;
-    } else {
-      $verified=false;
-      die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
+      ));
+      $curlData = curl_exec($curl);
+      curl_close($curl);
+  
+      // Parse data
+      $recaptcha = json_decode($curlData, true);
+      if ($recaptcha["success"] == '1' && $recaptcha["action"] == $action && $recaptcha["score"] >= 0.5) {
+        $verified = true;
+      } else {
+        $verified = false;
+        die(" Recaptcha thinks you're a bot! - please try again in a new tab.");
+      }
     }
-}
-
-// TODO: Decide whether to implement score check:
-//        if ($recaptcha->score >= 0.5) {
-//            $verified=true;
-//         } else {
-//            $verified=false;
-//            die (" Recaptcha thinks you're a bot! - please try again in a new tab.");
-//        }
-//      } else { // there is an error /
-//        die (" Something went wrong with Recaptcha! - please try again in a new tab.");
+  }
 
  //Check if node is online before and grab address before taking payment
  $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
