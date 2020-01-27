@@ -18,6 +18,7 @@
 					document.getElementById('recaptchaResponse2').value = token;
 					document.getElementById('recaptchaResponse3').value = token;
 					document.getElementById('recaptchaResponse4').value = token;
+					document.getElementById('recaptchaResponse5').value = token;
 				});
 			});
         </script>
