@@ -81,6 +81,8 @@ class phpFunctions_Wallet
         return $result;
     }
 
+//    curl --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"getblockchaininfo","params":[]}' -H 'content-type:text/plain;' http://xdsuser:xdspass@127.0.0.1:48333/
+
     public function CallAPIParams($url, $request_type, $params)
     {
 

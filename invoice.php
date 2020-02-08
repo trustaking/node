@@ -42,7 +42,6 @@ switch ($_SESSION['Plan']) {
 
 $wallet = new phpFunctions_Wallet();
 
-//if ('1' == '0') { // THIS LINE IS JUST NEEDED FOR LOCAL TESTING
 if ($payment != '1' || $_SESSION['Plan'] = '0') {
   // Deal with the bots first
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['g-recaptcha_response'])) {
@@ -79,10 +78,11 @@ if ($payment != '1' || $_SESSION['Plan'] = '0') {
 // Grab the next unused address 
 $url = $scheme . '://' . $server_ip . ':' . $api_port . '/api/Wallet/unusedaddress?WalletName=' . $WalletName . '&AccountName=' . $AccountName . $api_ver;
 $address = $wallet->CallAPI($url, "GET");
-if ($address == '' || empty($address)) {
-  die(' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
-} else {
+
+if (isset($address)) {
   $_SESSION['Address'] = $address;
+} else {
+  exit(' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 }
 
 // Bypass payment for free trial otherwise take payment
