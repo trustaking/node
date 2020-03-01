@@ -6,10 +6,7 @@ if (isset($_POST['address'])) {
 	$address = $_POST['address'];
 	if ($whitelist == '1') {
 
-	//    $address = "odx1qwltruatk6nag5ej2xu55yd88ew0ytylqr2weea" ;
-	//    $address = "odx1qfsclu57ns8wcqmlnxmg62dtdt2ux2wp22pj2ya" ;
-
-		$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getStakingNotExpired?WalletName='.$WalletName.'&Segwit=true';
+		$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getStakingNotExpired?WalletName='.$WalletName.$api_ver;
 		$result = $wallet->CallAPI ($url,"GET");
 
 		if(is_array($result)){

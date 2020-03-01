@@ -6,7 +6,7 @@ require('include/config.php');
 
 // Set price and and Expiry based on plan number
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
-  $_SESSION['Plan'] = $_POST["Plan"]; // Grab plan number and add to session
+  $_SESSION['Plan'] = $_POST['Plan']; // Grab plan number and add to session
 } else {
   header('Location:' . 'index.php'); //  otherwise redirect to home page
 }
@@ -42,7 +42,7 @@ switch ($_SESSION['Plan']) {
 
 $wallet = new phpFunctions_Wallet();
 
-if ($payment != '1' || $_SESSION['Plan'] = '0') {
+if ($payment != '1' || $_SESSION['Plan'] == '0') {
   // Deal with the bots first
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['g-recaptcha_response'])) {
     // Build POST request:
@@ -70,7 +70,7 @@ if ($payment != '1' || $_SESSION['Plan'] = '0') {
       $verified = true;
     } else {
       $verified = false;
-      die(" Recaptcha thinks you're a bot! - please try again in a new tab.");
+      exit (" Recaptcha thinks you're a bot! - please try again in a new tab.");
     }
   }
 }
@@ -82,6 +82,8 @@ $address = $wallet->CallAPI($url, "GET");
 if (isset($address)) {
   $_SESSION['Address'] = $address;
 } else {
+  print_r($address);
+  echo "<br/>" . $url . "<br/>";
   exit(' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 }
 

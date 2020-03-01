@@ -22,7 +22,9 @@ $url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$W
 $get_balance = $wallet->CallAPI ($url,"GET"); 
 	
 if ( !is_array($get_balance) ) {
-	die (' There was an error with your login parameters. Are your credentials correct?');
+	print_r($get_balance);
+	echo "<br/>" . $url . "<br/>";
+	exit (' There was an error with your login parameters. Are your credentials correct?');
 } else {
 foreach($get_balance as $a => $b){
 	foreach($b as $c => $d){
@@ -36,7 +38,9 @@ $url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
 $get_stakinginfo = $wallet->CallAPI ($url,"GET"); 
 
 if ( !is_array($get_stakinginfo) ) {
-	die (' There was an error with your API parameters.');
+	print_r($get_stakinginfo);
+	echo "<br/>" . $url . "<br/>";
+	exit (' There was an error with your API parameters.');
 }
 
 if ($get_stakinginfo['enabled']>0) {

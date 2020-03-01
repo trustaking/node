@@ -13,6 +13,9 @@
 						<li><a href="https://github.com/thecrypt0hunter/node-installer" target="_blank">VPS Node Installer</a></li>
 						<li><a href="https://github.com/thecrypt0hunter/CoreWallet/releases" target="_blank">Core Wallet Download</a></li>
 						<li><a href="https://donations.trustaking.com/" target="_blank">Donations</a></li>
+						<?php if ($exchange == '1') { ?>
+							<li><a href="offer.php">Exchange</a></li>
+						<?php } ?>
 					</ul>
 					<ul>
 						<li><a href="how-to.php" style='color:green'> HOW-TO GUIDES</a></li>

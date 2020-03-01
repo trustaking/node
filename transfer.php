@@ -24,7 +24,10 @@ if ($payment == '1' && $_SESSION['Plan']!='0') {
 	$OrderPaid = $wallet->GetInvoiceStatus ($_SESSION['InvoiceID'],$_SESSION['OrderID']);
 
 	if ( $OrderPaid == 'FAIL' ) {
-		die ('Payment not successful - please try again');
+		print_r($OrderPaid);
+		echo "<br/>" . $_SESSION['InvoiceID'] . "<br/>";		
+		echo "<br/>" . $_SESSION['OrderID'] . "<br/>";
+		exit ('Payment not successful - please try again');
 	} 
 	
 }
@@ -42,7 +45,9 @@ if ($whitelist == '1') {
 	$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
 	$result = $wallet->CallAPIParams ($url,"POST",$params);
 	if ( $result != '' || !empty($result) ) {
-		die (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
+		print_r($result);
+		echo "<br/>" . $url . "<br/>";
+		exit (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 	}
 
 	// Restart Staking TODO - Decide if this is a daily restart at node level during testing
