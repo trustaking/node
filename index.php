@@ -13,7 +13,7 @@ $_SESSION['Session'] = 'Open';
 <!-- Banner -->
 <section id="banner">
 	<div class="inner">
-		<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
+		<h2><a href="https://trustaking.com"><img src="images/logo_transparent.png" alt="" width="150"/></a> <br/>TRUSTAKING.COM</h2>
 		<p>The trusted home of <br />
 		cold staking<br />
 	</div>

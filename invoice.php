@@ -78,7 +78,7 @@ if ($payment != '1' || $_SESSION['Plan'] == '0') {
 // TODO replace with getnewaddress rpc call (once segwit is supported)
 // TODO replace API_Ver variable with segwit variable 
 // Grab the next unused address 
-$url = $scheme . '://' . $server_ip . ':' . $api_port . '/api/Wallet/unusedaddress?WalletName=' . $functionsName . '&AccountName=' . $AccountName . $api_ver;
+$url = $scheme . '://' . $server_ip . ':' . $api_port . '/api/Wallet/unusedaddress?WalletName=' . $WalletName . '&AccountName=' . $AccountName . $api_ver;
 $address = $functions->CallAPI($url, "GET");
 
 if (isset($address)) {

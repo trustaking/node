@@ -35,7 +35,7 @@ if ( $OrderPaid == 'FAIL' ) {
 if ($whitelist == '1') {
 
 	$params = [
-	'walletName' => $functionsName,
+	'walletName' => $WalletName,
 	'address' => $_SESSION['Address'],
 	'stakingExpiry' => $_SESSION['Expiry'],
 	];
@@ -51,7 +51,7 @@ if ($whitelist == '1') {
 	// Restart Staking TODO - Decide if this is a daily restart at node level during testing
 	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/stopstaking?true';
 	$result = $functions->CallAPI ($url,"POST");
-	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$functionsPassword.'&name='.$functionsName;
+	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$WalletPassword.'&name='.$WalletName;
 	$result = $functions->CallAPI ($url,"POST");
 
 }

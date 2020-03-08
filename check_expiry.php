@@ -6,7 +6,7 @@ if (isset($_POST['address'])) {
 	$address = $_POST['address'];
 	if ($whitelist == '1') {
 
-		$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getStakingNotExpired?WalletName='.$functionsName.$api_ver;
+		$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getStakingNotExpired?WalletName='.$WalletName.$api_ver;
 		$result = $functions->CallAPI ($url,"GET");
 
 		if(is_array($result)){
