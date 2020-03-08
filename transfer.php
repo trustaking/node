@@ -2,28 +2,24 @@
 session_start();
 include('include/node-check.php');
 
-// Check session is live
-
-if ( $_SESSION['Session'] != 'Open' ) {
-   $wallet->web_redirect ("index.php");
+// Check session is live & exchange is available
+if ($_SESSION['Session'] != 'Open' || $exchange != '1') {
+	//Check session contains correct variables
+	if (
+		$_SESSION['Address'] == '' || empty($_SESSION['Address']) ||
+		$_SESSION['Total'] == '' || empty($_SESSION['Total']) ||
+		$_SESSION['Price'] == '' || empty($_SESSION['Price']) ||
+		$_SESSION['Quantity'] == '' || empty($_SESSION['Quantity']) ||
+		$_SESSION['Session'] == '' || empty($_SESSION['Session'])
+	) {
+		$functions->web_redirect("index.php");
+	}
+	$functions->web_redirect("index.php");
 }
+//Check if invoice paid
+$OrderPaid = $functions->GetInvoiceStatus ($_SESSION['InvoiceID'],$_SESSION['OrderID']);
 
-//If payments are active, check if invoice paid
-
-if ($payment == '1' && $_SESSION['Plan']!='0') {
-
-	if ( $_SESSION['Address'] == '' || empty($_SESSION['Address']) || 
-		$_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
-		$_SESSION['Price'] == '' || empty($_SESSION['Price']) || 
-		$_SESSION['Expiry'] == '' || empty($_SESSION['Expiry']) || 
-		$_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID']) ) 
-		{
-			$wallet->web_redirect ("index.php");
-		}
-
-	$OrderPaid = $wallet->GetInvoiceStatus ($_SESSION['InvoiceID'],$_SESSION['OrderID']);
-
-	if ( $OrderPaid == 'FAIL' ) {
+if ( $OrderPaid == 'FAIL' ) {
 		print_r($OrderPaid);
 		echo "<br/>" . $_SESSION['InvoiceID'] . "<br/>";		
 		echo "<br/>" . $_SESSION['OrderID'] . "<br/>";
@@ -32,29 +28,31 @@ if ($payment == '1' && $_SESSION['Plan']!='0') {
 	
 }
 
+// TODO Transfer $_SESSION['Total'] to $_SESSION['Address']
+
 // Set whitelist $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
 
 if ($whitelist == '1') {
 
 	$params = [
-	'walletName' => $WalletName,
+	'walletName' => $functionsName,
 	'address' => $_SESSION['Address'],
 	'stakingExpiry' => $_SESSION['Expiry'],
 	];
 
 	$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
-	$result = $wallet->CallAPIParams ($url,"POST",$params);
+	$result = $functions->CallAPIParams ($url,"POST",$params);
 	if ( $result != '' || !empty($result) ) {
-		print_r($result);
-		echo "<br/>" . $url . "<br/>";
+		echo '<pre>' . json_encode($result,JSON_PRETTY_PRINT) . '</pre>' ;
+		echo "<br/><pre>" . $url . "</pre><br/>";
 		exit (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 	}
 
 	// Restart Staking TODO - Decide if this is a daily restart at node level during testing
 	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/stopstaking?true';
-	$result = $wallet->CallAPI ($url,"POST");
-	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$WalletPassword.'&name='.$WalletName;
-	$result = $wallet->CallAPI ($url,"POST");
+	$result = $functions->CallAPI ($url,"POST");
+	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$functionsPassword.'&name='.$functionsName;
+	$result = $functions->CallAPI ($url,"POST");
 
 }
 ?>

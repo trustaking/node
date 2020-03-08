@@ -40,7 +40,7 @@ switch ($_SESSION['Plan']) {
     break;
 }
 
-$wallet = new phpFunctions_Wallet();
+$functions = new phpFunctions();
 
 if ($payment != '1' || $_SESSION['Plan'] == '0') {
   // Deal with the bots first
@@ -75,9 +75,11 @@ if ($payment != '1' || $_SESSION['Plan'] == '0') {
   }
 }
 
+// TODO replace with getnewaddress rpc call (once segwit is supported)
+// TODO replace API_Ver variable with segwit variable 
 // Grab the next unused address 
-$url = $scheme . '://' . $server_ip . ':' . $api_port . '/api/Wallet/unusedaddress?WalletName=' . $WalletName . '&AccountName=' . $AccountName . $api_ver;
-$address = $wallet->CallAPI($url, "GET");
+$url = $scheme . '://' . $server_ip . ':' . $api_port . '/api/Wallet/unusedaddress?WalletName=' . $functionsName . '&AccountName=' . $AccountName . $api_ver;
+$address = $functions->CallAPI($url, "GET");
 
 if (isset($address)) {
   $_SESSION['Address'] = $address;
@@ -93,11 +95,11 @@ if ($_SESSION['Plan'] == '0' || $payment == '0') {
 } else {
 
   // Generate & store the InvoiceID in session
-  $_SESSION['OrderID'] = $ticker . '-' . $_SESSION['Address'];
+  $_SESSION['OrderID'] = 'CS-'.$ticker . '-' . $_SESSION['Address'];
   // Full service description
   $serv = "Trustaking " . $_SESSION['Plan_Desc'] . " - Service Expiry: " . $_SESSION['Expiry'];
   // Create invoice
-  $inv = $wallet->CreateInvoice($_SESSION['OrderID'], $_SESSION['Price'], $serv, $redirectURL, $ipnURL);
+  $inv = $functions->CreateInvoice($_SESSION['OrderID'], $_SESSION['Price'], $serv, $redirectURL, $ipnURL);
   $invoiceId = $inv['invoice_id'];
   $invoiceURL = $inv['invoice_url'];
   // Store the InvoiceID in session
@@ -107,3 +109,4 @@ if ($_SESSION['Plan'] == '0' || $payment == '0') {
   //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
 
 }
+?>

@@ -1,6 +1,6 @@
 <?php
 
-class phpFunctions_Wallet
+class phpFunctions
 {
 
     public function crypto_rand($min, $max, $pedantic = True)
@@ -81,8 +81,6 @@ class phpFunctions_Wallet
         return $result;
     }
 
-//    curl --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"getblockchaininfo","params":[]}' -H 'content-type:text/plain;' http://xdsuser:xdspass@127.0.0.1:48333/
-
     public function CallAPIParams($url, $request_type, $params)
     {
 
@@ -105,6 +103,7 @@ class phpFunctions_Wallet
                 'Content-Length: ' . strlen($payload)
             ),
         );
+
         $ch = curl_init($url);
         curl_setopt_array($ch, $options);
         $response = curl_exec($ch);                     // Execute
@@ -114,7 +113,42 @@ class phpFunctions_Wallet
         curl_close($ch);
         return $result;
     }
+    public function rpc($command, $params = null)
+    {
+        require('/var/secure/keys.php');
+        require('include/config.php');
+        $url = $scheme . '://' . $server_ip . ':' . $rpc_port . '/';
+        $request = '{"jsonrpc": "1.0", "$rpcuser":"$rpcpass", "method": "' . $command . '", "params": [' . $params . '] }';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, "$rpcuser:$rpcpass");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "accept: application/json",
+            "content-type: application/json-patch+json",
+        ));
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
 
+        $response = curl_exec($ch);
+        $response = json_decode($response, true);
+
+        if (is_array($response)) {
+            $result = $response['result'];
+            $error = $response['error'];
+        } else {
+            $result = '';
+            $error = '';
+        }
+
+        if (isset($error)) {
+            return $error;
+        } else {
+            return $result;
+        }
+        curl_close($ch);
+    }
     public function GetInvoiceStatus($invoiceId, $orderID)
     {
         require('/var/secure/keys.php'); //secured location - sensitive keys

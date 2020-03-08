@@ -2,11 +2,12 @@
 require ('/var/secure/keys.php');
 require ('include/config.php');
 require ('include/functions.php');
-$wallet = new phpFunctions_Wallet();
+$functions = new phpFunctions();
+$balance = 0;
+$connections = 0;
 
 //Check if node is online before further checks
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Node/status' ;
-$check_server = $wallet->checkSite ($url);
+$check_server = $functions->rpc('getinfo','');
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
@@ -18,29 +19,21 @@ EOD;
 } else {
 
 // Grab balance
-$url = $scheme.'://'.$server_ip.':'.$api_port."/api/Wallet/balance?WalletName=$WalletName&AccountName=$AccountName";
-$get_balance = $wallet->CallAPI ($url,"GET"); 
-	
-if ( !is_array($get_balance) ) {
-	print_r($get_balance);
-	echo "<br/>" . $url . "<br/>";
-	exit (' There was an error with your login parameters. Are your credentials correct?');
-} else {
-foreach($get_balance as $a => $b){
-	foreach($b as $c => $d){
-}
-//TODO: check that balance is returned and thow an error
-$bal = $d['amountConfirmed']/100000000;
-}}
+$balance = floor($functions->rpc('getbalance',''));
 
-// Get Node Staking Details
-$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getstakinginfo';
-$get_stakinginfo = $wallet->CallAPI ($url,"GET"); 
+// Get number of connections
+$getinfo = $functions->rpc('getinfo','');
+
+	if (array_key_exists('connections', $getinfo)) {
+		$connections = $getinfo['connections'];
+	}
+
+// Get Staking Details
+$get_stakinginfo = $functions->rpc('getstakinginfo','');
 
 if ( !is_array($get_stakinginfo) ) {
-	print_r($get_stakinginfo);
-	echo "<br/>" . $url . "<br/>";
-	exit (' There was an error with your API parameters.');
+	echo '<pre>' . json_encode($getstakinginfo,JSON_PRETTY_PRINT) . '</pre>' ;
+	exit (' There was an error with your RPC parameters.');
 }
 
 if ($get_stakinginfo['enabled']>0) {
@@ -55,12 +48,11 @@ EOD;
 
 if ($get_stakinginfo['staking']>0) {
 $message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:green'>Staking: $bal</a></li>
+<li><a href=""class="icon fa-circle" style='color:green'>Staking: $balance ($connections)</a></li>
 EOD;
 } else {
 $message = <<<EOD
-<li><a href=""class="icon fa-circle" style='color:red'>Staking offline</a></li>
+<li><a href=""class="icon fa-circle" style='color:blue'>Staking offline ($connections)</a></li>
 EOD;
 }
 }
-?>
