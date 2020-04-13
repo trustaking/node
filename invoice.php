@@ -1,8 +1,5 @@
 <?php
-session_start();
-require('/var/secure/keys.php');
-require('include/functions.php');
-require('include/config.php');
+include('include/initialise.php');
 
 // Set price and and Expiry based on plan number
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
@@ -40,9 +37,7 @@ switch ($_SESSION['Plan']) {
     break;
 }
 
-$functions = new phpFunctions();
-
-if ($payment != '1' || $_SESSION['Plan'] == '0') {
+if ($coinFunctions->config['payment'] != '1' || $_SESSION['Plan'] == '0') {
   // Deal with the bots first
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['g-recaptcha_response'])) {
     // Build POST request:
@@ -57,7 +52,7 @@ if ($payment != '1' || $_SESSION['Plan'] == '0') {
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POSTFIELDS, array(
-      'secret' => $captcha_secret_key,
+      'secret' => $coinFunctions->keys['captcha_secret_key'],
       'response' => $recaptcha_response,
       'remoteip' => $remoteip
     ));
@@ -76,10 +71,8 @@ if ($payment != '1' || $_SESSION['Plan'] == '0') {
 }
 
 // TODO replace with getnewaddress rpc call (once segwit is supported)
-// TODO replace API_Ver variable with segwit variable 
 // Grab the next unused address 
-$url = $scheme . '://' . $server_ip . ':' . $api_port . '/api/Wallet/unusedaddress?WalletName=' . $WalletName . '&AccountName=' . $AccountName . $api_ver;
-$address = $functions->CallAPI($url, "GET");
+$address = $coinFunctions->getColdStakingAddress("Hot");
 
 if (isset($address)) {
   $_SESSION['Address'] = $address;
@@ -90,7 +83,7 @@ if (isset($address)) {
 }
 
 // Bypass payment for free trial otherwise take payment
-if ($_SESSION['Plan'] == '0' || $payment == '0') {
+if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] == '0') {
   header('Location:' . 'activate.php');
 } else {
 
@@ -99,7 +92,7 @@ if ($_SESSION['Plan'] == '0' || $payment == '0') {
   // Full service description
   $serv = "Trustaking " . $_SESSION['Plan_Desc'] . " - Service Expiry: " . $_SESSION['Expiry'];
   // Create invoice
-  $inv = $functions->CreateInvoice($_SESSION['OrderID'], $_SESSION['Price'], $serv, $redirectURL, $ipnURL);
+  $inv = $functions->CreateInvoice($_SESSION['OrderID'], $_SESSION['Price'], $serv);
   $invoiceId = $inv['invoice_id'];
   $invoiceURL = $inv['invoice_url'];
   // Store the InvoiceID in session

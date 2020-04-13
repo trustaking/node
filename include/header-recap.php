@@ -13,7 +13,7 @@
 		<script src='https://www.google.com/recaptcha/api.js?render=<?php echo $captcha_site_key; ?>'></script>
         <script>
 			grecaptcha.ready(function () {
-				grecaptcha.execute('<?php echo $captcha_site_key; ?>', { action: 'payment' }).then(function (token) {
+				grecaptcha.execute('<?php echo $coinFunctions->keys['captcha_site_key']; ?>', { action: 'payment' }).then(function (token) {
 					document.getElementById('recaptchaResponse1').value = token;
 					document.getElementById('recaptchaResponse2').value = token;
 					document.getElementById('recaptchaResponse3').value = token;

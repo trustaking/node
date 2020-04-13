@@ -31,7 +31,7 @@ include('include/menu.php');
                 </ul>
                 <h5>Instructions</h5>
                 <ol>
-                <?php if ($payment == '1') { ?>
+                <?php if ($coinFunctions->config['payment'] == '1') { ?>
                     <li>Go to <a href="https://<?php echo $ticker;?>.trustaking.com/"><?php echo $ticker;?>.trustaking.com</a>, choose your plan (and make your payment) or a free trial.</li><br>
                     <img src="images/cold-stake/choose-plan.png">
                 <?php } else { ?>

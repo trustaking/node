@@ -2,6 +2,11 @@
 
 class phpFunctions
 {
+    public $keys;
+
+    public function __construct() {
+       $this->keys = parse_ini_file('/var/secure/keys.ini', true);
+    }
 
     public function crypto_rand($min, $max, $pedantic = True)
     {
@@ -24,138 +29,10 @@ class phpFunctions
         return $num + $min;
     }
 
-    public function checkSite($url)
-    {
-
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-        $options = array(
-            CURLOPT_RETURNTRANSFER => true,       // return web page
-            CURLOPT_HEADER         => false,      // do not return headers
-            CURLOPT_FOLLOWLOCATION => true,       // follow redirects
-            CURLOPT_USERAGENT      => $useragent, // who am i
-            CURLOPT_AUTOREFERER    => true,       // set referer on redirect
-            CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
-            CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
-            CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
-            CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
-            CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
-        );
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $options);
-        curl_exec($ch);
-
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        return ($httpcode == 200);
-    }
-
-    public function CallAPI($url, $request_type)
-    {
-
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-        $options = array(
-            CURLOPT_RETURNTRANSFER => true,       // return web page
-            CURLOPT_HEADER         => false,      // do not return headers
-            CURLOPT_FOLLOWLOCATION => true,       // follow redirects
-            CURLOPT_USERAGENT      => $useragent, // who am i
-            CURLOPT_AUTOREFERER    => true,       // set referer on redirect
-            CURLOPT_CONNECTTIMEOUT => 2,          // timeout on connect (in seconds)
-            CURLOPT_TIMEOUT        => 2,          // timeout on response (in seconds)
-            CURLOPT_MAXREDIRS      => 10,         // stop after 10 redirects
-            CURLOPT_SSL_VERIFYPEER => false,      // SSL verification not required
-            CURLOPT_SSL_VERIFYHOST => false,      // SSL verification not required
-            CURLOPT_CUSTOMREQUEST => $request_type,
-            CURLOPT_HTTPHEADER => array(
-                // here Set your security here requred headers
-                "accept: application/json",
-                "content-type: application/json-patch+json",
-            ),
-        );
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $options);
-        $response = curl_exec($ch); // Execute
-        $response = json_decode($response, true);
-        $error = curl_errno($ch);
-        $result = $response;
-        curl_close($ch);
-        return $result;
-    }
-
-    public function CallAPIParams($url, $request_type, $params)
-    {
-
-        $payload = json_encode($params);
-        if ($request_type == 'POST') {
-            $post = true;
-        } else {
-            $post = false;
-        }
-
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-        $options = array(
-            CURLOPT_RETURNTRANSFER => true,
-            CURLINFO_HEADER_OUT => true,            //to track the handle's request string. 
-            CURLOPT_POSTFIELDS => $payload,         // holds the json payload
-            CURLOPT_POST => $post,                  // POST
-            CURLOPT_HTTPHEADER => array(
-                'accept: application/json',
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($payload)
-            ),
-        );
-
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $options);
-        $response = curl_exec($ch);                     // Execute
-        $response = json_decode($response, true);
-        $error = curl_errno($ch);
-        $result = $response;
-        curl_close($ch);
-        return $result;
-    }
-    public function rpc($command, $params = null)
-    {
-        require('/var/secure/keys.php');
-        require('include/config.php');
-        $url = $scheme . '://' . $server_ip . ':' . $rpc_port . '/';
-        $request = '{"jsonrpc": "1.0", "$rpcuser":"$rpcpass", "method": "' . $command . '", "params": [' . $params . '] }';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERPWD, "$rpcuser:$rpcpass");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "accept: application/json",
-            "content-type: application/json-patch+json",
-        ));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-
-        $response = curl_exec($ch);
-        $response = json_decode($response, true);
-
-        if (is_array($response)) {
-            $result = $response['result'];
-            $error = $response['error'];
-        } else {
-            $result = '';
-            $error = '';
-        }
-
-        if (isset($error)) {
-            return $error;
-        } else {
-            return $result;
-        }
-        curl_close($ch);
-    }
     public function GetInvoiceStatus($invoiceId, $orderID)
     {
-        require('/var/secure/keys.php'); //secured location - sensitive keys
-        require('include/config.php'); // coin configuration
         require('vendor/autoload.php'); //loads the btcpayserver library
-
-        $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+        $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($this->keys['encryt_pass']);
         $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
         $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
         $client        = new \BTCPayServer\Client\Client();
@@ -163,11 +40,11 @@ class phpFunctions
 
         $client->setPrivateKey($privateKey);
         $client->setPublicKey($publicKey);
-        $client->setUri($btcpayserver);
+        $client->setUri($this->keys['btcpayserver']);
         $client->setAdapter($adapter);
 
         $token = new \BTCPayServer\Token();
-        $token->setToken($pair_token);
+        $token->setToken($this->keys['pair_token']);
         $token->setFacade('merchant');
         $client->setToken($token);
 
@@ -185,13 +62,10 @@ class phpFunctions
         return $result;
     }
 
-    public function CreateInvoice($OrderID, $Price, $Description, $redirectURL, $ipnURL)
+    public function CreateInvoice($OrderID, $Price, $Description)
     {
-        require('/var/secure/keys.php'); //secured location - sensitive keys
-        require('include/config.php'); // coin configuration
         require('vendor/autoload.php'); //loads the btcpayserver library
-
-        $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($encryt_pass);
+        $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage($this->keys['encryt_pass']);
         $privateKey    = $storageEngine->load('/var/secure/btcpayserver.pri');
         $publicKey     = $storageEngine->load('/var/secure/btcpayserver.pub');
         $client        = new \BTCPayServer\Client\Client();
@@ -199,11 +73,11 @@ class phpFunctions
 
         $client->setPrivateKey($privateKey);
         $client->setPublicKey($publicKey);
-        $client->setUri($btcpayserver);
+        $client->setUri($this->keys['btcpayserver']);
         $client->setAdapter($adapter);
 
         $token = new \BTCPayServer\Token();
-        $token->setToken($pair_token);
+        $token->setToken($this->keys['pair_token']);
         //$token->setFacade('merchant');
         $client->setToken($token);
 
@@ -260,86 +134,5 @@ class phpFunctions
         header('Location: ' . $url);
         exit();
     }
-
-    private function getOS()
-    {
-
-        global $user_agent;
-        $user_agent     =   $_SERVER['HTTP_USER_AGENT'];
-        $os_platform    =   "Unknown OS Platform";
-
-        $os_array       =   array(
-            '/windows nt 10.0/i'    =>  'Windows 10',
-            '/windows nt 6.2/i'     =>  'Windows 8',
-            '/windows nt 6.1/i'     =>  'Windows 7',
-            '/windows nt 6.0/i'     =>  'Windows Vista',
-            '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
-            '/windows nt 5.1/i'     =>  'Windows XP',
-            '/windows xp/i'         =>  'Windows XP',
-            '/windows nt 5.0/i'     =>  'Windows 2000',
-            '/windows me/i'         =>  'Windows ME',
-            '/win98/i'              =>  'Windows 98',
-            '/win95/i'              =>  'Windows 95',
-            '/win16/i'              =>  'Windows 3.11',
-            '/macintosh|mac os x/i' =>  'Mac OS X',
-            '/mac_powerpc/i'        =>  'Mac OS 9',
-            '/linux/i'              =>  'Linux',
-            '/ubuntu/i'             =>  'Ubuntu',
-            '/iphone/i'             =>  'iPhone',
-            '/ipod/i'               =>  'iPod',
-            '/ipad/i'               =>  'iPad',
-            '/android/i'            =>  'Android',
-            '/blackberry/i'         =>  'BlackBerry',
-            '/webos/i'              =>  'Mobile'
-        );
-
-        foreach ($os_array as $regex => $value) {
-
-            if (preg_match($regex, $user_agent)) {
-                $os_platform    =   $value;
-            }
-        }
-        return $os_platform;
-    }
-
-    private function getBrowser()
-    {
-
-        global $user_agent;
-        $browser        =   "Unknown Browser";
-        $browser_array  =   array(
-            '/msie/i'       =>  'Internet Explorer',
-            '/firefox/i'    =>  'Firefox',
-            '/safari/i'     =>  'Safari',
-            '/chrome/i'     =>  'Chrome',
-            '/opera/i'      =>  'Opera',
-            '/netscape/i'   =>  'Netscape',
-            '/maxthon/i'    =>  'Maxthon',
-            '/konqueror/i'  =>  'Konqueror',
-            '/mobile/i'     =>  'Handheld Browser'
-        );
-
-        foreach ($browser_array as $regex => $value) {
-
-            if (preg_match($regex, $user_agent)) {
-                $browser    =   $value;
-            }
-        }
-        return $browser;
-    }
-
-    public function isWindows()
-    {
-        $user_os  =  $this->getOS();
-        $findme   = 'Windows';
-        $pos = strpos($user_os, $findme);
-        $os = false;
-
-        if ($pos === false) {
-            $os = false;
-        } else {
-            $os = true;
-        }
-        return $os;
-    }
 }
+?>

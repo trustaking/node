@@ -1,13 +1,18 @@
 <?php
-session_start();
 include('include/node-check.php');
 
 if (isset($_POST['address'])) {
 	$address = $_POST['address'];
-	if ($whitelist == '1') {
+	if ($coinFunctions->config['whitelist'] == '1') {
 
 		$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getStakingNotExpired?WalletName='.$WalletName.$api_ver;
 		$result = $functions->CallAPI ($url,"GET");
+		
+		// if ( $result != '' || !empty($result) ) {
+		// 	echo '<pre>' . json_encode($result,JSON_PRETTY_PRINT) . '</pre>' ;
+		// 	echo "<br/><pre>" . $url . "</pre><br/>";
+		// 	exit (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
+		// }
 
 		if(is_array($result)){
 			foreach($result as $a => $b){

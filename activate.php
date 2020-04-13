@@ -1,16 +1,14 @@
 <?php 
-session_start();
 include('include/node-check.php');
-
 // Check session is live
 
-if ( $_SESSION['Session'] != 'Open' ) {
+if ( $_SESSION['session'] != 'Open' ) {
    $functions->web_redirect ("index.php");
 }
 
 //If payments are active, check if invoice paid
 
-if ($payment == '1' && $_SESSION['Plan']!='0') {
+if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') {
 
 	if ( $_SESSION['Address'] == '' || empty($_SESSION['Address']) || 
 		$_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
@@ -34,29 +32,18 @@ if ($payment == '1' && $_SESSION['Plan']!='0') {
 
 // Set whitelist $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
 
-if ($whitelist == '1') {
+if ($coinFunctions->config['whitelist'] == '1') {
 
-	$params = [
-	'walletName' => $WalletName,
-	'address' => $_SESSION['Address'],
-	'stakingExpiry' => $_SESSION['Expiry'],
-	];
-
-	$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/stakingExpiry';
-	$result = $functions->CallAPIParams ($url,"POST",$params);
+	$result = $coinFunctions->setStakingExpiry($_SESSION['Address'],$_SESSION['Expiry']);
 	if ( $result != '' || !empty($result) ) {
 		echo '<pre>' . json_encode($result,JSON_PRETTY_PRINT) . '</pre>' ;
 		echo "<br/><pre>" . $url . "</pre><br/>";
 		exit (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 	}
 
-	// TODO - Decide if this is a daily restart at node level during testing
-	// Restart Staking //
-	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/stopstaking?true';
-	$result = $functions->CallAPI ($url,"POST");
-	$url = $scheme.'://'.$server_ip.':'.$api_port.'api/Staking/startstaking?password='.$WalletPassword.'&name='.$WalletName;
-	$result = $functions->CallAPI ($url,"POST");
-
+	// TODO: test if staking is required
+	$startStaking = $coinFunctions->startStaking();
+	$stopStaking = $coinFunctions->stopStaking();
 }
 ?>
 <?php include('include/header.php'); ?>
@@ -68,7 +55,7 @@ if ($whitelist == '1') {
 	</header>
 	<section class="wrapper style5">
 		<div class="inner">
-			<?php if ($payment == '1' && $_SESSION['Plan']!='0') { ?>
+			<?php if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') { ?>
 				<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3><p>Thank you for your payment!</p><br>
 			<?php } else { ?>
 				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/">here</a></p><br>

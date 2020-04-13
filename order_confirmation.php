@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('include/node-check.php');
 include('include/header.php');	
 include('include/menu.php');
@@ -8,7 +7,7 @@ $displayPrice = new NumberFormatter("en", NumberFormatter::CURRENCY);
 $displayTotal = new NumberFormatter("en", NumberFormatter::CURRENCY);
 
 // Check session is live & exchange is available
-if ( $_SESSION['Session'] != 'Open' || $exchange != '1') {
+if ( $_SESSION['session'] != 'Open' || $coinFunctions->config['exchange'] != '1') {
 	// Set price and and Expiry based on plan number
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Quantity']) && isset($_POST['Address'])) {
 		$_SESSION['Quantity'] = $_POST["Quantity"]; // Grab quantity and add to session

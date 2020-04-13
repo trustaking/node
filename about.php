@@ -10,7 +10,7 @@ include('include/menu.php');
 	</header>
 	<section class="wrapper style5">
 		<div class="inner">
-			<?php if ($payment != '1') { ?>
+			<?php if ($coinFunctions->config['payment'] != '1') { ?>
 			<h3>What are the fees?</h3>
 				<p>This service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://donations.trustaking.com/">here</a> if you want to help.<p> 
 			<?php }; ?>

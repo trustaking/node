@@ -1,6 +1,5 @@
 <?php
-require ('/var/secure/keys.php');
-require ('include/config.php');
+include ('include/initialise.php');
 require ('vendor/autoload.php');
 
 $myfile = fopen("/var/secure/BTCPayServerIPN.log", "a");

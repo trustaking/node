@@ -1,13 +1,10 @@
 <?php
-require ('/var/secure/keys.php');
-require ('include/config.php');
-require ('include/functions.php');
-$functions = new phpFunctions();
+include_once('include/initialise.php');
 $balance = 0;
 $connections = 0;
 
 //Check if node is online before further checks
-$check_server = $functions->rpc('getinfo','');
+$check_server = $coinFunctions->rpc('getinfo','');
 
 if ( $check_server == '' || empty($check_server) ) {
 $message = <<<EOD
@@ -19,17 +16,17 @@ EOD;
 } else {
 
 // Grab balance
-$balance = floor($functions->rpc('getbalance',''));
+$getaddress = $coinFunctions->getAddress();
 
 // Get number of connections
-$getinfo = $functions->rpc('getinfo','');
+$getinfo = $coinFunctions->rpc('getinfo','');
 
 	if (array_key_exists('connections', $getinfo)) {
 		$connections = $getinfo['connections'];
 	}
 
 // Get Staking Details
-$get_stakinginfo = $functions->rpc('getstakinginfo','');
+$get_stakinginfo = $coinFunctions->rpc('getstakinginfo','');
 
 if ( !is_array($get_stakinginfo) ) {
 	echo '<pre>' . json_encode($getstakinginfo,JSON_PRETTY_PRINT) . '</pre>' ;

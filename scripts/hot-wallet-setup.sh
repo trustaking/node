@@ -93,5 +93,5 @@ touch /var/secure/credentials.sh
 echo "STAKINGNAME=$HotWalletName" &>> /var/secure/credentials.sh
 echo "STAKINGPASSWORD=$HotWalletPassword" &>> /var/secure/credentials.sh
 echo "RPCUSER=" &>> /var/secure/credentials.sh
-echo "RPCPASS=$HotWalletPassword" &>> /var/secure/credentials.sh
+echo "RPCPASS=" &>> /var/secure/credentials.sh
 chmod 0644 /var/secure/credentials.sh

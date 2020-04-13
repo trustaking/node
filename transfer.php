@@ -1,16 +1,15 @@
 <?php 
-session_start();
 include('include/node-check.php');
 
 // Check session is live & exchange is available
-if ($_SESSION['Session'] != 'Open' || $exchange != '1') {
+if ($_SESSION['session'] != 'Open' || $coinFunctions->config['exchange'] != '1') {
 	//Check session contains correct variables
 	if (
 		$_SESSION['Address'] == '' || empty($_SESSION['Address']) ||
 		$_SESSION['Total'] == '' || empty($_SESSION['Total']) ||
 		$_SESSION['Price'] == '' || empty($_SESSION['Price']) ||
 		$_SESSION['Quantity'] == '' || empty($_SESSION['Quantity']) ||
-		$_SESSION['Session'] == '' || empty($_SESSION['Session'])
+		$_SESSION['session'] == '' || empty($_SESSION['session'])
 	) {
 		$functions->web_redirect("index.php");
 	}
@@ -25,14 +24,12 @@ if ( $OrderPaid == 'FAIL' ) {
 		echo "<br/>" . $_SESSION['OrderID'] . "<br/>";
 		exit ('Payment not successful - please try again');
 	} 
-	
-}
 
 // TODO Transfer $_SESSION['Total'] to $_SESSION['Address']
 
 // Set whitelist $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
 
-if ($whitelist == '1') {
+if ($coinFunctions->config['whitelist'] == '1') {
 
 	$params = [
 	'walletName' => $WalletName,
@@ -65,7 +62,7 @@ if ($whitelist == '1') {
 	</header>
 	<section class="wrapper style5">
 		<div class="inner">
-			<?php if ($payment == '1' && $_SESSION['Plan']!='0') { ?>
+			<?php if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') { ?>
 				<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3><p>Thank you for your payment!</p><br>
 			<?php } else { ?>
 				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/">here</a></p><br>
