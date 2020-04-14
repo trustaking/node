@@ -51,16 +51,16 @@ if ($coinFunctions->config['whitelist'] == '1') {
 <!-- Main -->
 <article id="main">
 	<header>
-		<img src="images/coin_logo-<?php print $ticker; ?>.png" alt="" width="200"/>
+		<img src="images/coin_logo-<?php print $coinFunctions->config['ticker']; ?>.png" alt="" width="200"/>
 	</header>
 	<section class="wrapper style5">
 		<div class="inner">
 			<?php if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') { ?>
 				<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3><p>Thank you for your payment!</p><br>
 			<?php } else { ?>
-				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/">here</a></p><br>
+				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/"><b><u>here</b></u></a></p><br>
 			<?php }; ?>
-			<p>Before you get started, open your local wallet and ensure it's fully synced. Then follow the instructions in your local wallet.</p>
+			<p>For a step by step tutorial, check out our how-to guide by visiting this <b><u><a href="how-to.php#trustaking">page</a></b></u></p>
 			<p>Here is your personal cold staking address: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
 			<p><b>IMPORTANT ... DO NOT SEND COINS DIRECTLY TO THIS ADDRESS</b> ... its for cold staking only </br></br>
 			If you're in any doubt ... ask for help in Discord.</p>

@@ -18,9 +18,9 @@ if ($coinFunctions->config['exchange'] == '1') {
 $functions = new phpFunctions();
 
   // Generate & store the InvoiceID in session
-  $_SESSION['OrderID'] = 'E-'. $ticker . '-' . $_SESSION['Address'];
+  $_SESSION['OrderID'] = 'E-'. $coinFunctions->config['ticker'] . '-' . $_SESSION['Address'];
   // Full service description
-  $serv = $ticker . "-" . $_SESSION['Price'] . " : " . $_SESSION['Address'];
+  $serv = $coinFunctions->config['ticker'] . "-" . $_SESSION['Price'] . " : " . $_SESSION['Address'];
   // Create invoice
   $inv = $functions->CreateInvoice($_SESSION['OrderID'], $_SESSION['Total'], $serv);
   $invoiceId = $inv['invoice_id'];

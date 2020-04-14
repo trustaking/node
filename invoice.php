@@ -88,7 +88,7 @@ if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] == '0') {
 } else {
 
   // Generate & store the InvoiceID in session
-  $_SESSION['OrderID'] = 'CS-'.$ticker . '-' . $_SESSION['Address'];
+  $_SESSION['OrderID'] = 'CS-'.$coinFunctions->config['ticker'] . '-' . $_SESSION['Address'];
   // Full service description
   $serv = "Trustaking " . $_SESSION['Plan_Desc'] . " - Service Expiry: " . $_SESSION['Expiry'];
   // Create invoice

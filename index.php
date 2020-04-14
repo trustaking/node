@@ -7,11 +7,12 @@ include('include/menu.php');
 <!-- Banner -->
 <section id="banner">
 	<div class="inner">
+		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?> <br><br>
 		<h2><a href="https://trustaking.com"><img src="images/logo_transparent.png" alt="" width="150"/></a> <br/>TRUSTAKING.COM</h2>
 		<p>The trusted home of <br />
 		cold staking<br />
 	</div>
-	<p><br />Choose your plan</p>
+	<p>Choose your plan</p>
 	<a href="#main" class="more scrolly"></a>
 	</section>
 <!-- Main -->
@@ -157,9 +158,9 @@ include('include/menu.php');
 
 	<section id="banner">
 	<div class="inner">
+		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?> <br><br>
 		<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
-		<p>The trusted home of <br />
-		cold staking<br />
+		<p>The trusted home <br> of cold staking</p>
 	</div>
 		<form method="post" action="invoice.php" name="free" id="free">
 			<input type="hidden" name="recaptcha_response" id="recaptchaResponse5">
@@ -167,8 +168,7 @@ include('include/menu.php');
 			<input type="hidden" name="Plan" value="0">
 			<input type="submit" class="button icon fa-shopping-cart" value="Cold Stake Now" />
 		</form>
-			<p><br />Send us a <a href="https://donations.trustaking.com/">tip</a> to keep the service free of charge.</p>
-			<a href="#main" class="more scrolly"></a>
+			<br><p>Send us a <a href="https://donations.trustaking.com/">tip</a> to keep the service free of charge.</p>
 </section>
 
 <?php }; ?>
@@ -180,8 +180,9 @@ include('include/menu.php');
 			<header class="major">
 				<h2>Full Node as a Service</h2>
 				<p><b>Effortless cold staking with no technical knowledge required</b></p>
+				<p>To see how easy it is to get started, please see our how-to guides by visiting this <b><u><a href="how-to.php#trustaking">page</a></b></u>
 				<?php if ($coinFunctions->config['payment'] != '1') { ?>
-					<p>This service is being provided <b>free of charge</b> as we have decided to trial a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. Hopefully, people will appreciate the service and donate on a regular basis so that we can keep the service running. We have opened a crowdfunding page <a href="https://donations.trustaking.com/">here</a> if you want to help.<p> 
+					<p>This service is being provided in parts <b>free of charge</b> as we are trialling a donation/tips based business model. We will rely on these tips and donations as long as possible, giving everyone the opportunity to use cold staking. If you appreciate our service, please donate on a regular basis so that we can keep the service running. Please visit <b><u><a href="https://donations.trustaking.com/">donations.trustaking.com</a></b></u> if you want to help.<p> 
 				<?php }; ?>
 			</header>
 			<ul class="icons major">

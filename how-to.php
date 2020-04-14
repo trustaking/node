@@ -32,10 +32,10 @@ include('include/menu.php');
                 <h5>Instructions</h5>
                 <ol>
                 <?php if ($coinFunctions->config['payment'] == '1') { ?>
-                    <li>Go to <a href="https://<?php echo $ticker;?>.trustaking.com/"><?php echo $ticker;?>.trustaking.com</a>, choose your plan (and make your payment) or a free trial.</li><br>
+                    <li>Go to <a href="https://<?php echo $coinFunctions->config['ticker'];?>.trustaking.com/"><?php echo $coinFunctions->config['ticker'];?>.trustaking.com</a>, choose your plan (and make your payment) or a free trial.</li><br>
                     <img src="images/cold-stake/choose-plan.png">
                 <?php } else { ?>
-                    <li>Go to <a href="https://<?php echo $ticker;?>.trustaking.com/"><?php echo $ticker;?>.trustaking.com</a>, click Cold Stake Now.</li><br>
+                    <li>Go to <a href="https://<?php echo $coinFunctions->config['ticker'];?>.trustaking.com/"><?php echo $coinFunctions->config['ticker'];?>.trustaking.com</a>, click Cold Stake Now.</li><br>
                     <img src="images/cold-stake/trustaking-1.png">
                 <?php }; ?>
                 <li> You will be provided with a personal cold staking address from Trustaking.com which you will use to delegate staking.</li><br>
@@ -95,7 +95,7 @@ include('include/menu.php');
             </div><br>
             Now copy this final command into the Terminal and hit Enter which will begin the setup process.<br>
             <div class="p-2 rounded" style="background-color: black">
-            <code>bash <( curl -s https://raw.githubusercontent.com/thecrypt0hunter/node-installer/master/install-<?php echo $ticker;?>-hot-node.sh )</code>
+            <code>bash <( curl -s https://raw.githubusercontent.com/thecrypt0hunter/node-installer/master/install-<?php echo $coinFunctions->config['ticker'];?>-hot-node.sh )</code>
             </div><br>
             This is how it should look when you enter the commands one-by-one and the setup begins:</li><br>
             <img src="images/cold-stake/VPS-hot-node-setup.gif">

@@ -32,26 +32,26 @@ $_SESSION['Total'] = $_SESSION['Quantity'] * $_SESSION['Price'];
 			<div class="panel panel-plan box-active">
 				<div class="panel-heading" style="background-color: #cd7f32; color: white">
 					<h4 class="panel-title text-center">
-						Exchange <?php echo $ticker; ?> for BTC </h4>
+						Exchange <?php echo $coinFunctions->config['ticker']; ?> for BTC </h4>
 				</div>
 				<div class="plan-price-box text-info">
-					<span class="price"><?php echo $displayPrice->formatCurrency($_SESSION['Price'], "USD") . " per " . strtoupper($ticker); ?> </span>
+					<span class="price"><?php echo $displayPrice->formatCurrency($_SESSION['Price'], "USD") . " per " . strtoupper($coinFunctions->config['ticker']); ?> </span>
 				</div>
 				<div class="panel-body pt-0">
 					<h4 class="text-primary text-teal-800 mb-0">Details</h4>
 					<ul class="mt-0 mb-0 text-info top-border-none plans-intro">
 						<li>
-							Total <?php echo strtoupper($ticker); ?> requested: <span class="text-primary"><?php echo $_SESSION['Quantity']; ?></span>
+							Total <?php echo strtoupper($coinFunctions->config['ticker']); ?> requested: <span class="text-primary"><?php echo $_SESSION['Quantity']; ?></span>
 						</li>
 						<li>
-							Price per <?php echo strtoupper($ticker); ?>: <span class="text-primary"><span class="text-warning"><?php echo $displayPrice->formatCurrency($_SESSION['Price'], "USD"); ?></span></span>
+							Price per <?php echo strtoupper($coinFunctions->config['ticker']); ?>: <span class="text-primary"><span class="text-warning"><?php echo $displayPrice->formatCurrency($_SESSION['Price'], "USD"); ?></span></span>
 						</li>
 						<li>
 						<li>
 							Total Cost in BTC: <span class="text-primary"><span class="text-warning"><?php echo $displayTotal->formatCurrency($_SESSION['Total'], "USD"); ?></span></span>
 						</li>
 						<li>
-							<?php echo strtoupper($ticker); ?> Address: <span class="text-primary"><span class="text-warning"><?php echo $_SESSION['Address']; ?></span></span>
+							<?php echo strtoupper($coinFunctions->config['ticker']); ?> Address: <span class="text-primary"><span class="text-warning"><?php echo $_SESSION['Address']; ?></span></span>
 						</li>
 
 						<form method="post" action="buy.php" name="bronze" id="bronze">

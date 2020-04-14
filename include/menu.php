@@ -23,7 +23,7 @@
 						<li><a href="how-to.php#vps">Setup VPS</a></li>
 						<li><a href="how-to.php#add-more">Add more coins</a></li>
 						<li><a href="how-to.php#withdraw">Withdraw coins</a></li>
-						<?php if ($coinFunctions->config['whitelist'] == '1') { ?>
+						<?php if ($coinFunctions->config['whitelist'] == '2') { ?>
 							<li><a href="check_expiry.php">Check my expiry date</a></li>
 						<?php } ?>
 					</ul>
