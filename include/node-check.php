@@ -16,7 +16,7 @@ EOD;
 } else {
 
 // Grab balance
-$getaddress = $coinFunctions->getAddress();
+$balance = $coinFunctions->getBalance();
 
 // Get number of connections
 $getinfo = $coinFunctions->rpc('getinfo','');

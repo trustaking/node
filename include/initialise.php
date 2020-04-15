@@ -5,4 +5,3 @@ require_once('include/functions.php');
 $coinFunctions = new phpCoinFunctions();
 $functions = new phpFunctions();
 $_SESSION['session'] = 'Open';
-?>
