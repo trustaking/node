@@ -7,10 +7,10 @@ include('include/menu.php');
 <!-- Banner -->
 <section id="banner">
 	<div class="inner">
-		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?> <br><br>
-		<h2><a href="https://trustaking.com"><img src="images/logo_transparent.png" alt="" width="150"/></a> <br/>TRUSTAKING.COM</h2>
-		<p>The trusted home of <br />
-		cold staking<br />
+		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
+		<br><h3><img src="images/logo_transparent.png" alt="" width="150" /></h3>
+		<h2>TRUSTAKING.COM </h3>
+		<p>The trusted home <br> of cold staking</p>
 	</div>
 	<p>Choose your plan</p>
 	<a href="#main" class="more scrolly"></a>
@@ -158,8 +158,9 @@ include('include/menu.php');
 
 	<section id="banner">
 	<div class="inner">
-		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?> <br><br>
-		<h2><img src="images/logo_transparent.png" alt="" width="150"/> <br/>TRUSTAKING.COM</h2>
+		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
+		<br><h3><img src="images/logo_transparent.png" alt="" width="150" /></h3>
+		<h2>TRUSTAKING.COM </h3>
 		<p>The trusted home <br> of cold staking</p>
 	</div>
 		<form method="post" action="invoice.php" name="free" id="free">
