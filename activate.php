@@ -58,7 +58,7 @@ if ($coinFunctions->config['whitelist'] == '1') {
 			<?php if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') { ?>
 				<h3>ORDER #<?php print $_SESSION['OrderID'];?></h3><p>Thank you for your payment!</p><br>
 			<?php } else { ?>
-				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/"><b><u>here</b></u></a></p><br>
+				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/"><b><u>here</b></u></a></p>
 			<?php }; ?>
 			<p>For a step by step tutorial, check out our how-to guide by visiting this <b><u><a href="how-to.php#trustaking">page</a></b></u></p>
 			<p>Here is your personal cold staking address: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>

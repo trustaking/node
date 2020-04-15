@@ -1,13 +1,3 @@
-<?php
-$bannerAd[1] = '<a href="https://www.liberstad.com/" target="_blank"><img src="images/banner_liberstad.png" border="0" class="img-responsive"></a>';
-//$bannerAd[3] = 'code for ad 3';
-//$bannerAd[4] = 'code for ad 4';
-//$bannerAd[5] = 'code for ad 5';
-$adCount = 0;
-if (isset($bannerAd)) {
-	$adCount = count($bannerAd);
-	$randomAdNumber = mt_rand(1, $adCount);
-}
 ?>
 <!DOCTYPE HTML>
 <html>

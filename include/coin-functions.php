@@ -7,7 +7,7 @@ class phpCoinFunctions
     public $config;
 
     public function __construct() {
-       $this->config = parse_ini_file('/var/secure/config.ini', true);
+       $this->config = parse_ini_file('include/config.ini', true);
        $this->keys = parse_ini_file('/var/secure/keys.ini', true);
     }
 

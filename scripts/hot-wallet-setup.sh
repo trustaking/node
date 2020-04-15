@@ -31,6 +31,7 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "Please enter some details about your Hot wallet (that will used for staking)"
 echo 
+read -p "Coin: " fork
 read -p "Name (default=hot):" response
 if [[ "$response" != "" ]] ; then 
    HotWalletName="$response" 
@@ -89,9 +90,9 @@ echo -e "Hot address     :${RED}" $HotWalletColdStakingHotAddress
 echo -e "${NONE}"
 
 [ ! -d /var/secure ] && mkdir -p /var/secure 
-touch /var/secure/credentials.sh
-echo "STAKINGNAME=$HotWalletName" &>> /var/secure/credentials.sh
-echo "STAKINGPASSWORD=$HotWalletPassword" &>> /var/secure/credentials.sh
-echo "RPCUSER=" &>> /var/secure/credentials.sh
-echo "RPCPASS=" &>> /var/secure/credentials.sh
-chmod 0644 /var/secure/credentials.sh
+touch /var/secure/cred-${fork}.sh
+echo "STAKINGNAME=$HotWalletName" &>> /var/secure/cred-${fork}.sh
+echo "STAKINGPASSWORD=$HotWalletPassword" &>> /var/secure/cred-${fork}.sh
+echo "RPCUSER=" &>> /var/secure/cred-${fork}.sh
+echo "RPCPASS=" &>> /var/secure/cred-${fork}.sh
+chmod 0644 /var/secure/cred-${fork}.sh
