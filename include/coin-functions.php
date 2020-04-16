@@ -138,7 +138,7 @@ class phpCoinFunctions
         }
     }
 
-    public function getStakingExpiry($address) // Not working
+    public function getStakingExpiry($address) // Not working on XDS
     {
         $params = [
             'walletName' => $this->config['WalletName'],

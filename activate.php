@@ -42,8 +42,8 @@ if ($coinFunctions->config['whitelist'] == '1') {
 	}
 
 	// TODO: test if staking is required
-	$startStaking = $coinFunctions->startStaking();
 	$stopStaking = $coinFunctions->stopStaking();
+	$startStaking = $coinFunctions->startStaking();
 }
 ?>
 <?php include('include/header.php'); ?>
