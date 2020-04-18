@@ -10,7 +10,8 @@ BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
 ##### Define Variables ######
-apiport=38222
+fork=
+apiport=
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
 HotWalletName="hot"
@@ -31,7 +32,6 @@ echo -e "${RED}${BOLD}##########################################################
 echo
 echo -e "Please enter some details about your Hot wallet (that will used for staking)"
 echo 
-read -p "Coin: " fork
 read -p "Name (default=hot):" response
 if [[ "$response" != "" ]] ; then 
    HotWalletName="$response" 
@@ -90,9 +90,10 @@ echo -e "Hot address     :${RED}" $HotWalletColdStakingHotAddress
 echo -e "${NONE}"
 
 [ ! -d /var/secure ] && mkdir -p /var/secure 
-touch /var/secure/cred-${fork}.sh
-echo "STAKINGNAME=$HotWalletName" &>> /var/secure/cred-${fork}.sh
-echo "STAKINGPASSWORD=$HotWalletPassword" &>> /var/secure/cred-${fork}.sh
-echo "RPCUSER=" &>> /var/secure/cred-${fork}.sh
-echo "RPCPASS=" &>> /var/secure/cred-${fork}.sh
+cat > /var/secure/cred-${fork}.sh << EOF
+STAKINGNAME=$HotWalletName
+STAKINGPASSWORD=$HotWalletPassword
+RPCUSER=
+RPCPASS=
+EOF
 chmod 0644 /var/secure/cred-${fork}.sh
