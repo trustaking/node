@@ -14,6 +14,8 @@ fork=
 apiport=
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
+RPCUSER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+RPCPASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 HotWalletName="hot"
 HotWalletSecretWords=""
 HotWalletPassword=""
@@ -91,9 +93,9 @@ echo -e "${NONE}"
 
 [ ! -d /var/secure ] && mkdir -p /var/secure 
 cat > /var/secure/cred-${fork}.sh << EOF
-STAKINGNAME=$HotWalletName
-STAKINGPASSWORD=$HotWalletPassword
-RPCUSER=
-RPCPASS=
+STAKINGNAME=${HotWalletName}
+STAKINGPASSWORD=${HotWalletPassword}
+RPCUSER=${RPCUSER}
+RPCPASS=${RPCPASS}
 EOF
 chmod 0644 /var/secure/cred-${fork}.sh
