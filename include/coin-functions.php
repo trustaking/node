@@ -138,14 +138,14 @@ class phpCoinFunctions
         }
     }
 
-    public function getStakingExpiry($address) // Not working on XDS
+    public function getStakingExpiry($address)
     {
         $params = [
             'walletName' => $this->config['WalletName'],
-            'segwit' =>"true"
+            'segwit' =>$this->config['segwit']
             ];
         $url = 'http://localhost:' . $this->config['api_port'] . '/api/Staking/getStakingNotExpired';
-        $response = $this->CallAPI ($url,"GET",$params);
+        $response = $this->CallAPI ($url,"POST",$params);
 
         if (isset($response) && array_key_exists('errors', $response)) {
             echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
@@ -164,8 +164,12 @@ class phpCoinFunctions
 					$i++;
 				}
 			}
-		}
-        return $result;
+        }
+        if (isset($result)){
+            return $result;
+        } else {
+            return "Expired";
+        }
     }
 
     public function startStaking()
