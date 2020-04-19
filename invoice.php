@@ -70,7 +70,6 @@ if ($coinFunctions->config['payment'] != '1' || $_SESSION['Plan'] == '0') {
   }
 }
 
-// TODO replace with getnewaddress rpc call (once segwit is supported)
 // Grab the next unused address 
 $address = $coinFunctions->getColdStakingAddress("Hot");
 
@@ -83,8 +82,9 @@ if (isset($address)) {
 }
 
 // Bypass payment for free trial otherwise take payment
-if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] == '0') {
+if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] != '1') {
   header('Location:' . 'activate.php');
+  $functions->web_redirect("activate.php");
 } else {
 
   // Generate & store the InvoiceID in session
@@ -97,10 +97,8 @@ if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] == '0') {
   $invoiceURL = $inv['invoice_url'];
   // Store the InvoiceID in session
   $_SESSION['InvoiceID'] = $invoiceId;
-  // Forwarding to payment page
-  
-  header('Location:' . $invoiceURL); //<<redirect to payment page
+  // Redirect to payment page
+  $functions->web_redirect($invoiceURL);
   //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
-
 }
 ?>
