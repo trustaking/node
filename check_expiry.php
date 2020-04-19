@@ -2,32 +2,8 @@
 include('include/node-check.php');
 
 if (isset($_POST['address'])) {
-	$address = $_POST['address'];
 	if ($coinFunctions->config['whitelist'] == '1') {
-
-		$url = $scheme.'://'.$server_ip.':'.$api_port.'/api/Staking/getStakingNotExpired?WalletName='.$WalletName.$api_ver;
-		$result = $functions->CallAPI ($url,"GET");
-		
-		// if ( $result != '' || !empty($result) ) {
-		// 	echo '<pre>' . json_encode($result,JSON_PRETTY_PRINT) . '</pre>' ;
-		// 	echo "<br/><pre>" . $url . "</pre><br/>";
-		// 	exit (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
-		// }
-
-		if(is_array($result)){
-			foreach($result as $a => $b){
-				$i=0;
-				foreach($b as $c => $d){ // /[^a-z|\s+]+/i /[^0-9]/
-					$add = trim((json_encode($result['addresses'][$i]['address'])),'"') ;
-					$exp = strtr(trim(json_encode($result['addresses'][$i]['expiry']),'"'),"T"," ") ;
-					$exp = substr($exp, 0, strlen($exp)-4);
-					if ( $add == $address ) {
-						$expires = $exp;
-					}
-					$i++;
-				}
-			}
-		} else {echo "Not an array";}
+		$expires = $coinFunctions->getStakingExpiry($_POST['address']);
 	}
 }
 ?>
@@ -43,7 +19,7 @@ if (isset($_POST['address'])) {
 				<section>
 					<h3>Check My Expiry Date</h3>
 				</div>
-				<?php if ( (isset($_POST['address'])) && isset($expires) ){?>
+				<?php if ( isset($_POST['address']) && isset($expires) ){?>
 				<div class="table-wrapper">
 					<table>
 							<thead>
@@ -54,7 +30,7 @@ if (isset($_POST['address'])) {
 							</thead>
 							<tbody>
 								<tr>
-									<td><?php echo $address;?></td>
+									<td><?php echo $_POST['address'];?></td>
 									<td><?php echo $expires;?></td>
 								</tr>
 							</tbody>

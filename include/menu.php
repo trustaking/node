@@ -13,6 +13,9 @@
 						<li><a href="https://github.com/thecrypt0hunter/node-installer" target="_blank">VPS Node Installer</a></li>
 						<li><a href="https://github.com/thecrypt0hunter/CoreWallet/releases" target="_blank">Core Wallet Download</a></li>
 						<li><a href="https://donations.trustaking.com/" target="_blank">Donations</a></li>
+						<?php if ($coinFunctions->config['whitelist'] == '1') { ?>
+							<li><a href="check_expiry.php">Check my expiry date</a></li>
+						<?php } ?>
 						<?php if ($coinFunctions->config['exchange'] == '1') { ?>
 							<li><a href="order.php">Exchange</a></li>
 						<?php } ?>
@@ -23,7 +26,7 @@
 						<li><a href="how-to.php#vps">Setup VPS</a></li>
 						<li><a href="how-to.php#add-more">Add more coins</a></li>
 						<li><a href="how-to.php#withdraw">Withdraw coins</a></li>
-						<?php if ($coinFunctions->config['whitelist'] == '2') { ?>
+						<?php if ($coinFunctions->config['whitelist'] == '1') { ?>
 							<li><a href="check_expiry.php">Check my expiry date</a></li>
 						<?php } ?>
 					</ul>

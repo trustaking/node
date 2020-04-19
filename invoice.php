@@ -5,7 +5,7 @@ include('include/initialise.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
   $_SESSION['Plan'] = $_POST['Plan']; // Grab plan number and add to session
 } else {
-  header('Location:' . 'index.php'); //  otherwise redirect to home page
+  $functions->web_redirect("index.php"); //otherwise redirect to homepage
 }
 
 switch ($_SESSION['Plan']) {
@@ -98,6 +98,7 @@ if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] == '0') {
   // Store the InvoiceID in session
   $_SESSION['InvoiceID'] = $invoiceId;
   // Forwarding to payment page
+  
   header('Location:' . $invoiceURL); //<<redirect to payment page
   //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
 
