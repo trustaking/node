@@ -1841,6 +1841,10 @@ ul.automation-confirm li.child-row h5 {
     width: 330px;
     display: inline-block;
 }
+.panel-plan-large {
+    width: 660px;
+    display: inline-block;
+}
 @media (min-width: 1025px) {
     .plan-top-80 {
         margin-top: -80px;

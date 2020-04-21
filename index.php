@@ -8,8 +8,8 @@ include('include/menu.php');
 <section id="banner">
 	<div class="inner">
 		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
-		<br><h3><img src="images/logo_transparent.png" alt="" width="150" /></h3>
-		<h2>TRUSTAKING.COM </h3>
+		<br><h3><a href="https://trustaking.com/" target="_blank"><img src="images/logo_transparent.png" alt="trustaking.com" width="150" /></a></h3>
+		<h2><a href="https://trustaking.com/" target="_blank">TRUSTAKING.COM</a></h3>
 		<p>The trusted home <br> of cold staking</p>
 	</div>
 	<p>Choose your plan</p>
@@ -159,8 +159,8 @@ include('include/menu.php');
 	<section id="banner">
 	<div class="inner">
 		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
-		<br><h3><img src="images/logo_transparent.png" alt="" width="150" /></h3>
-		<h2>TRUSTAKING.COM </h3>
+		<br><h3><a href="https://trustaking.com/" target="_blank"><img src="images/logo_transparent.png" alt="trustaking.com" width="150" /></a></h3>
+		<h2><a href="https://trustaking.com/" target="_blank">TRUSTAKING.COM</a></h3>
 		<p>The trusted home <br> of cold staking</p>
 	</div>
 		<form method="post" action="invoice.php" name="free" id="free">

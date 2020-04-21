@@ -8,14 +8,13 @@ $displayTotal = new NumberFormatter("en", NumberFormatter::CURRENCY);
 
 // Check session is live & exchange is available
 if ( $_SESSION['session'] != 'Open' || $coinFunctions->config['exchange'] != '1') {
-	// Set price and and Expiry based on plan number
-	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Quantity']) && isset($_POST['Address'])) {
-		$_SESSION['Quantity'] = $_POST["Quantity"]; // Grab quantity and add to session
-		$_SESSION['Address'] = $_POST["Address"]; // Grab address and add to session
-	} else {
 		$functions->web_redirect("index.php"); //otherwise redirect to homepage
-	}
-	$functions->web_redirect("index.php");
+}
+
+// Set price and and Expiry based on plan number
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Quantity']) && isset($_POST['Address'])) {
+	$_SESSION['Quantity'] = $_POST["Quantity"]; // Grab quantity and add to session
+	$_SESSION['Address'] = $_POST["Address"]; // Grab address and add to session
 }
 
 $_SESSION['Total'] = $_SESSION['Quantity'] * $_SESSION['Price'];
@@ -24,12 +23,12 @@ $_SESSION['Total'] = $_SESSION['Quantity'] * $_SESSION['Price'];
 <!-- Main -->
 <article id="main">
 	<header>
-		<h2>Confirmation</h2>
+		<h2>Exchange Confirmation</h2>
 	</header>
 
 	<div class="subscription-plans">
 		<div class="plan-box-center">
-			<div class="panel panel-plan box-active">
+			<div class="panel panel-plan-large box-active">
 				<div class="panel-heading" style="background-color: #cd7f32; color: white">
 					<h4 class="panel-title text-center">
 						Exchange <?php echo $coinFunctions->config['ticker']; ?> for BTC </h4>

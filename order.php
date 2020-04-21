@@ -2,7 +2,6 @@
 include('include/node-check.php');
 include('include/header.php');
 include('include/menu.php');
-$_SESSION['session'] = 'Open';
 $_SESSION['Price'] = 0.05;
 $balance = 0;
 
