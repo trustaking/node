@@ -19,6 +19,15 @@ if (isset($bannerAd)) {
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		<meta property="og:title" content="Trustaking.com">
+		<meta property="og:description" content="The trusted home of cold staking.">
+		<meta property="og:image" content="https://trustaking.com/images/thumbnail.png">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+		<!--<meta property="og:url" content="">-->
+		<meta name="twitter:card" content="summary_large_image">
 		<script src='https://www.google.com/recaptcha/api.js?render=<?php echo $coinFunctions->keys['captcha_site_key']; ?>'></script>
         <script>
 			grecaptcha.ready(function () {
