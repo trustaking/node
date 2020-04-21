@@ -138,7 +138,7 @@ class phpCoinFunctions
         }
     }
 
-    public function getStakingExpiry($address)
+    public function getStakingExpiry($address = null)
     {
         $params = [
             'walletName' => $this->config['WalletName'],
@@ -147,23 +147,27 @@ class phpCoinFunctions
         $url = 'http://localhost:' . $this->config['api_port'] . '/api/Staking/getStakingNotExpired';
         $response = $this->CallAPI ($url,"POST",$params);
 
-        if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+        if (isset ($address)) {
+            if (isset($response) && array_key_exists('errors', $response)) {
+                echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
+                echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
+                echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            } else {
+                foreach($response as $a => $b){
+                    $i=0;
+                    foreach($b as $c => $d){ // /[^a-z|\s+]+/i /[^0-9]/
+                        $add = trim((json_encode($response['addresses'][$i]['address'])),'"') ;
+                        $exp = strtr(trim(json_encode($response['addresses'][$i]['expiry']),'"'),"T"," ") ;
+                        $exp = substr($exp, 0, strlen($exp)-4);
+                        if ( $add == $address ) {
+                            $result = $exp;
+                        }
+                        $i++;
+                    }
+                } 
+            }
         } else {
-			foreach($response as $a => $b){
-				$i=0;
-				foreach($b as $c => $d){ // /[^a-z|\s+]+/i /[^0-9]/
-					$add = trim((json_encode($response['addresses'][$i]['address'])),'"') ;
-					$exp = strtr(trim(json_encode($response['addresses'][$i]['expiry']),'"'),"T"," ") ;
-					$exp = substr($exp, 0, strlen($exp)-4);
-					if ( $add == $address ) {
-						$result = $exp;
-					}
-					$i++;
-				}
-			}
+            $result = $response;
         }
         if (isset($result)){
             return $result;
@@ -282,4 +286,3 @@ class phpCoinFunctions
         }
     }
 }
-?>

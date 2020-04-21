@@ -26,21 +26,30 @@ if ($check_server != '' || !empty($check_server)) {
 	// $getHotColdStakingaddress = $functions->getColdStakingAddress("Hot");
 	// echo '<pre>Cold Hot address: ' . json_encode($getHotColdStakingaddress, JSON_PRETTY_PRINT) . '</pre>';
 
-	$getbalance = $functions->getBalance();
-	$getinfo = $functions->rpc('getinfo', '');
-	$getblockchaininfo = $functions->rpc('getblockchaininfo', '');
-	$getstakinginfo = $functions->rpc('getstakinginfo', '');
-	$getpeerinfo = $functions->rpc('getpeerinfo', '');
-	$getnetworkinfo = $functions->rpc('getnetworkinfo', '');
-	$getrawmempool = $functions->rpc('getrawmempool', '');
 
-	echo '<pre>Hot balance: ' . json_encode($getbalance, JSON_PRETTY_PRINT) . '</pre>';
-	echo '<pre>' . json_encode($getinfo, JSON_PRETTY_PRINT) . '</pre>';
-	echo '<pre>' . json_encode($getstakinginfo, JSON_PRETTY_PRINT) . '</pre>';
-	echo '<pre>' . json_encode($getnetworkinfo, JSON_PRETTY_PRINT) . '</pre>';
-	echo '<pre>' . json_encode($getblockchaininfo, JSON_PRETTY_PRINT) . '</pre>';
-	echo '<pre>' . json_encode($getrawmempool, JSON_PRETTY_PRINT) . '</pre>';
-	echo '<pre>' . json_encode($getpeerinfo, JSON_PRETTY_PRINT) . '</pre>';
+	$getbalance = $functions->getBalance();
+	echo '<pre>Staking balance: ' . json_encode($getbalance, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getinfo = $functions->rpc('getinfo', '');
+	echo '<pre>getinfo: ' . json_encode($getinfo, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getStakingExpiry = $functions->getStakingExpiry();
+	echo '<pre>getstakingexpiry: ' . json_encode($getStakingExpiry, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getstakinginfo = $functions->rpc('getstakinginfo', '');
+	echo '<pre>getblockstakinginfo: ' . json_encode($getstakinginfo, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getnetworkinfo = $functions->rpc('getnetworkinfo', '');
+	echo '<pre>getnetworkinfo: ' . json_encode($getnetworkinfo, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getblockchaininfo = $functions->rpc('getblockchaininfo', '');
+	echo '<pre>getblockchaininfo: ' . json_encode($getblockchaininfo, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getrawmempool = $functions->rpc('getrawmempool', '');
+	echo '<pre>getrawmempool: ' . json_encode($getrawmempool, JSON_PRETTY_PRINT) . '</pre>';
+
+	$getpeerinfo = $functions->rpc('getpeerinfo', '');
+	echo '<pre>getpeerinfo: ' . json_encode($getpeerinfo, JSON_PRETTY_PRINT) . '</pre>';
 } else {
 
 	die('<pre> Unable to connect to the node </pre>');
