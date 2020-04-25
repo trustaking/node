@@ -11,6 +11,11 @@ class phpCoinFunctions
        $this->keys = parse_ini_file('/var/secure/keys.ini', true);
     }
 
+    public function displayError($errorText) {
+        echo '<pre>'.$errorText.'</pre>';
+        //TODO Log Error
+    }
+
     public function CallAPI($url, $request_type, $params = null)
     {
         $payload = json_encode($params);
@@ -104,9 +109,13 @@ class phpCoinFunctions
         $response = $this->CallAPI($url,"GET",$params);
 
         if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
             foreach ($response as $a => $b) {
                 foreach ($b as $c => $d) {
@@ -130,9 +139,13 @@ class phpCoinFunctions
         $response = $this->CallAPI ($url,"POST",$params);
 
         if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
           return $response;
         }
@@ -147,26 +160,29 @@ class phpCoinFunctions
         $url = 'http://localhost:' . $this->config['api_port'] . '/api/Staking/getStakingNotExpired';
         $response = $this->CallAPI ($url,"POST",$params);
 
-        if (isset ($address)) {
             if (isset($response) && array_key_exists('errors', $response)) {
-                echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-                echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-                echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+                if ($this->config['debug'] == '1') {
+                    $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                    $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                    $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+                } else {
+                    $this->displayError('Error connecting to the node .. please inform the administrator');
+                }
             } else {
-                foreach($response as $a => $b){
-                    $i=0;
-                    foreach($b as $c => $d){ // /[^a-z|\s+]+/i /[^0-9]/
-                        $add = trim((json_encode($response['addresses'][$i]['address'])),'"') ;
-                        $exp = strtr(trim(json_encode($response['addresses'][$i]['expiry']),'"'),"T"," ") ;
-                        $exp = substr($exp, 0, strlen($exp)-4);
-                        if ( $add == $address ) {
-                            $result = $exp;
+                if (isset ($address)) {
+                    foreach($response as $a => $b){
+                        $i=0;
+                        foreach($b as $c => $d){ // /[^a-z|\s+]+/i /[^0-9]/
+                            $add = trim((json_encode($response['addresses'][$i]['address'])),'"') ;
+                            $exp = strtr(trim(json_encode($response['addresses'][$i]['expiry']),'"'),"T"," ") ;
+                            $exp = substr($exp, 0, strlen($exp)-4);
+                            if ( $add == $address ) {
+                                $result = $exp;
+                            }
+                            $i++;
                         }
-                        $i++;
                     }
-                } 
-            }
-        } else {
+                } else {
             $result = $response;
         }
         if (isset($result)){
@@ -175,6 +191,7 @@ class phpCoinFunctions
             return "Expired";
         }
     }
+}
 
     public function startStaking()
     {
@@ -185,9 +202,13 @@ class phpCoinFunctions
         $url = 'http://localhost:' . $this->config['api_port'] .'/api/Staking/startstaking';
         $response = $this->CallAPI ($url,"POST",$params);       
         if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
           return $response;
         }
@@ -199,8 +220,12 @@ class phpCoinFunctions
         $response = $this->CallAPI ($url,"POST","true");
      
         if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
           return $response;
         }
@@ -217,9 +242,13 @@ class phpCoinFunctions
         $response = $this->CallAPI ($url,"GET",$params);
   
         if (is_array($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
           return $response;
         }
@@ -243,9 +272,13 @@ class phpCoinFunctions
         $url = 'http://localhost:' . $this->config['api_port'] .'/api/ColdStaking/cold-staking-address';
         $response = $this->CallAPI($url,"GET",$params);
         if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
           return $response['address'];
         }
@@ -278,9 +311,13 @@ class phpCoinFunctions
          $url = 'http://localhost:' . $this->config['api_port'] .'/api/Wallet/send-transaction';
          $response = $this->CallAPI($url,"POST",$params);
          if (isset($response) && array_key_exists('errors', $response)) {
-            echo '<pre>Are the credentials correct as there was an error with: ' . $url . '</pre>';
-            echo '<pre>' . json_encode($response,JSON_PRETTY_PRINT) . '</pre>' ;
-            echo '<pre>' . json_encode($params,JSON_PRETTY_PRINT) . '</pre>' ;
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response,JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params,JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
         } else {
           return $response;
         }

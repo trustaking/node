@@ -51,7 +51,6 @@ if ($check_server != '' || !empty($check_server)) {
 	$getpeerinfo = $functions->rpc('getpeerinfo', '');
 	echo '<pre>getpeerinfo: ' . json_encode($getpeerinfo, JSON_PRETTY_PRINT) . '</pre>';
 } else {
-
-	die('<pre> Unable to connect to the node </pre>');
+	$functions->displayError('Unable to connect to the node .. please inform the administrator');
 }
 ?>
