@@ -6,9 +6,18 @@ class phpCoinFunctions
     public $keys;
     public $config;
 
-    public function __construct() {
-       $this->config = parse_ini_file('include/config.ini', true);
-       $this->keys = parse_ini_file('/var/secure/keys.ini', true);
+    public function __construct()
+    {
+        if (!file_exists('include/config.ini')) {
+            $this->displayError('Config file missing');
+        } else {
+            $this->config = parse_ini_file('include/config.ini', true);
+        }
+        if (!file_exists('/var/secure/keys.ini')) {
+            $this->displayError('Keys file missing');
+        } else {
+            $this->keys = parse_ini_file('/var/secure/keys.ini', true);
+        }
     }
 
     public function displayError($errorText) {
