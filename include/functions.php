@@ -105,9 +105,9 @@ class phpFunctions
 
         // Configure the rest of the invoice
         $invoice
-            ->setNotificationUrl($ipnURL)
+            ->setNotificationUrl($coinFunctions->config['ipnURL'])
             ->setOrderId($OrderID)
-            ->setRedirectURL($redirectURL);
+            ->setRedirectURL($coinFunctions->config['redirectURL']);
 
         // Updates invoice with new information such as the invoice id and the URL where
         // a customer can view the invoice.
