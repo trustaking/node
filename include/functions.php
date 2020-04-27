@@ -1,11 +1,14 @@
 <?php
 
+include_once('include/initialise.php');
+
 class phpFunctions
 {
     public $keys;
 
     public function __construct() {
        $this->keys = parse_ini_file('/var/secure/keys.ini', true);
+       $this->config = parse_ini_file('include/config.ini', true);
     }
 
     public function crypto_rand($min, $max, $pedantic = True)
@@ -105,9 +108,9 @@ class phpFunctions
 
         // Configure the rest of the invoice
         $invoice
-            ->setNotificationUrl($coinFunctions->config['ipnURL'])
+            ->setNotificationUrl($this->config['ipnURL'])
             ->setOrderId($OrderID)
-            ->setRedirectURL($coinFunctions->config['redirectURL']);
+            ->setRedirectURL($this->config['redirectURL']);
 
         // Updates invoice with new information such as the invoice id and the URL where
         // a customer can view the invoice.
