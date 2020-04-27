@@ -1,6 +1,7 @@
 <?php
 $bannerAd[1] = '<a href="https://www.liberstad.com/" target="_blank"><img src="images/banner_liberstad.png" border="0" style="max-width:100%"></a>';
 $bannerAd[2] = '<a href="https://www.blockcore.net/" target="_blank"><img src="images/banner-blockcore.png" border="0" style="max-width:100%"></a>';
+$bannerAd[3] = '<a href="https://www.x42.tech/" target="_blank"><img src="images/banner-x42.png" border="0" style="max-width:100%"></a>';
 $adCount = 0;
 if (isset($bannerAd)) {
 	$adCount = count($bannerAd);
