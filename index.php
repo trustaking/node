@@ -3,8 +3,19 @@ include('include/node-check.php');
 include('include/header-recap.php');
 include('include/menu.php');
 ?>
+<!-- Maintenance Header -->
+<?php if ($coinFunctions->config['maintenance'] == '1') { ?>
+	<section id="banner">
+	<div class="inner">
+		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
+		<br><h3><a href="https://trustaking.com/" target="_blank"><img src="images/logo_transparent.png" alt="trustaking.com" width="150" /></a></h3>
+		<h2><a href="https://trustaking.com/" target="_blank">TRUSTAKING.COM</a></h3>
+		<p>The trusted home <br> of cold staking</p>
+	</div>
+	</section>
+<?php } else { ?>
 <?php if ($coinFunctions->config['payment'] == '1') { ?>
-<!-- Banner -->
+<!-- Payment Header -->
 <section id="banner">
 	<div class="inner">
 		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
@@ -153,9 +164,8 @@ include('include/menu.php');
 		</div>
 	</section>
 </article>
-
 <?php } else { ?>
-
+<!-- No Payment Header -->
 	<section id="banner">
 	<div class="inner">
 		<?php if ($adCount>0) { echo $bannerAd[$randomAdNumber]; } ?>
@@ -171,8 +181,8 @@ include('include/menu.php');
 		</form>
 			<br><p>Send us a <a href="https://donations.trustaking.com/">tip</a> to keep the service free of charge.</p>
 </section>
-
-<?php }; ?>
+<?php }; ?> <!-- End Payment -->
+<?php }; ?> <!-- End Maintenance -->
 
 <article id="one">
 <!-- One -->
