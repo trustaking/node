@@ -2,7 +2,7 @@
                 <footer id="footer">
 						<ul class="icons">
 							<li><a href="https://discord.gg/BRcDVqM" class="fab fa-discord"></a></li>
-							<li><a href="mailto:admin@trustaking.com" class="icon fa-envelope-o"></a></li>
+							<li><a href="mailto:trustaking@protonmail.com" class="icon fa-envelope-o"></a></li>
 						</ul>
 						<ul class="copyright">
 							<li>&copy; TRUSTAKING.COM</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
