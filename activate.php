@@ -30,7 +30,7 @@ if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') {
 	
 }
 
-// Set whitelist $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
+// Set whitelist to $_SESSION['Address'] with expiry date = $_SESSION['Expiry']
 
 if ($coinFunctions->config['whitelist'] == '1') {
 
@@ -41,9 +41,6 @@ if ($coinFunctions->config['whitelist'] == '1') {
 		exit (' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
 	}
 
-	// TODO: test if staking is required
-	$stopStaking = $coinFunctions->stopStaking();
-	$startStaking = $coinFunctions->startStaking();
 }
 ?>
 <?php include('include/header.php'); ?>
