@@ -1,20 +1,22 @@
 <?php 
 include('include/node-check.php');
-// Check session is live
+include('include/header.php');
+include('include/menu.php');
 
+// Check session is live
 if ( $_SESSION['session'] != 'Open' ) {
    $functions->web_redirect ("index.php");
 }
 
 //If payments are active, check if invoice paid
 
-if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') {
+if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan'] != '0') {
 
-	if ( $_SESSION['Address'] == '' || empty($_SESSION['Address']) || 
-		$_SESSION['OrderID'] == '' || empty($_SESSION['OrderID']) || 
-		$_SESSION['Price'] == '' || empty($_SESSION['Price']) || 
-		$_SESSION['Expiry'] == '' || empty($_SESSION['Expiry']) || 
-		$_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID']) ) 
+	if ( $_SESSION['Address'] == ''   || empty($_SESSION['Address'])	|| 
+		 $_SESSION['OrderID'] == ''   || empty($_SESSION['OrderID'])	|| 
+		 $_SESSION['Price'] == ''     || empty($_SESSION['Price'])		|| 
+		 $_SESSION['Expiry'] == ''    || empty($_SESSION['Expiry'])		|| 
+		 $_SESSION['InvoiceID'] == '' || empty($_SESSION['InvoiceID'])) 
 		{
 			$functions->web_redirect ("index.php");
 		}
@@ -22,9 +24,9 @@ if ($coinFunctions->config['payment'] == '1' && $_SESSION['Plan']!='0') {
 	$OrderPaid = $functions->GetInvoiceStatus ($_SESSION['InvoiceID'],$_SESSION['OrderID']);
 
 	if ( $OrderPaid == 'FAIL' ) {
-		print_r($OrderPaid);
-		echo "<br/>" . $_SESSION['InvoiceID'] . "<br/>";		
-		echo "<br/>" . $_SESSION['OrderID'] . "<br/>";
+		// print_r($OrderPaid);
+		// echo "<br/>" . $_SESSION['InvoiceID'] . "<br/>";		
+		// echo "<br/>" . $_SESSION['OrderID'] . "<br/>";
 		exit ('Payment not successful - please try again');
 	} 
 	
@@ -43,8 +45,6 @@ if ($coinFunctions->config['whitelist'] == '1') {
 
 }
 ?>
-<?php include('include/header.php'); ?>
-<?php include('include/menu.php'); ?>
 <!-- Main -->
 <article id="main">
 	<header>
