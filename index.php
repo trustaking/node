@@ -23,7 +23,7 @@ include('include/menu.php');
 		<h2><a href="https://trustaking.com/" target="_blank">TRUSTAKING.COM</a></h3>
 		<p>The trusted home <br> of cold staking</p>
 	</div>
-	<p>Choose your plan</p>
+	<p>Choose your <?php echo $coinFunctions->config['ticker'];?> plan</p>
 	<a href="#main" class="more scrolly"></a>
 	</section>
 <!-- Main -->
