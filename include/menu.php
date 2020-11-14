@@ -25,7 +25,7 @@
 						<?php } ?>
 					</ul>
 					<ul>
-					<?php if ($coinFunctions->config['howtourl'] == '') { ?>
+					<?php if ($coinFunctions->config['howtourl'] != '') { ?>
 						<li><a href="#" style='color:green'> HOW-TO GUIDES</a></li>
 							<li><a href="<?php print $coinFunctions->config['howtourl'];?>">Delegate to Trustaking</a></li>
 						<?php if ($coinFunctions->config['howtovpsurl'] != '') { ?>
