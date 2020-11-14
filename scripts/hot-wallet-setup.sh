@@ -11,7 +11,7 @@ UNDERLINE='\033[4m'
 
 ##### Define Variables ######
 fork=
-apiport=
+COINAPIPORT=
 date_stamp="$(date +%y-%m-%d-%s)"
 logfile="/tmp/log_$date_stamp_output.log"
 RPCUSER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
@@ -48,8 +48,8 @@ echo -e "*Creating your Hot wallet ... please wait."
 
 ### grab a 12 word mneumonic
 
-HotWalletSecretWords=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$apiport/api/Wallet/mnemonic?language=english&wordCount=12" -H "accept: application/json")) 
-curl -sX POST "http://localhost:$apiport/api/Wallet/create" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"mnemonic\": \"$HotWalletSecretWords\",  \"password\": \"$HotWalletPassword\",  \"passphrase\": \"$HotWalletPassphrase\",  \"name\": \"$HotWalletName\"}" &>> ${logfile}
+HotWalletSecretWords=$(sed -e 's/^"//' -e 's/"$//' <<<$(curl -sX GET "http://localhost:$COINAPIPORT/api/Wallet/mnemonic?language=english&wordCount=12" -H "accept: application/json")) 
+curl -sX POST "http://localhost:$COINAPIPORT/api/Wallet/create" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"mnemonic\": \"$HotWalletSecretWords\",  \"password\": \"$HotWalletPassword\",  \"passphrase\": \"$HotWalletPassphrase\",  \"name\": \"$HotWalletName\"}" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
 echo
@@ -57,7 +57,7 @@ echo
 ##### Convert the hot wallet to a cold staking wallet ######
 
 echo -e "* Preparing your Hot wallet for cold staking   ... please wait."
-curl -sX POST "http://localhost:$apiport/api/ColdStaking/cold-staking-account" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"walletName\": \"$HotWalletName\",  \"walletPassword\": \"$HotWalletPassword\",  \"isColdWalletAccount\": false}" &>> ${logfile}
+curl -sX POST "http://localhost:$COINAPIPORT/api/ColdStaking/cold-staking-account" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"walletName\": \"$HotWalletName\",  \"walletPassword\": \"$HotWalletPassword\",  \"isColdWalletAccount\": false}" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
 echo
@@ -66,7 +66,7 @@ echo
 
 echo -e "* Fetching your Hot wallet details for cold staking   ... please wait."
 
-HotWalletColdStakingHotAddress=$(curl -sX GET "http://localhost:$apiport/api/ColdStaking/cold-staking-address?WalletName=$HotWalletName&IsColdWalletAddress=false" -H  "accept: application/json")
+HotWalletColdStakingHotAddress=$(curl -sX GET "http://localhost:$COINAPIPORT/api/ColdStaking/cold-staking-address?WalletName=$HotWalletName&IsColdWalletAddress=false" -H  "accept: application/json")
 HotWalletColdStakingHotAddress=${HotWalletColdStakingHotAddress:12:34}
 
 echo -e "${GREEN}Done.${NONE}"
@@ -76,9 +76,9 @@ echo
 
 echo -e "* Preparing to start cold staking on your Hot wallet   ... please wait."
 
-curl -sX POST "http://localhost:$apiport/api/Staking/startstaking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"password\": \"$HotWalletPassword\",  \"name\": \"$HotWalletName\"}" &>> ${logfile}
+curl -sX POST "http://localhost:$COINAPIPORT/api/Staking/startstaking" -H  "accept: application/json" -H  "Content-Type: application/json-patch+json" -d "{  \"password\": \"$HotWalletPassword\",  \"name\": \"$HotWalletName\"}" &>> ${logfile}
 
-curl -X GET "http://localhost:$apiport/api/Staking/getstakinginfo" -H  "accept: application/json" &>> ${logfile}
+curl -X GET "http://localhost:$COINAPIPORT/api/Staking/getstakinginfo" -H  "accept: application/json" &>> ${logfile}
 
 echo -e "${GREEN}Done.${NONE}"
 echo

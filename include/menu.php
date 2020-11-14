@@ -21,11 +21,15 @@
 						<?php } ?>
 					</ul>
 					<ul>
+					<?php if ($coinFunctions->config['howtourl'] == '') { ?>
 						<li><a href="how-to.php" style='color:green'> HOW-TO GUIDES</a></li>
 						<li><a href="how-to.php#trustaking">Delegate to Trustaking</a></li>
 						<li><a href="how-to.php#vps">Setup VPS</a></li>
 						<li><a href="how-to.php#add-more">Add more coins</a></li>
 						<li><a href="how-to.php#withdraw">Withdraw coins</a></li>
+					  <?php } else { ?>
+						<li><a href="<?php print $coinFunctions->config['howtourl'];?>" style='color:green'> HOW-TO GUIDES</a></li>
+					<?php } ?>
 					</ul>
 			    </div>
 			</li>
