@@ -11,7 +11,7 @@
 			            <li><a href="index.php">Home</a></li>
 						<li><a href="https://donations.trustaking.com/" target="_blank">Donations</a></li>
 						<li><a href="about.php">FAQ</a></li>
-						<?php if ($coinFunctions->config['rewardsurl'] != '') { ?>
+						 <?php if ($coinFunctions->config['rewardsurl'] != '') { ?>
 							<li><a href="<?php print $coinFunctions->config['rewardsurl'];?>" target="_blank">Staking Calculator</a></li>
 						<?php } ?>
 						<?php if ($coinFunctions->config['whitelist'] == '1') { ?>
@@ -20,6 +20,8 @@
 						<?php if ($coinFunctions->config['exchange'] == '1') { ?>
 							<li><a href="order.php">Exchange</a></li>
 						<?php } ?>
+					</ul>
+					<ul>
 						<li><a href="#" style='color:green'> DOWNLOADS</a></li>
 						<?php if ($coinFunctions->config['vpsurl'] != '') { ?>
 							<li><a href="<?php print $coinFunctions->config['vpsurl'];?>" target="_blank">VPS Node Installer</a></li>
