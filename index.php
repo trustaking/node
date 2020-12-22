@@ -32,7 +32,7 @@ include('include/menu.php');
 		<div class="plan-box-center">
 			<div class="panel panel-plan box-active">
 				<div class="panel-heading" style="background-color: #cd7f32; color: white">
-					<h4 class="pull-left panel-title text-center">													
+					<h4 class="pull-left panel-title text-center">
 						Bronze </h4>
 				</div>
 				<div class="plan-price-box text-info">
@@ -52,7 +52,7 @@ include('include/menu.php');
 					</li>
 				</ul>
 			</div>
-			<div class="panel-footer pt-10 pb-10 text-center">	
+			<div class="panel-footer pt-10 pb-10 text-center">
 			<form method="post" action="invoice.php" name="bronze" id="bronze">
 				<input type="hidden" name="recaptcha_response" id="recaptchaResponse1">
 				<input type="hidden" name="action" value="payment">
