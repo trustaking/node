@@ -4,7 +4,7 @@ include('include/header.php');
 include('include/menu.php');
 
 // Check session is live
-if ( $_SESSION['session'] != 'Open' ) {
+if ( $_SESSION['session'] != 'Open' || $_SESSION['Address'] == '' || empty($_SESSION['Address']) ){
    $functions->web_redirect ("index.php");
 }
 
