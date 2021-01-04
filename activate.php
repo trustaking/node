@@ -57,9 +57,11 @@ if ($coinFunctions->config['whitelist'] == '1') {
 			<?php } else { ?>
 				<h3>Thankyou for using Trustaking.com</h3><p>Please consider giving a donation <a href="https://donations.trustaking.com/"><b><u>here</b></u></a></p>
 			<?php }; ?>
-			<p>For a step by step tutorial, check out our how-to guide by visiting this <b><u>
+			<p>For a step by step tutorial, check out our how-to guide by visiting this
 				<?php if ($coinFunctions->config['howtourl'] != '') { ?> 
 					<a href="<?php print $coinFunctions->config['howtourl'];?>" target="_blank"><b><u>page</b></u></a>
+					 <?php } else {?>
+						<a href="how-to.php#trustaking"><b><u>page</b></u></a>
 				<?php } ?>
 			</p>
 			<p>Here is your personal Trustaking address: <pre><code><?php print $_SESSION['Address']; ?></code></pre></p>
