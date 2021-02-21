@@ -1,7 +1,7 @@
 <?php
 $bannerAd[1] = '<a href="https://www.blockcore.net/" target="_blank"><img src="images/banner-blockcore.png" border="0" style="max-width:100%"></a>';
 $bannerAd[2] = '<a href="https://www.txbit.io/" target="_blank"><img src="images/banner-txbit.png" border="0" style="max-width:100%"></a>';
-$bannerAd[3] = '<a href="https://www.stratisplatform.com/" target="_blank"><img src="images/banner-stratis.jpg" border="0" style="max-width:100%"></a>';
+$bannerAd[3] = '<a href="https://www.stratisplatform.com/" target="_blank"><img src="images/banner-stratis.png" border="0" style="max-width:100%"></a>';
 //$bannerAd[4] = '<a href="https://www.liberstad.com/" target="_blank"><img src="images/banner-liberstad.png" border="0" style="max-width:100%"></a>';
 
 $adCount = 0;
