@@ -2,7 +2,8 @@
 include('include/initialise.php');
 
 // Set price and and Expiry based on plan number
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
+//if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Plan'])) {
+  if (isset($_POST['Plan'])) {
   $_SESSION['Plan'] = $_POST['Plan']; // Grab plan number and add to session
 } else {
   $functions->web_redirect("index.php"); //otherwise redirect to homepage
@@ -73,32 +74,35 @@ if ($coinFunctions->config['payment'] != '1' || $_SESSION['Plan'] == '0') {
 // Grab the next unused address 
 $address = $coinFunctions->getColdStakingAddress("Hot");
 
-if (isset($address)) {
-  $_SESSION['Address'] = $address;
-} else {
-  print_r($address);
-  echo "<br/>" . $url . "<br/>";
-  exit(' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
-}
+  if (isset($address)) {
+    $_SESSION['Address'] = $address;
+  } else {
+    print_r($address);
+    echo "<br/>" . $url . "<br/>";
+    exit(' Something went wrong checking the node! - please try again in a new tab it could just be a timeout.');
+  }
 
-// Bypass payment for free trial otherwise take payment
-if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] != '1') {
-  header('Location:' . 'activate.php');
-  $functions->web_redirect("activate.php");
-} else {
+  // Bypass payment for free trial otherwise take payment
+  if ($_SESSION['Plan'] == '0' || $coinFunctions->config['payment'] != '1') {
+    header('Location:' . 'activate.php');
+    $functions->web_redirect("activate.php");
+  } else {
+    // Generate & store the InvoiceID in session
+    $_SESSION['OrderID'] = 'CS-' . $coinFunctions->config['ticker'] . '-' . $_SESSION['Address'];
+    // Full service description
+    $serv = "Trustaking " . $_SESSION['Plan_Desc'] . " - Service Expiry: " . $_SESSION['Expiry'];
+    // Create invoice
+    $inv = $functions->CreateInvoice($_SESSION['OrderID'], $_SESSION['Price'], $serv);
 
-  // Generate & store the InvoiceID in session
-  $_SESSION['OrderID'] = 'CS-'.$coinFunctions->config['ticker'] . '-' . $_SESSION['Address'];
-  // Full service description
-  $serv = "Trustaking " . $_SESSION['Plan_Desc'] . " - Service Expiry: " . $_SESSION['Expiry'];
-  // Create invoice
-  $inv = $functions->CreateInvoice($_SESSION['OrderID'], $_SESSION['Price'], $serv);
-  $invoiceId = $inv['invoice_id'];
-  $invoiceURL = $inv['invoice_url'];
-  // Store the InvoiceID in session
-  $_SESSION['InvoiceID'] = $invoiceId;
-  // Redirect to payment page
-  $functions->web_redirect($invoiceURL);
-  //echo '<br><b>Invoice:</b><br>'.$invoiceId.'" created, see '.$invoiceURL .'<br>';
-}
+    if (isset($inv['invoice_id'])) {
+      $_SESSION['InvoiceID'] = $inv['invoice_id'];   // Store the InvoiceID in session
+      $functions->web_redirect($inv['invoice_url']); // Redirect to payment page
+    } else {
+      echo "<br/>OrderID: " . $_SESSION['OrderID'] . "<br/>";
+      echo "<br/>Price: " . $_SESSION['Price'] . "<br/>";
+      echo "<br/>serv: " . $serv . "<br/>";
+      echo "<br/>invoiceId: " . $_SESSION['InvoiceID'] . "<br/>";
+      echo "<br/>invoiceURL: " . $inv['invoice_url'] . "<br/>";
+    }
+  }
 ?>

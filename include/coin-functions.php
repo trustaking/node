@@ -68,7 +68,7 @@ class phpCoinFunctions
 
         $options = array(
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_BINARYTRANSFER => true,
+            // CURLOPT_BINARYTRANSFER => true,
             CURLINFO_HEADER_OUT => true,           // to track the handle's request string. 
             CURLOPT_POSTFIELDS => $request,        // holds the json payload
             CURLOPT_POST => true,                  // POST
