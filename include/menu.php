@@ -11,6 +11,7 @@
 			            <li><a href="index.php">Home</a></li>
 						<li><a href="https://donations.trustaking.com/" target="_blank">Donations</a></li>
 						<li><a href="about.php">FAQ</a></li>
+						<li><a href="check_address.php">Check my address</a></li>
 						 <?php if ($coinFunctions->config['rewardsurl'] != '') { ?>
 							<li><a href="<?php print $coinFunctions->config['rewardsurl'];?>" target="_blank">Staking Calculator</a></li>
 						<?php } ?>

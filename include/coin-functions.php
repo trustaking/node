@@ -293,6 +293,30 @@ class phpCoinFunctions
         }
     }
 
+    // curl -X 'GET' 'http://localhost:17103/api/Wallet/history?WalletName=hot&AccountName=coldStakingHotAddresses&Address=ygCc34jiu6d6pTrt1WtFd9SCNuZgRVbBwp' -H 'accept: */*'
+
+    public function getAddressHistory($address = null)
+    {
+        $params = [
+            'WalletName' => $this->config['WalletName'],
+            'AccountName' => $address
+        ];
+        $url = 'http://localhost:' . $this->config['api_port'] . '/api/Wallet/history';
+        $response = $this->CallAPI($url, "GET", $params);
+
+        if (isset($response) && array_key_exists('errors', $response)) {
+            if ($this->config['debug'] == '1') {
+                $this->displayError('Are the credentials correct as there was an error with: ' . $url);
+                $this->displayError(json_encode($response, JSON_PRETTY_PRINT));
+                $this->displayError(json_encode($params, JSON_PRETTY_PRINT));
+            } else {
+                $this->displayError('Error connecting to the node .. please inform the administrator');
+            }
+        } else {
+            return $response;
+        }
+    }
+
     public function sendTx($address,$amount)
     {
         // Build transaction
