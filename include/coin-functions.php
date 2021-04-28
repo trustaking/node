@@ -299,7 +299,8 @@ class phpCoinFunctions
     {
         $params = [
             'WalletName' => $this->config['WalletName'],
-            'AccountName' => $address
+            'AccountName' => $this->config['AccountName'],
+            'Address' => $address
         ];
         $url = 'http://localhost:' . $this->config['api_port'] . '/api/Wallet/history';
         $response = $this->CallAPI($url, "GET", $params);

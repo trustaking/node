@@ -15,12 +15,8 @@ if (isset($_POST['address'])) {
 	<section class="wrapper style5">
 		<div class="inner">
 			<section>
-				<h3>Check My Expiry Date</h3>
+				<h3>Check My Address</h3>
 		</div>
-		<?php if (isset($_POST['address']) && isset($history)) { ?>
-			<?php echo "<pre>" . $history . "<pre>"; ?>
-		<?php } ?>
-		<br />
 		<form method="post" action="">
 			<div class="col-24">
 				<input type="text" name="address" id="address" value="" placeholder="address" />
@@ -34,6 +30,10 @@ if (isset($_POST['address'])) {
 			</div>
 		</form>
 	</section>
+	<br />
+	<?php if (isset($_POST['address']) && isset($history)) { ?>
+			<?php echo "<pre>" . $history . "<pre>"; ?>
+		<?php } ?>
 	</section>
 </article>
 <?php include('include/footer.php'); ?>
