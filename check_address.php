@@ -1,8 +1,12 @@
 <?php
 include('include/node-check.php');
 if (isset($_POST['address'])) {
-	$result = $coinFunctions->getAddressHistory($_POST['address']);
-	$history = json_encode($result, JSON_PRETTY_PRINT);
+	$result = $coinFunctions->getAddressBalance($_POST['address']);
+	$balance = json_encode($result, JSON_PRETTY_PRINT);
+	if (isset($balance)) {
+		$result = $coinFunctions->getAddressHistory($_POST['address']);
+		$history = json_encode($result, JSON_PRETTY_PRINT);
+	}
 }
 ?>
 <?php include('include/header.php'); ?>
@@ -29,7 +33,10 @@ if (isset($_POST['address'])) {
 				</ul>
 			</div>
 		</form>
-	</section>
+	<br />
+	<?php if (isset($_POST['address']) && isset($balance)) { ?>
+			<?php echo "<pre>" . $balance . "<pre>"; ?>
+		<?php } ?>
 	<br />
 	<?php if (isset($_POST['address']) && isset($history)) { ?>
 			<?php echo "<pre>" . $history . "<pre>"; ?>
